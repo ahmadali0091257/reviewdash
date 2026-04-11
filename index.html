@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +13,23 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <!-- Dynamic Theme Engine -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { sans:['Inter', 'sans-serif'], urdu:['Noto Sans Arabic', 'sans-serif'] },
                     colors: {
-                        darkBg: '#0f172a', darkCard: '#1e293b', darkBorder: '#334155', darkText: '#cbd5e1'
+                        main: 'var(--bg-main)',
+                        card: 'var(--bg-card)',
+                        theme: 'var(--border-col)',
+                        txt: 'var(--text-main)',
+                        muted: 'var(--text-muted)',
+                        brand: {
+                            50: 'var(--brand-50)', 100: 'var(--brand-100)', 200: 'var(--brand-200)',
+                            500: 'var(--brand-500)', 600: 'var(--brand-600)', 700: 'var(--brand-700)',
+                            800: 'var(--brand-800)', 900: 'var(--brand-900)'
+                        }
                     }
                 }
             }
@@ -28,6 +37,31 @@
     </script>
 
     <style>
+        :root {
+            /* LIGHT THEME (Default) */
+            --brand-50: #eff6ff; --brand-100: #dbeafe; --brand-200: #bfdbfe; --brand-500: #3b82f6; --brand-600: #2563eb; --brand-700: #1d4ed8; --brand-800: #1e40af; --brand-900: #1e3a8a;
+            --bg-main: #f8fafc; --bg-card: #ffffff; --border-col: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b;
+        }
+        [data-theme="dark"] {
+            /* DARK THEME */
+            --brand-50: #1e1e2f; --brand-100: #2a2a40; --brand-200: #3b3b5c; --brand-500: #6366f1; --brand-600: #4f46e5; --brand-700: #4338ca; --brand-800: #3730a3; --brand-900: #312e81;
+            --bg-main: #0f172a; --bg-card: #1e293b; --border-col: #334155; --text-main: #f8fafc; --text-muted: #94a3b8;
+        }[data-theme="spiderman"] {
+            /* SPIDER-MAN (Red & Dark Blue) */
+            --brand-50: #fef2f2; --brand-100: #fee2e2; --brand-200: #fecaca; --brand-500: #ef4444; --brand-600: #dc2626; --brand-700: #b91c1c; --brand-800: #991b1b; --brand-900: #7f1d1d;
+            --bg-main: #020617; --bg-card: #172554; --border-col: #1e3a8a; --text-main: #f8fafc; --text-muted: #93c5fd;
+        }
+        [data-theme="shopify"] {
+            /* SHOPIFY (Green & Clean Light) */
+            --brand-50: #f0fdf4; --brand-100: #dcfce7; --brand-200: #bbf7d0; --brand-500: #22c55e; --brand-600: #16a34a; --brand-700: #15803d; --brand-800: #166534; --brand-900: #14532d;
+            --bg-main: #f4f6f8; --bg-card: #ffffff; --border-col: #dfe3e8; --text-main: #212b36; --text-muted: #637381;
+        }
+        [data-theme="batman"] {
+            /* BATMAN (Yellow & True Black) */
+            --brand-50: #fefce8; --brand-100: #fef9c3; --brand-200: #fef08a; --brand-500: #eab308; --brand-600: #ca8a04; --brand-700: #a16207; --brand-800: #854d0e; --brand-900: #713f12;
+            --bg-main: #000000; --bg-card: #171717; --border-col: #262626; --text-main: #e5e5e5; --text-muted: #a3a3a3;
+        }
+
         body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
         .urdu-text { font-family: 'Noto Sans Arabic', sans-serif; }
         .modal-overlay { transition: opacity 0.3s ease; }
@@ -36,38 +70,37 @@
         .hidden-view { display: none !important; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
-        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        ::-webkit-scrollbar-thumb { background: var(--border-col); border-radius: 4px; }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-darkBg text-gray-800 dark:text-gray-100 h-screen overflow-hidden flex selection:bg-blue-200">
+<body class="bg-main text-txt h-screen overflow-hidden flex selection:bg-brand-200 selection:text-brand-900">
 
     <!-- Toast Notifications -->
-    <div id="toast" class="fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-[-150%] bg-white dark:bg-darkCard dark:border-darkBorder border-l-4 shadow-lg rounded-xl px-5 py-4 flex items-center gap-3 min-w-[280px]">
+    <div id="toast" class="fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-[-150%] bg-card border-theme border-l-4 shadow-lg rounded-xl px-5 py-4 flex items-center gap-3 min-w-[280px]">
         <div id="toast-icon"></div>
-        <p id="toast-message" class="text-sm font-medium dark:text-white"></p>
+        <p id="toast-message" class="text-sm font-medium text-txt"></p>
     </div>
 
     <!-- LOGIN SCREEN -->
-    <div id="login-view" class="fixed inset-0 z-50 bg-gray-100 dark:bg-darkBg flex items-center justify-center transition-opacity duration-300">
-        <div class="bg-white dark:bg-darkCard p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100 dark:border-darkBorder">
+    <div id="login-view" class="fixed inset-0 z-50 bg-main flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-card p-8 rounded-2xl shadow-xl w-full max-w-md border border-theme">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 text-white mb-4 shadow-lg">
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-brand-600 text-white mb-4 shadow-lg">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">ReviewFlow</h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Sign in to your workspace</p>
+                <h2 class="text-2xl font-bold text-txt">ReviewFlow</h2>
+                <p class="text-sm text-muted mt-1">Sign in to your workspace</p>
             </div>
             <form id="login-form" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                    <input type="email" id="login-email" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    <label class="block text-sm font-medium text-txt mb-1">Email</label>
+                    <input type="email" id="login-email" required class="w-full px-4 py-2 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                    <input type="password" id="login-password" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    <label class="block text-sm font-medium text-txt mb-1">Password</label>
+                    <input type="password" id="login-password" required class="w-full px-4 py-2 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
                 </div>
-                <button type="submit" id="login-btn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 rounded-lg transition shadow-md">
+                <button type="submit" id="login-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2.5 rounded-lg transition shadow-md">
                     Sign In
                 </button>
             </form>
@@ -78,106 +111,127 @@
     <div id="app-view" class="flex w-full h-full hidden-view">
         
         <!-- Sidebar -->
-        <aside class="w-64 bg-white dark:bg-darkCard border-r border-gray-200 dark:border-darkBorder flex flex-col shadow-sm relative z-10 transition-colors">
-            <div class="h-16 flex items-center px-6 border-b border-gray-100 dark:border-darkBorder shrink-0">
-                <span class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-500">ReviewFlow</span>
+        <aside class="w-64 bg-card border-r border-theme flex flex-col shadow-sm relative z-10 transition-colors">
+            <div class="h-16 flex items-center px-6 border-b border-theme shrink-0">
+                <span class="text-xl font-extrabold text-brand-600">ReviewFlow</span>
             </div>
             
-            <div class="px-6 py-4 border-b border-gray-100 dark:border-darkBorder bg-gray-50 dark:bg-gray-800/50 shrink-0">
-                <p class="text-xs text-gray-500 dark:text-gray-400">Logged in as:</p>
-                <p id="user-email-display" class="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate" title=""></p>
-                <span class="mt-2 inline-block text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-bold border border-blue-200 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:border-blue-800 dark:text-blue-300">Workspace Admin</span>
+            <div class="px-6 py-4 border-b border-theme bg-main shrink-0">
+                <p class="text-xs text-muted">Logged in as:</p>
+                <p id="user-email-display" class="text-sm font-semibold text-txt truncate"></p>
+                <span class="mt-2 inline-block text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-bold border border-brand-200 bg-brand-50 text-brand-700">Workspace Admin</span>
             </div>
 
             <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-                <button data-target="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
+                <button data-target="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-brand-50 text-brand-700">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path></svg> Dashboard
                 </button>
-                <button data-target="products" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800">
+                <button data-target="products" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> Products
                 </button>
-                <button data-target="today" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800">
+                <button data-target="today" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Today's Tasks
                     </div>
                     <span id="sidebar-today-badge" class="bg-red-500 text-white py-0.5 px-2 rounded-full text-xs hidden shadow-sm">0</span>
                 </button>
-                <button data-target="history" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800">
+                <button data-target="history" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> History
                 </button>
             </nav>
 
-            <div class="p-4 border-t border-gray-200 dark:border-darkBorder space-y-2 shrink-0">
-                <button id="theme-toggle" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
-                </button>
-                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+            <div class="p-4 border-t border-theme space-y-3 shrink-0">
+                <!-- Theme Dropdown -->
+                <div class="relative w-full">
+                    <label class="text-xs font-bold text-muted uppercase tracking-wider mb-1 block px-1">🎨 Theme</label>
+                    <select id="theme-selector" class="w-full bg-main border border-theme text-txt text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
+                        <option value="light">☀️ Light Theme</option>
+                        <option value="dark">🌙 Dark Theme</option>
+                        <option value="spiderman">🕷️ Spider-Man</option>
+                        <option value="shopify">🛍️ Shopify Green</option>
+                        <option value="batman">🦇 Batman</option>
+                    </select>
+                </div>
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500 hover:text-white transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg> Sign Out
                 </button>
             </div>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 flex flex-col h-screen overflow-hidden bg-gray-50 dark:bg-darkBg transition-colors">
+        <main class="flex-1 flex flex-col h-screen overflow-hidden bg-main transition-colors">
             
             <!-- Dashboard View -->
             <div id="view-dashboard" class="view-section flex-1 overflow-y-auto p-8">
                 <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Overview Analytics</h1>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Real-time workflow monitoring</p>
+                    <h1 class="text-3xl font-bold text-txt">Overview Analytics</h1>
+                    <p class="text-sm text-muted mt-1">Real-time workflow monitoring</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                    <div class="bg-brand-600 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
                         <div>
-                            <p class="text-indigo-100 text-sm font-medium mb-1">Total Products</p>
+                            <p class="text-brand-100 text-sm font-medium mb-1">Total Products</p>
                             <h3 id="stat-total-products" class="text-4xl font-extrabold">0</h3>
                         </div>
-                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
                     </div>
-                    <div class="bg-gradient-to-br from-emerald-400 to-teal-600 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                    <div class="bg-emerald-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
                         <div>
                             <p class="text-emerald-100 text-sm font-medium mb-1">Completed (7 Days)</p>
                             <h3 id="stat-completed-reviews" class="text-4xl font-extrabold">0</h3>
                         </div>
-                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     </div>
-                    <div class="bg-gradient-to-br from-orange-400 to-rose-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                    <div class="bg-orange-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
                         <div>
                             <p class="text-orange-100 text-sm font-medium mb-1">Total Pending</p>
                             <h3 id="stat-pending-today" class="text-4xl font-extrabold">0</h3>
                         </div>
-                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-darkCard p-6 rounded-2xl border border-gray-100 dark:border-darkBorder shadow-sm">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Weekly Progress Activity</h3>
+                <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm">
+                    <h3 class="text-lg font-semibold text-txt mb-4">Weekly Progress Activity</h3>
                     <div class="relative h-72 w-full"><canvas id="growthChart"></canvas></div>
                 </div>
             </div>
 
             <!-- Products View -->
             <div id="view-products" class="view-section hidden-view flex-1 flex flex-col h-full">
-                <div class="p-8 border-b border-gray-200 dark:border-darkBorder bg-white dark:bg-darkCard shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Product Catalog</h1>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage schedules, QTY, edit, and delete products</p>
+                        <h1 class="text-2xl font-bold text-txt">Product Catalog</h1>
+                        <p class="text-sm text-muted mt-1">Manage schedules, QTY, and filters</p>
                     </div>
-                    <div class="flex gap-3 w-full md:w-auto">
-                        <input type="text" id="search-product" placeholder="Search by title..." class="px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg outline-none w-full md:w-64 transition focus:ring-2 focus:ring-blue-500">
-                        <button id="btn-search" class="bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition dark:text-white font-medium">Search</button>
+                    <div class="flex flex-wrap gap-3 w-full md:w-auto items-center">
                         
-                        <button id="open-add-modal-btn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 whitespace-nowrap font-medium">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add Product
+                        <!-- NEW: Day Filter Dropdown -->
+                        <select id="filter-day" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-medium shadow-sm">
+                            <option value="">🗓️ All Days</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+
+                        <input type="text" id="search-product" placeholder="Search title..." class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm">
+                        <button id="btn-search" class="bg-theme border border-theme text-txt px-4 py-2 rounded-lg hover:bg-main transition font-medium text-sm shadow-sm">Search</button>
+                        
+                        <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add
                         </button>
                     </div>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
-                    <div class="bg-white dark:bg-darkCard border border-gray-200 dark:border-darkBorder rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-card border border-theme rounded-xl shadow-sm overflow-hidden">
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider border-b border-gray-200 dark:border-darkBorder">
+                                <tr class="bg-main text-muted text-xs uppercase tracking-wider border-b border-theme">
                                     <th class="p-4 font-medium">Product Title</th>
                                     <th class="p-4 font-medium">SKU</th>
                                     <th class="p-4 font-medium text-center">QTY</th>
@@ -186,15 +240,15 @@
                                     <th class="p-4 font-medium text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="products-table-body" class="divide-y divide-gray-100 dark:divide-darkBorder text-sm text-gray-700 dark:text-gray-300">
+                            <tbody id="products-table-body" class="divide-y divide-theme text-sm text-txt">
                                 <!-- Products rows are injected via JS -->
                             </tbody>
                         </table>
                         <div id="products-empty-state" class="p-8 text-center hidden">
-                            <p class="text-gray-500 dark:text-gray-400">No products found in the catalog.</p>
+                            <p class="text-muted">No products found matching your criteria.</p>
                         </div>
-                        <div class="p-4 text-center bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-darkBorder">
-                            <button id="load-more-btn" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline hidden">Load More Products</button>
+                        <div class="p-4 text-center bg-main border-t border-theme">
+                            <button id="load-more-btn" class="text-brand-600 font-semibold hover:underline hidden">Load More</button>
                         </div>
                     </div>
                 </div>
@@ -202,40 +256,38 @@
 
             <!-- Today's View -->
             <div id="view-today" class="view-section hidden-view flex-1 flex flex-col h-full">
-                <div class="p-8 border-b border-gray-200 dark:border-darkBorder bg-white dark:bg-darkCard shrink-0">
-                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Pending Tasks</h1>
-                    <p class="text-sm text-indigo-500 font-medium mt-1" id="today-date-subtitle">Loading Date...</p>
+                <div class="p-8 border-b border-theme bg-card shrink-0">
+                    <h1 class="text-2xl font-bold text-txt">Pending Tasks</h1>
+                    <p class="text-sm text-brand-600 font-medium mt-1" id="today-date-subtitle">Loading Date...</p>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
-                    <div id="today-tasks-container" class="space-y-4 max-w-4xl mx-auto">
-                        <!-- Tasks are injected here -->
-                    </div>
-                    <div id="today-empty-state" class="p-16 text-center hidden bg-white dark:bg-darkCard border border-gray-200 dark:border-darkBorder rounded-2xl shadow-sm max-w-4xl mx-auto">
-                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-5">
+                    <div id="today-tasks-container" class="space-y-4 max-w-4xl mx-auto"></div>
+                    <div id="today-empty-state" class="p-16 text-center hidden bg-card border border-theme rounded-2xl shadow-sm max-w-4xl mx-auto">
+                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-5">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">You're all caught up!</h3>
-                        <p class="text-gray-500 dark:text-gray-400 mt-2 text-base">Awesome work! No pending reviews from today or yesterday.</p>
+                        <h3 class="text-2xl font-bold text-txt">You're all caught up!</h3>
+                        <p class="text-muted mt-2 text-base">No pending reviews from today or yesterday.</p>
                     </div>
                 </div>
             </div>
 
             <!-- History View -->
             <div id="view-history" class="view-section hidden-view flex-1 flex flex-col h-full">
-                <div class="p-8 border-b border-gray-200 dark:border-darkBorder bg-white dark:bg-darkCard shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Work History</h1>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Check past completions and delete logs</p>
+                        <h1 class="text-2xl font-bold text-txt">Work History</h1>
+                        <p class="text-sm text-muted mt-1">Check past completions and delete logs</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Select Date:</span>
-                        <input type="date" id="history-date-picker" class="px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg outline-none cursor-pointer focus:ring-2 focus:ring-blue-500">
+                        <span class="text-sm text-muted font-medium">Select Date:</span>
+                        <input type="date" id="history-date-picker" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none cursor-pointer focus:ring-2 focus:ring-brand-500 shadow-sm">
                     </div>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
-                    <div class="max-w-4xl mx-auto bg-white dark:bg-darkCard border border-gray-200 dark:border-darkBorder rounded-xl shadow-sm overflow-hidden">
-                        <ul id="history-list" class="divide-y divide-gray-100 dark:divide-darkBorder">
-                            <li class="p-8 text-center text-gray-500 dark:text-gray-400">Select a date from the calendar to view history.</li>
+                    <div class="max-w-4xl mx-auto bg-card border border-theme rounded-xl shadow-sm overflow-hidden">
+                        <ul id="history-list" class="divide-y divide-theme">
+                            <li class="p-8 text-center text-muted">Select a date from the calendar to view history.</li>
                         </ul>
                     </div>
                 </div>
@@ -246,11 +298,11 @@
     <!-- MODALS SECTION -->
 
     <!-- Add/Edit Product Modal -->
-    <div id="add-product-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-darkCard rounded-2xl shadow-2xl w-full max-w-xl modal-content flex flex-col">
-            <div class="p-5 border-b border-gray-100 dark:border-darkBorder flex justify-between items-center bg-gray-50 dark:bg-gray-800/50 rounded-t-2xl shrink-0">
-                <h3 id="modal-product-title" class="text-lg font-bold text-gray-900 dark:text-white">Add New Product</h3>
-                <button class="close-add-modal text-gray-400 hover:text-red-500 transition-colors bg-white dark:bg-gray-700 rounded-full p-1 border dark:border-gray-600">
+    <div id="add-product-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-xl modal-content flex flex-col border border-theme">
+            <div class="p-5 border-b border-theme flex justify-between items-center bg-main rounded-t-2xl shrink-0">
+                <h3 id="modal-product-title" class="text-lg font-bold text-txt">Add New Product</h3>
+                <button class="close-add-modal text-muted hover:text-red-500 transition-colors bg-card rounded-full p-1 border border-theme">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -259,40 +311,40 @@
                     <input type="hidden" id="edit-product-id" value="">
                     
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Product Title</label>
-                        <input type="text" id="prod-title" required placeholder="e.g. Wireless Bluetooth Earbuds" class="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <label class="block text-sm font-semibold text-txt mb-1">Product Title</label>
+                        <input type="text" id="prod-title" required placeholder="e.g. Wireless Earbuds" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
                     </div>
                     
                     <div class="grid grid-cols-3 gap-4">
                         <div class="col-span-1">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Stock / QTY</label>
-                            <input type="number" id="prod-qty" required min="0" value="0" class="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition font-bold text-blue-600 dark:text-blue-400">
+                            <label class="block text-sm font-semibold text-txt mb-1">Stock / QTY</label>
+                            <input type="number" id="prod-qty" required min="0" value="0" class="w-full px-4 py-2.5 border border-theme bg-main rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition font-bold text-brand-600">
                         </div>
                         <div class="col-span-1">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Initial Reviews</label>
-                            <input type="number" id="prod-initial" required min="0" value="0" class="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            <label class="block text-sm font-semibold text-txt mb-1">Initial Reviews</label>
+                            <input type="number" id="prod-initial" required min="0" value="0" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
                         </div>
                         <div class="col-span-1">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">SKU</label>
-                            <input type="text" id="prod-sku" required placeholder="SKU-123" class="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition font-mono text-sm">
+                            <label class="block text-sm font-semibold text-txt mb-1">SKU</label>
+                            <input type="text" id="prod-sku" required placeholder="SKU-123" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition font-mono text-sm">
                         </div>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Schedule Days</label>
+                        <label class="block text-sm font-semibold text-txt mb-2">Schedule Days</label>
                         <div class="grid grid-cols-2 gap-3" id="days-checkbox-container"></div>
-                        <p id="days-error" class="text-red-500 text-xs mt-2 hidden font-medium">Please select at least one day to schedule the product.</p>
+                        <p id="days-error" class="text-red-500 text-xs mt-2 hidden font-medium">Please select at least one day.</p>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Target Reviews Per Day</label>
-                        <input type="number" id="prod-target" required min="1" value="1" class="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <label class="block text-sm font-semibold text-txt mb-1">Target Reviews Per Day</label>
+                        <input type="number" id="prod-target" required min="1" value="1" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
                     </div>
                 </form>
             </div>
-            <div class="p-5 border-t border-gray-100 dark:border-darkBorder flex justify-end gap-3 rounded-b-2xl shrink-0 bg-gray-50 dark:bg-gray-800/30">
-                <button type="button" class="close-add-modal px-5 py-2.5 text-sm font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition">Cancel</button>
-                <button type="button" id="save-product-btn" class="px-6 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg shadow-md transition flex items-center gap-2">
+            <div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-2xl shrink-0 bg-main">
+                <button type="button" class="close-add-modal px-5 py-2.5 text-sm font-bold text-muted hover:bg-theme rounded-lg transition">Cancel</button>
+                <button type="button" id="save-product-btn" class="px-6 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-md transition flex items-center gap-2">
                     <span id="save-product-text">Save Product</span>
                     <svg id="save-product-spinner" class="animate-spin hidden h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </button>
@@ -300,43 +352,37 @@
         </div>
     </div>
 
-    <!-- Daily Task Checkbox Modal (Includes QTY Auto-Save) -->
-    <div id="daily-task-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-darkCard rounded-2xl shadow-2xl w-full max-w-md modal-content flex flex-col max-h-[85vh]">
-            <div class="p-5 border-b border-gray-100 dark:border-darkBorder flex justify-between items-center shrink-0">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white" id="task-modal-header">Review Checklist</h3>
-                <button class="close-task-modal text-gray-400 hover:text-red-500 transition-colors bg-gray-100 dark:bg-gray-800 rounded-full p-1.5">
+    <!-- Daily Task Modal -->
+    <div id="daily-task-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-md modal-content flex flex-col max-h-[85vh] border border-theme">
+            <div class="p-5 border-b border-theme flex justify-between items-center shrink-0">
+                <h3 class="text-xl font-bold text-txt" id="task-modal-header">Review Checklist</h3>
+                <button class="close-task-modal text-muted hover:text-red-500 bg-main rounded-full p-1.5 border border-theme">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             <div class="p-6 overflow-y-auto">
-                <!-- Top Auto-save QTY bar -->
-                <div class="flex items-center justify-between bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-200 dark:border-blue-800/50 mb-4 shadow-sm">
+                <div class="flex items-center justify-between bg-brand-50 p-3 rounded-xl border border-brand-200 mb-4">
                     <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <span class="text-sm font-bold text-blue-900 dark:text-blue-300">Available QTY</span>
+                        <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <span class="text-sm font-bold text-brand-900">Available QTY</span>
                     </div>
-                    <input type="number" id="task-modal-qty-input" class="w-20 px-2 py-1 border border-blue-300 dark:border-blue-600 rounded-lg text-right text-lg font-bold bg-white dark:bg-gray-700 text-blue-800 dark:text-blue-100 focus:ring-2 focus:ring-blue-500 outline-none transition shadow-inner">
+                    <input type="number" id="task-modal-qty-input" class="w-20 px-2 py-1 border border-brand-300 rounded-lg text-right text-lg font-bold bg-white text-brand-800 focus:ring-2 focus:ring-brand-500 outline-none">
                 </div>
 
-                <div class="mb-5 bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <div class="mb-5 bg-main p-4 rounded-xl border border-theme flex justify-between items-center">
                     <div>
-                        <h4 id="task-modal-title" class="font-bold text-gray-900 dark:text-white text-lg">Product Title Placeholder</h4>
-                        <p id="task-modal-sku" class="text-sm text-gray-500 dark:text-gray-400 font-mono mt-0.5">SKU: ---</p>
+                        <h4 id="task-modal-title" class="font-bold text-txt text-lg">Product Title</h4>
+                        <p id="task-modal-sku" class="text-sm text-muted font-mono mt-0.5">SKU: ---</p>
                     </div>
-                    <!-- Reset Progress Button -->
-                    <button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 px-3 py-1.5 rounded-lg hover:bg-red-200 transition font-bold border border-red-200 dark:border-red-800 shrink-0">
-                        Clear Log
-                    </button>
+                    <button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-200 font-bold border border-red-200 shrink-0">Clear Log</button>
                 </div>
                 
-                <div id="task-checkboxes-container" class="space-y-3">
-                    <!-- Checkboxes injected dynamically -->
-                </div>
+                <div id="task-checkboxes-container" class="space-y-3"></div>
             </div>
-            <div class="p-6 border-t border-gray-100 dark:border-darkBorder shrink-0 bg-gray-50 dark:bg-gray-800/30 rounded-b-2xl">
-                <button type="button" id="save-task-btn" class="w-full px-4 py-3.5 text-base font-extrabold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-lg rounded-xl transition-all flex items-center justify-center gap-2">
-                    <span id="save-task-text">Save Progress / Complete</span>
+            <div class="p-6 border-t border-theme shrink-0 bg-main rounded-b-2xl">
+                <button type="button" id="save-task-btn" class="w-full px-4 py-3.5 text-base font-extrabold text-white bg-emerald-500 hover:bg-emerald-600 shadow-lg rounded-xl transition flex items-center justify-center gap-2">
+                    <span id="save-task-text">Save Progress</span>
                     <svg id="save-task-spinner" class="animate-spin hidden h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </button>
             </div>
@@ -344,30 +390,30 @@
     </div>
 
     <!-- Product Stats Modal -->
-    <div id="stats-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-darkCard rounded-3xl shadow-2xl w-full max-w-sm modal-content relative overflow-hidden">
-            <div class="h-24 bg-gradient-to-r from-indigo-500 to-purple-600 absolute top-0 left-0 w-full rounded-t-3xl"></div>
+    <div id="stats-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-3xl shadow-2xl w-full max-w-sm modal-content relative overflow-hidden border border-theme">
+            <div class="h-24 bg-brand-600 absolute top-0 left-0 w-full rounded-t-3xl"></div>
             
             <div class="relative z-10 p-6 pt-8 text-center flex flex-col items-center">
                 <button class="close-stats-modal absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 rounded-full p-1 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
                 
-                <div class="w-16 h-16 bg-white dark:bg-darkCard rounded-full shadow-lg flex items-center justify-center mb-4 border-4 border-white dark:border-darkCard">
-                    <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                <div class="w-16 h-16 bg-card rounded-full shadow-lg flex items-center justify-center mb-4 border-4 border-card">
+                    <svg class="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </div>
                 
-                <h3 id="stats-modal-title" class="text-xl font-bold text-gray-900 dark:text-white mb-6 w-full truncate">Product Title</h3>
+                <h3 id="stats-modal-title" class="text-xl font-bold text-txt mb-6 w-full truncate">Product Title</h3>
                 
-                <div class="w-full bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-2xl border border-indigo-100 dark:border-indigo-800/50">
-                    <p class="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2 uppercase tracking-wide">Total All-Time Reviews</p>
-                    <p id="stats-total-completed" class="text-5xl font-black text-gray-900 dark:text-white">0</p>
+                <div class="w-full bg-brand-50 p-6 rounded-2xl border border-brand-100">
+                    <p class="text-sm font-medium text-brand-700 mb-2 uppercase tracking-wide">Total All-Time Reviews</p>
+                    <p id="stats-total-completed" class="text-5xl font-black text-brand-900">0</p>
                 </div>
 
-                <div class="w-full flex justify-between mt-6 px-2 text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    <div class="flex flex-col items-center"><span class="text-gray-400 dark:text-gray-500 text-xs uppercase">Target/Day</span> <span id="stats-target" class="text-gray-900 dark:text-gray-200 text-lg font-bold">0</span></div>
-                    <div class="w-px bg-gray-200 dark:bg-gray-700"></div>
-                    <div class="flex flex-col items-center"><span class="text-gray-400 dark:text-gray-500 text-xs uppercase">Current QTY</span> <span id="stats-qty" class="text-blue-600 dark:text-blue-400 text-lg font-bold">0</span></div>
+                <div class="w-full flex justify-between mt-6 px-2 text-sm text-muted font-medium">
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Target/Day</span> <span id="stats-target" class="text-txt text-lg font-bold">0</span></div>
+                    <div class="w-px bg-theme"></div>
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Current QTY</span> <span id="stats-qty" class="text-brand-600 text-lg font-bold">0</span></div>
                 </div>
             </div>
         </div>
@@ -401,12 +447,9 @@
         // 2. GLOBAL STATE & CONSTANTS
         // ==========================================
         let state = { 
-            todayProducts:[], 
-            paginatedProducts:[], 
-            dailyLogs:[], 
-            lastVisibleDoc: null, 
-            totalProductsCount: 0, 
-            searchQuery: "" 
+            todayProducts:[], paginatedProducts:[], dailyLogs:[], 
+            lastVisibleDoc: null, totalProductsCount: 0, 
+            searchQuery: "", filterDay: "" 
         };
 
         const daysBilingual =[
@@ -416,44 +459,41 @@
             { id: 'Sunday', en: 'Sunday', ur: 'اتوار' }
         ];
 
-        let chartInstance = null; 
-        let activeTaskContext = null;
-        let activeTaskDate = null; 
+        let chartInstance = null; let activeTaskContext = null; let activeTaskDate = null; 
 
         // ==========================================
-        // 3. UTILITY FUNCTIONS (DATES & TOASTS)
+        // 3. UTILITIES & THEME ENGINE
         // ==========================================
-        const showToast = (message, type = 'success') => {
+        const showToast = (msg, type = 'success') => {
             const toast = document.getElementById('toast');
-            const icon = document.getElementById('toast-icon');
-            document.getElementById('toast-message').innerText = message;
-            toast.className = `fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-0 bg-white dark:bg-darkCard dark:border-darkBorder border-l-4 shadow-xl rounded-lg px-5 py-4 flex items-center gap-3 min-w-[280px] ${type === 'success' ? 'border-green-500' : 'border-red-500'}`;
-            icon.innerHTML = type === 'success' 
-                ? `<div class="bg-green-100 dark:bg-green-900/30 p-1.5 rounded-full"><svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg></div>` 
-                : `<div class="bg-red-100 dark:bg-red-900/30 p-1.5 rounded-full"><svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></div>`;
+            document.getElementById('toast-message').innerText = msg;
+            toast.className = `fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-0 bg-card border-theme border-l-4 shadow-xl rounded-lg px-5 py-4 flex items-center gap-3 min-w-[280px] ${type === 'success' ? 'border-green-500' : 'border-red-500'}`;
+            document.getElementById('toast-icon').innerHTML = type === 'success' 
+                ? `<div class="bg-green-100 p-1.5 rounded-full"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg></div>` 
+                : `<div class="bg-red-100 p-1.5 rounded-full"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></div>`;
             setTimeout(() => toast.classList.replace('translate-y-0', 'translate-y-[-150%]'), 3500);
         };
 
         const getCurrentDateString = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
         const getCurrentDayName = () => { return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]; };
-        
-        const getYesterdayDate = () => { const d = new Date(); d.setDate(d.getDate() - 1); return d; };
-        const getYesterdayDateString = () => { const d = getYesterdayDate(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
-        const getYesterdayDayName = () => { return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][getYesterdayDate().getDay()]; };
-
+        const getYesterdayDateString = () => { const d = new Date(); d.setDate(d.getDate() - 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+        const getYesterdayDayName = () => { const d = new Date(); d.setDate(d.getDate() - 1); return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getDay()]; };
         window.copyToClipboard = (text, type) => { navigator.clipboard.writeText(text).then(() => showToast(`Copied ${type}: ${text}`)); };
 
-        const applyTheme = (isDark) => { 
-            const themeIcon = document.getElementById('theme-icon');
-            const themeText = document.getElementById('theme-text');
-            if(isDark) { document.documentElement.classList.add('dark'); themeIcon.innerText = '☀️'; themeText.innerText = 'Light Mode'; } 
-            else { document.documentElement.classList.remove('dark'); themeIcon.innerText = '🌙'; themeText.innerText = 'Dark Mode'; }
-            if(chartInstance) renderChart(); 
+        // Theme Setter
+        const applyTheme = (themeName) => {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('theme', themeName);
+            document.getElementById('theme-selector').value = themeName;
+            if(chartInstance) renderChart();
         };
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { applyTheme(true); } else { applyTheme(false); }
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.theme = isDark ? 'dark' : 'light'; applyTheme(isDark);
+
+        // Initialize Theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+
+        document.getElementById('theme-selector').addEventListener('change', (e) => {
+            applyTheme(e.target.value);
         });
 
         // ==========================================
@@ -463,11 +503,9 @@
             if (user) {
                 document.getElementById('user-email-display').innerText = user.email;
                 document.getElementById('user-email-display').title = user.email;
-
                 document.getElementById('login-view').classList.add('opacity-0', 'pointer-events-none');
                 setTimeout(() => document.getElementById('login-view').classList.add('hidden-view'), 300);
                 document.getElementById('app-view').classList.remove('hidden-view');
-                
                 await initializeData();
             } else {
                 document.getElementById('login-view').classList.remove('hidden-view', 'opacity-0', 'pointer-events-none');
@@ -497,23 +535,21 @@
                 const logsSnap = await getDocs(query(collection(db, "daily_logs"), where("date", ">=", dateStr7DaysAgo)));
                 state.dailyLogs = logsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                const todayDay = getCurrentDayName();
-                const yesterdayDay = getYesterdayDayName();
-                const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any", [todayDay, yesterdayDay])));
+                const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any",[getCurrentDayName(), getYesterdayDayName()])));
                 state.todayProducts = todaySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
                 setupUI(); switchView('dashboard'); await fetchPaginatedProducts(true);
-            } catch(e) { console.error("Data error:", e); showToast("Error loading data", "error"); }
+            } catch(e) { console.error(e); showToast("Error loading data", "error"); }
         }
 
         // ==========================================
-        // 6. UI NAVIGATION
+        // 6. UI SETUP
         // ==========================================
         function setupUI() {
             document.getElementById('days-checkbox-container').innerHTML = daysBilingual.map(d => `
-                <label class="flex items-center space-x-3 p-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600 transition group">
-                    <input type="checkbox" value="${d.id}" class="day-checkbox rounded w-4 h-4 text-blue-600 focus:ring-blue-500">
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-200">${d.en} <span class="urdu-text text-gray-400 text-xs ml-1 font-normal">(${d.ur})</span></span>
+                <label class="flex items-center space-x-3 p-3 border border-theme bg-main rounded-lg cursor-pointer hover:bg-theme transition group">
+                    <input type="checkbox" value="${d.id}" class="day-checkbox rounded w-4 h-4 text-brand-600 focus:ring-brand-500">
+                    <span class="text-sm font-medium text-txt">${d.en} <span class="urdu-text text-muted text-xs ml-1">(${d.ur})</span></span>
                 </label>
             `).join('');
             document.getElementById('today-date-subtitle').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -526,11 +562,11 @@
             document.getElementById(`view-${target}`).classList.remove('hidden-view');
             
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-50', 'text-blue-700', 'dark:bg-blue-900/30', 'dark:text-blue-400');
-                btn.classList.add('text-gray-600', 'dark:text-gray-400');
+                btn.classList.remove('bg-brand-50', 'text-brand-700');
+                btn.classList.add('text-muted');
                 if (btn.getAttribute('data-target') === target) {
-                    btn.classList.add('bg-blue-50', 'text-blue-700', 'dark:bg-blue-900/30', 'dark:text-blue-400');
-                    btn.classList.remove('text-gray-600', 'dark:text-gray-400');
+                    btn.classList.add('bg-brand-50', 'text-brand-700');
+                    btn.classList.remove('text-muted');
                 }
             });
 
@@ -547,10 +583,8 @@
             document.getElementById('stat-completed-reviews').innerText = state.dailyLogs.reduce((acc, curr) => acc + (curr.completedReviews || 0), 0) + "+";
             
             let totalPendingCount = 0;
-            const todayStr = getCurrentDateString();
-            const yesterdayStr = getYesterdayDateString();
-            const tDay = getCurrentDayName();
-            const yDay = getYesterdayDayName();
+            const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString();
+            const tDay = getCurrentDayName(); const yDay = getYesterdayDayName();
 
             state.todayProducts.forEach(p => {
                 if(p.days.includes(yDay)) {
@@ -571,8 +605,12 @@
 
         function renderChart() {
             const ctx = document.getElementById('growthChart').getContext('2d');
-            const isDark = document.documentElement.classList.contains('dark');
-            const labels = []; const data =[];
+            
+            // Get CSS variable color for dynamic chart color
+            const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim() || '#3b82f6';
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#64748b';
+
+            const labels =[]; const data =[];
             for(let i=6; i>=0; i--) {
                 const d = new Date(); d.setDate(d.getDate() - i);
                 const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -582,46 +620,63 @@
             if(chartInstance) chartInstance.destroy();
             chartInstance = new Chart(ctx, { 
                 type: 'bar', 
-                data: { labels, datasets:[{ data, backgroundColor: isDark ? '#818cf8' : '#6366f1', borderRadius: 6 }] }, 
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: isDark ? '#94a3b8' : '#64748b' } }, y: { beginAtZero: true, ticks: { color: isDark ? '#94a3b8' : '#64748b', stepSize: 1 } } } } 
+                data: { labels, datasets:[{ data, backgroundColor: brandColor, borderRadius: 6 }] }, 
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textColor } }, y: { beginAtZero: true, ticks: { color: textColor, stepSize: 1 } } } } 
             });
         }
 
         // ==========================================
-        // 8. PRODUCTS MANAGEMENT
+        // 8. PRODUCTS LIST, SEARCH, & DAY FILTER
         // ==========================================
         async function fetchPaginatedProducts(isReset = false) {
             const tbody = document.getElementById('products-table-body');
             const btnMore = document.getElementById('load-more-btn');
             if(isReset) { state.paginatedProducts =[]; state.lastVisibleDoc = null; tbody.innerHTML = ''; }
             
-            let baseQuery = state.searchQuery ? query(collection(db, "products"), where("title", ">=", state.searchQuery), where("title", "<=", state.searchQuery + '\uf8ff'), orderBy("title"), limit(10)) : query(collection(db, "products"), orderBy("createdAt", "desc"), limit(10));
+            let baseQuery;
+            
+            // Prioritize Search > Day Filter > Default
+            if(state.searchQuery) {
+                baseQuery = query(collection(db, "products"), where("title", ">=", state.searchQuery), where("title", "<=", state.searchQuery + '\uf8ff'), orderBy("title"), limit(15));
+            } else if (state.filterDay) {
+                // If only filtering by day (no search) - avoids need for composite index
+                baseQuery = query(collection(db, "products"), where("days", "array-contains", state.filterDay), limit(15));
+            } else {
+                baseQuery = query(collection(db, "products"), orderBy("createdAt", "desc"), limit(10));
+            }
+
             if(!isReset && state.lastVisibleDoc) baseQuery = query(baseQuery, startAfter(state.lastVisibleDoc));
 
             const snap = await getDocs(baseQuery);
-            const newProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            let newProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+            // Local filter just in case BOTH search & day are applied
+            if(state.searchQuery && state.filterDay) {
+                newProducts = newProducts.filter(p => p.days && p.days.includes(state.filterDay));
+            }
+
             state.paginatedProducts =[...state.paginatedProducts, ...newProducts];
             state.lastVisibleDoc = snap.docs[snap.docs.length - 1];
 
-            if(newProducts.length < 10) btnMore.classList.add('hidden'); else btnMore.classList.remove('hidden');
+            if(snap.docs.length < (state.searchQuery ? 15 : 10)) btnMore.classList.add('hidden'); else btnMore.classList.remove('hidden');
             renderProductsTable();
         }
 
         function renderProductsTable() {
             document.getElementById('products-empty-state').classList.toggle('hidden', state.paginatedProducts.length > 0);
             document.getElementById('products-table-body').innerHTML = state.paginatedProducts.map(p => {
-                const daysStr = p.days.map(d => `<span class="inline-block bg-gray-100 dark:bg-gray-700 text-xs px-2.5 py-1 rounded mr-1.5 mb-1.5 text-gray-700 dark:text-gray-300">${d.substring(0,3)}</span>`).join('');
+                const daysStr = p.days.map(d => `<span class="inline-block bg-theme text-xs px-2.5 py-1 rounded mr-1.5 mb-1.5 text-txt">${d.substring(0,3)}</span>`).join('');
                 return `
-                    <tr class="border-b border-gray-50 dark:border-darkBorder hover:bg-blue-50/30 dark:hover:bg-gray-800/30 transition-colors">
-                        <td class="p-4"><div class="font-bold text-gray-900 dark:text-white text-base">${p.title}</div></td>
-                        <td class="p-4"><div class="font-mono text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded inline-block dark:text-gray-400">${p.sku}</div></td>
-                        <td class="p-4 text-center"><span class="font-bold text-blue-600 dark:text-blue-400">${p.qty || 0}</span></td>
+                    <tr class="border-b border-theme hover:bg-theme/30 transition-colors">
+                        <td class="p-4"><div class="font-bold text-txt text-base">${p.title}</div></td>
+                        <td class="p-4"><div class="font-mono text-xs bg-theme px-2 py-1 rounded inline-block text-muted">${p.sku}</div></td>
+                        <td class="p-4 text-center"><span class="font-bold text-brand-600">${p.qty || 0}</span></td>
                         <td class="p-4 max-w-[200px]">${daysStr}</td>
-                        <td class="p-4 text-center"><span class="inline-flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 w-8 h-8 rounded-full font-bold">${p.targetReviews}</span></td>
+                        <td class="p-4 text-center"><span class="inline-flex items-center justify-center bg-brand-50 text-brand-700 w-8 h-8 rounded-full font-bold border border-brand-100">${p.targetReviews}</span></td>
                         <td class="p-4 text-right space-x-2 whitespace-nowrap">
-                            <button onclick="window.viewProductStats('${p.id}')" class="text-xs font-bold bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-3.5 py-2 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition">Stats</button>
-                            <button onclick="window.openEditModal('${p.id}')" class="text-xs font-bold bg-gray-100 dark:bg-gray-700 px-3.5 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition dark:text-white">Edit</button>
-                            <button onclick="window.deleteProduct('${p.id}')" class="text-xs font-bold bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3.5 py-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 transition">Delete</button>
+                            <button onclick="window.viewProductStats('${p.id}')" class="text-xs font-bold bg-main border border-theme px-3.5 py-2 rounded-lg hover:bg-theme transition text-txt">Stats</button>
+                            <button onclick="window.openEditModal('${p.id}')" class="text-xs font-bold bg-main border border-theme px-3.5 py-2 rounded-lg hover:bg-theme transition text-txt">Edit</button>
+                            <button onclick="window.deleteProduct('${p.id}')" class="text-xs font-bold bg-red-50 text-red-600 px-3.5 py-2 rounded-lg hover:bg-red-100 transition border border-red-100">Delete</button>
                         </td>
                     </tr>
                 `;
@@ -630,7 +685,14 @@
 
         document.getElementById('load-more-btn').addEventListener('click', () => fetchPaginatedProducts());
         document.getElementById('btn-search').addEventListener('click', () => { state.searchQuery = document.getElementById('search-product').value.trim(); fetchPaginatedProducts(true); });
+        
+        // DAY FILTER
+        document.getElementById('filter-day').addEventListener('change', (e) => { 
+            state.filterDay = e.target.value; 
+            fetchPaginatedProducts(true); 
+        });
 
+        // Add/Edit
         const prodModal = document.getElementById('add-product-modal');
         document.getElementById('open-add-modal-btn').addEventListener('click', () => {
             document.getElementById('product-form').reset(); document.getElementById('edit-product-id').value = ""; document.getElementById('modal-product-title').innerText = "Add New Product"; document.getElementById('days-error').classList.add('hidden');
@@ -660,11 +722,9 @@
 
             const editId = document.getElementById('edit-product-id').value;
             const prodData = { 
-                title: document.getElementById('prod-title').value, 
-                sku: document.getElementById('prod-sku').value, 
+                title: document.getElementById('prod-title').value, sku: document.getElementById('prod-sku').value, 
                 qty: parseInt(document.getElementById('prod-qty').value) || 0,
-                initialCount: parseInt(document.getElementById('prod-initial').value), 
-                targetReviews: parseInt(document.getElementById('prod-target').value), 
+                initialCount: parseInt(document.getElementById('prod-initial').value), targetReviews: parseInt(document.getElementById('prod-target').value), 
                 days: checkedDays 
             };
             
@@ -680,8 +740,7 @@
             if(!confirm('🚨 Delete this product and ALL its review records? This cannot be undone.')) return;
             try {
                 await deleteDoc(doc(db, "products", id));
-                const logsQuery = query(collection(db, "daily_logs"), where("productId", "==", id));
-                const snap = await getDocs(logsQuery);
+                const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id)));
                 snap.forEach(async (d) => { await deleteDoc(doc(db, "daily_logs", d.id)); });
 
                 state.paginatedProducts = state.paginatedProducts.filter(p => p.id !== id);
@@ -695,32 +754,22 @@
         };
 
         // ==========================================
-        // 9. TODAY'S TASKS (CHECKLIST, AUTO-QTY, RESET)
+        // 9. TODAY'S TASKS (AUTO-QTY & CARRY OVER)
         // ==========================================
         function renderTodayTasks() {
             const container = document.getElementById('today-tasks-container');
-            const todayStr = getCurrentDateString();
-            const yesterdayStr = getYesterdayDateString();
-            const tDay = getCurrentDayName();
-            const yDay = getYesterdayDayName();
+            const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString();
+            const tDay = getCurrentDayName(); const yDay = getYesterdayDayName();
             
             let pendingCount = 0; const taskCards =[]; 
             
             state.todayProducts.forEach(p => {
-                // Check Yesterday's pending
                 if(p.days.includes(yDay)) {
-                    const yLog = state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr);
-                    const yComp = yLog ? yLog.completedReviews : 0;
-                    if(yComp < p.targetReviews) {
-                        pendingCount++;
-                        taskCards.push({ p, completed: yComp, isComplete: false, isCarryOver: true, taskDate: yesterdayStr });
-                    }
+                    const yComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr) || {}).completedReviews || 0;
+                    if(yComp < p.targetReviews) { pendingCount++; taskCards.push({ p, completed: yComp, isComplete: false, isCarryOver: true, taskDate: yesterdayStr }); }
                 }
-                
-                // Check Today's status
                 if(p.days.includes(tDay)) {
-                    const tLog = state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr);
-                    const tComp = tLog ? tLog.completedReviews : 0;
+                    const tComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr) || {}).completedReviews || 0;
                     const isComplete = tComp >= p.targetReviews;
                     if (!isComplete) pendingCount++; 
                     taskCards.push({ p, completed: tComp, isComplete: isComplete, isCarryOver: false, taskDate: todayStr });
@@ -730,46 +779,36 @@
             const badge = document.getElementById('sidebar-today-badge');
             if (pendingCount > 0) { badge.innerText = pendingCount; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); }
             
-            taskCards.sort((a, b) => {
-                if (a.isComplete !== b.isComplete) return a.isComplete ? 1 : -1;
-                if (a.isCarryOver !== b.isCarryOver) return a.isCarryOver ? -1 : 1;
-                return 0;
-            });
-
+            taskCards.sort((a, b) => { if (a.isComplete !== b.isComplete) return a.isComplete ? 1 : -1; if (a.isCarryOver !== b.isCarryOver) return a.isCarryOver ? -1 : 1; return 0; });
             if (taskCards.length === 0) { document.getElementById('today-empty-state').classList.remove('hidden'); container.innerHTML=''; return; }
             document.getElementById('today-empty-state').classList.add('hidden');
             
             container.innerHTML = taskCards.map(t => {
-                const borderStyle = t.isComplete ? 'border-gray-200 dark:border-darkBorder opacity-60' : t.isCarryOver ? 'border-red-300 dark:border-red-800 shadow-md ring-1 ring-red-100 dark:ring-red-900/50' : 'border-blue-200 dark:border-blue-800 shadow-md';
-                const badgeHtml = t.isComplete 
-                    ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Completed</span>` 
-                    : t.isCarryOver 
-                    ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400">⚠️ Pending from Yesterday</span>` 
-                    : `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">Action Required</span>`;
+                const borderStyle = t.isComplete ? 'border-theme opacity-60' : t.isCarryOver ? 'border-red-300 shadow-md ring-1 ring-red-100' : 'border-brand-300 shadow-md';
+                const badgeHtml = t.isComplete ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-emerald-100 text-emerald-700">Completed</span>` 
+                    : t.isCarryOver ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-red-100 text-red-700">⚠️ Pending from Yesterday</span>` 
+                    : `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-orange-100 text-orange-700">Action Required</span>`;
 
                 return `
-                <div class="bg-white dark:bg-darkCard border ${borderStyle} rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all">
+                <div class="bg-card border ${borderStyle} rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all">
                     <div class="flex-1 cursor-pointer" onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')">
-                        <div class="flex items-center gap-3 mb-1.5"><h3 class="text-xl font-bold dark:text-white">${t.p.title}</h3>${badgeHtml}</div>
+                        <div class="flex items-center gap-3 mb-1.5"><h3 class="text-xl font-bold text-txt">${t.p.title}</h3>${badgeHtml}</div>
                         <div class="flex flex-wrap items-center gap-3 text-sm mt-2">
-                            <span class="font-mono bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded border dark:border-gray-700 text-xs dark:text-gray-400">SKU: ${t.p.sku}</span>
-                            <span class="font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-2.5 py-1 rounded text-xs border border-blue-200 dark:border-blue-800">QTY: ${t.p.qty || 0}</span>
-                            <span class="font-medium bg-gray-50 dark:bg-gray-800/50 px-3 py-1 rounded-full dark:text-gray-300">Progress: <strong class="dark:text-white">${t.completed} / ${t.p.targetReviews}</strong></span>
+                            <span class="font-mono bg-main px-2.5 py-1 rounded border border-theme text-xs text-muted">SKU: ${t.p.sku}</span>
+                            <span class="font-bold bg-brand-50 text-brand-700 px-2.5 py-1 rounded text-xs border border-brand-200">QTY: ${t.p.qty || 0}</span>
+                            <span class="font-medium bg-main px-3 py-1 rounded-full text-muted border border-theme">Progress: <strong class="text-txt">${t.completed} / ${t.p.targetReviews}</strong></span>
                         </div>
                     </div>
                     <div class="shrink-0 flex gap-2">
-                        <button onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')" class="text-sm font-extrabold ${t.isComplete ? 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300' : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'} px-6 py-3 rounded-xl">${t.isComplete ? 'Review / Edit' : 'Submit Check'}</button>
+                        <button onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')" class="text-sm font-extrabold ${t.isComplete ? 'bg-main border border-theme text-txt' : 'bg-brand-600 text-white shadow-md'} px-6 py-3 rounded-xl">${t.isComplete ? 'Review / Edit' : 'Submit Check'}</button>
                     </div>
                 </div>`
             }).join('');
         }
 
         const taskModal = document.getElementById('daily-task-modal');
-        
         window.openTaskModal = (id, dateStr) => {
-            const p = state.todayProducts.find(x => x.id === id); if(!p) return; 
-            activeTaskContext = p; activeTaskDate = dateStr; 
-            
+            const p = state.todayProducts.find(x => x.id === id); if(!p) return; activeTaskContext = p; activeTaskDate = dateStr; 
             document.getElementById('task-modal-header').innerText = dateStr === getCurrentDateString() ? "Today's Checklist" : "Yesterday's Pending Checklist";
             document.getElementById('task-modal-title').innerText = p.title; document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`;
             
@@ -778,11 +817,9 @@
             qtyInput.onchange = async (e) => {
                 const newQty = parseInt(e.target.value) || 0;
                 try {
-                    await updateDoc(doc(db, "products", p.id), { qty: newQty });
-                    p.qty = newQty; 
+                    await updateDoc(doc(db, "products", p.id), { qty: newQty }); p.qty = newQty; 
                     const pInAll = state.paginatedProducts.find(x => x.id === id); if(pInAll) pInAll.qty = newQty;
-                    renderTodayTasks(); renderProductsTable(); 
-                    showToast('QTY Auto-Saved!');
+                    renderTodayTasks(); renderProductsTable(); showToast('QTY Auto-Saved!');
                 } catch(err) { showToast('Error saving QTY', 'error'); }
             };
 
@@ -790,14 +827,13 @@
             const completed = log ? log.completedReviews : 0;
             
             const resetBtn = document.getElementById('reset-task-btn');
-            if(completed > 0) { resetBtn.classList.remove('hidden'); resetBtn.onclick = () => window.resetTask(p.id, dateStr); } 
-            else { resetBtn.classList.add('hidden'); }
+            if(completed > 0) { resetBtn.classList.remove('hidden'); resetBtn.onclick = () => window.resetTask(p.id, dateStr); } else { resetBtn.classList.add('hidden'); }
 
             let cbHTML = '';
             for(let i=1; i<=p.targetReviews; i++) {
                 const isChecked = i <= completed ? 'checked' : '';
-                const styleActive = isChecked ? 'bg-emerald-50 border-emerald-200 dark:bg-emerald-900/10 dark:border-emerald-800' : 'bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600';
-                cbHTML += `<label class="flex items-center space-x-4 p-4 rounded-xl border ${styleActive} cursor-pointer group"><input type="checkbox" class="task-checkbox rounded text-emerald-500 w-6 h-6 border-gray-300 dark:border-gray-500" ${isChecked}><span class="dark:text-white font-bold">Review Setup Task #${i}</span></label>`;
+                const styleActive = isChecked ? 'bg-emerald-50 border-emerald-200' : 'bg-card border-theme hover:bg-main';
+                cbHTML += `<label class="flex items-center space-x-4 p-4 rounded-xl border ${styleActive} cursor-pointer"><input type="checkbox" class="task-checkbox rounded text-emerald-500 w-6 h-6 border-theme bg-main" ${isChecked}><span class="text-txt font-bold">Review Setup Task #${i}</span></label>`;
             }
             document.getElementById('task-checkboxes-container').innerHTML = cbHTML;
             taskModal.classList.remove('hidden-view'); setTimeout(() => taskModal.classList.add('modal-active'), 10);
@@ -805,7 +841,6 @@
 
         document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { taskModal.classList.remove('modal-active'); setTimeout(() => taskModal.classList.add('hidden-view'), 300); }));
 
-        // SAVE TASK & AUTO-MINUS QTY
         document.getElementById('save-task-btn').addEventListener('click', async () => {
             if(!activeTaskContext) return;
             document.getElementById('save-task-text').classList.add('hidden'); document.getElementById('save-task-spinner').classList.remove('hidden'); document.getElementById('save-task-btn').disabled = true;
@@ -814,89 +849,65 @@
             const logId = `${activeTaskContext.id}_${activeTaskDate}`;
             const logData = { productId: activeTaskContext.id, productTitle: activeTaskContext.title, date: activeTaskDate, completedReviews: checkedCount, targetReviews: activeTaskContext.targetReviews, timestamp: serverTimestamp() };
             
-            // Calculate Difference for QTY auto-minus
-            const previousLog = state.dailyLogs.find(l => l.id === logId);
-            const previousCompleted = previousLog ? previousLog.completedReviews : 0;
-            const difference = checkedCount - previousCompleted;
+            const prevLog = state.dailyLogs.find(l => l.id === logId);
+            const diff = checkedCount - (prevLog ? prevLog.completedReviews : 0);
 
             try {
-                // Save Log
                 await setDoc(doc(db, "daily_logs", logId), logData);
                 const existIdx = state.dailyLogs.findIndex(l => l.id === logId);
                 if(existIdx > -1) state.dailyLogs[existIdx] = { id: logId, ...logData }; else state.dailyLogs.push({ id: logId, ...logData });
                 
-                // Auto-Minus QTY logic
-                if(difference !== 0) {
-                    const currentQty = parseInt(activeTaskContext.qty) || 0;
-                    const updatedQty = Math.max(0, currentQty - difference); // Prevent negative QTY
-                    
-                    await updateDoc(doc(db, "products", activeTaskContext.id), { qty: updatedQty });
-                    
-                    // Update Local State for QTY
-                    activeTaskContext.qty = updatedQty;
-                    const pInPaginated = state.paginatedProducts.find(x => x.id === activeTaskContext.id);
-                    if(pInPaginated) pInPaginated.qty = updatedQty;
+                if(diff !== 0) {
+                    const newQty = Math.max(0, (parseInt(activeTaskContext.qty) || 0) - diff);
+                    await updateDoc(doc(db, "products", activeTaskContext.id), { qty: newQty });
+                    activeTaskContext.qty = newQty;
+                    const pInAll = state.paginatedProducts.find(x => x.id === activeTaskContext.id); if(pInAll) pInAll.qty = newQty;
                 }
 
-                document.querySelector('.close-task-modal').click(); 
-                renderTodayTasks(); renderDashboard(); renderProductsTable();
-                
-                if(checkedCount === activeTaskContext.targetReviews && document.querySelectorAll('#today-tasks-container .bg-orange-100').length <= 1) triggerConfetti();
+                document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable();
+                if(checkedCount === activeTaskContext.targetReviews && document.querySelectorAll('#today-tasks-container .bg-orange-100').length <= 1) { const colors =['#10b981', '#3b82f6', '#f59e0b']; confetti({ particleCount: 50, spread: 60, colors }); }
             } catch(e) { showToast('Error saving progress', 'error'); } 
             finally { document.getElementById('save-task-text').classList.remove('hidden'); document.getElementById('save-task-spinner').classList.add('hidden'); document.getElementById('save-task-btn').disabled = false; }
         });
 
-        // RESET LOG & RESTORE QTY
         window.resetTask = async (productId, dateStr) => {
-            if(!confirm("Clear review progress for this task? (This will restore the deducted QTY back to stock)")) return;
+            if(!confirm("Clear progress and restore deducted QTY back to stock?")) return;
             const logId = `${productId}_${dateStr}`;
-            
             try {
                 const log = state.dailyLogs.find(l => l.id === logId);
-                // Restore QTY logic
                 if(log) {
                     const p = state.todayProducts.find(x => x.id === productId);
                     if(p) {
                         const restoredQty = (parseInt(p.qty) || 0) + log.completedReviews;
-                        await updateDoc(doc(db, "products", productId), { qty: restoredQty });
-                        p.qty = restoredQty;
-                        const pInAll = state.paginatedProducts.find(x => x.id === productId);
-                        if(pInAll) pInAll.qty = restoredQty;
+                        await updateDoc(doc(db, "products", productId), { qty: restoredQty }); p.qty = restoredQty;
+                        const pInAll = state.paginatedProducts.find(x => x.id === productId); if(pInAll) pInAll.qty = restoredQty;
                     }
                 }
-
                 await deleteDoc(doc(db, "daily_logs", logId));
                 state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
-                
-                document.querySelector('.close-task-modal').click();
-                renderTodayTasks(); renderDashboard(); renderProductsTable();
-                showToast('Progress cleared and QTY restored.');
+                document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable();
+                showToast('Progress cleared & QTY restored.');
             } catch(e) { showToast('Error clearing progress', 'error'); }
         };
-
-        function triggerConfetti() {
-            const end = Date.now() + 3000; const colors =['#10b981', '#3b82f6', '#f59e0b'];
-            (function frame() { confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors }); confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors }); if (Date.now() < end) requestAnimationFrame(frame); }());
-        }
 
         // ==========================================
         // 10. HISTORY VIEW
         // ==========================================
         document.getElementById('history-date-picker').addEventListener('change', async (e) => {
-            const list = document.getElementById('history-list'); list.innerHTML = `<li class="p-12 text-center text-gray-500">Loading...</li>`;
+            const list = document.getElementById('history-list'); list.innerHTML = `<li class="p-12 text-center text-muted">Loading...</li>`;
             try {
                 const snap = await getDocs(query(collection(db, "daily_logs"), where("date", "==", e.target.value)));
-                if(snap.empty) { list.innerHTML = `<li class="p-12 text-center text-gray-500 dark:text-gray-400">No reviews completed on this date.</li>`; return; }
+                if(snap.empty) { list.innerHTML = `<li class="p-12 text-center text-muted">No reviews completed on this date.</li>`; return; }
                 
                 list.innerHTML = snap.docs.map(doc => {
                     const d = doc.data();
-                    const badgeColor = d.completedReviews >= d.targetReviews ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800' : 'bg-orange-100 dark:bg-orange-900/40 text-orange-800';
+                    const badgeColor = d.completedReviews >= d.targetReviews ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800';
                     return `
-                    <li class="p-6 flex flex-col md:flex-row md:items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 border-b dark:border-darkBorder last:border-0 gap-4 transition">
-                        <div><p class="font-bold dark:text-white text-lg">${d.productTitle}</p><p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-mono">Date: ${d.date}</p></div>
+                    <li class="p-6 flex flex-col md:flex-row md:items-center justify-between hover:bg-theme border-b border-theme last:border-0 gap-4 transition">
+                        <div><p class="font-bold text-txt text-lg">${d.productTitle}</p><p class="text-xs text-muted mt-1 font-mono">Date: ${d.date}</p></div>
                         <div class="flex items-center self-end md:self-auto">
-                            <span class="${badgeColor} dark:text-gray-200 px-4 py-1.5 rounded-full text-sm font-black">${d.completedReviews} / ${d.targetReviews}</span>
-                            <button onclick="window.deleteLog('${doc.id}')" class="text-xs bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3.5 py-1.5 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 transition ml-4 font-bold border border-red-200 dark:border-red-800">Remove Record</button>
+                            <span class="${badgeColor} px-4 py-1.5 rounded-full text-sm font-black">${d.completedReviews} / ${d.targetReviews}</span>
+                            <button onclick="window.deleteLog('${doc.id}')" class="text-xs bg-red-50 text-red-600 px-3.5 py-1.5 rounded-lg hover:bg-red-100 transition ml-4 font-bold border border-red-200">Remove Record</button>
                         </div>
                     </li>`;
                 }).join('');
@@ -904,14 +915,13 @@
         });
 
         window.deleteLog = async (logId) => {
-            if(!confirm('🚨 Delete this review completion record? It will affect the stats.')) return;
+            if(!confirm('🚨 Delete this review completion record? (This DOES NOT restore QTY, use Clear Log in Today tab for that).')) return;
             try {
                 await deleteDoc(doc(db, "daily_logs", logId));
                 state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId); 
                 showToast('Log record deleted.');
                 document.getElementById('history-date-picker').dispatchEvent(new Event('change')); 
-                renderDashboard(); 
-                if(logId.includes(getCurrentDateString()) || logId.includes(getYesterdayDateString())) renderTodayTasks(); 
+                renderDashboard(); if(logId.includes(getCurrentDateString()) || logId.includes(getYesterdayDateString())) renderTodayTasks(); 
             } catch(e) { showToast('Error deleting log', 'error'); }
         };
 
@@ -921,12 +931,8 @@
         const statsModal = document.getElementById('stats-modal');
         window.viewProductStats = async (id) => {
             const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return;
-            document.getElementById('stats-modal-title').innerText = p.title; 
-            document.getElementById('stats-target').innerText = p.targetReviews; 
-            document.getElementById('stats-initial').innerText = p.initialCount; 
-            document.getElementById('stats-qty').innerText = p.qty || 0; 
-            document.getElementById('stats-total-completed').innerText = "...";
-            
+            document.getElementById('stats-modal-title').innerText = p.title; document.getElementById('stats-target').innerText = p.targetReviews; 
+            document.getElementById('stats-qty').innerText = p.qty || 0; document.getElementById('stats-total-completed').innerText = "...";
             statsModal.classList.remove('hidden-view'); setTimeout(() => statsModal.classList.add('modal-active'), 10);
             try {
                 const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id)));
