@@ -310,7 +310,7 @@
                 </button>
             </div>
             <div class="p-6 overflow-y-auto">
-                <!-- QTY Auto-save bar -->
+                <!-- Top Auto-save QTY bar -->
                 <div class="flex items-center justify-between bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-200 dark:border-blue-800/50 mb-4 shadow-sm">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
@@ -401,7 +401,7 @@
         // 2. GLOBAL STATE & CONSTANTS
         // ==========================================
         let state = { 
-            todayProducts:[], // Holds products scheduled for today OR yesterday
+            todayProducts:[], 
             paginatedProducts:[], 
             dailyLogs:[], 
             lastVisibleDoc: null, 
@@ -418,7 +418,7 @@
 
         let chartInstance = null; 
         let activeTaskContext = null;
-        let activeTaskDate = null; // Important for Carry-over logic
+        let activeTaskDate = null; 
 
         // ==========================================
         // 3. UTILITY FUNCTIONS (DATES & TOASTS)
@@ -437,14 +437,12 @@
         const getCurrentDateString = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
         const getCurrentDayName = () => { return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]; };
         
-        // Helper for Yesterday logic
         const getYesterdayDate = () => { const d = new Date(); d.setDate(d.getDate() - 1); return d; };
         const getYesterdayDateString = () => { const d = getYesterdayDate(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
         const getYesterdayDayName = () => { return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][getYesterdayDate().getDay()]; };
 
         window.copyToClipboard = (text, type) => { navigator.clipboard.writeText(text).then(() => showToast(`Copied ${type}: ${text}`)); };
 
-        // Dark Mode
         const applyTheme = (isDark) => { 
             const themeIcon = document.getElementById('theme-icon');
             const themeText = document.getElementById('theme-text');
@@ -499,7 +497,6 @@
                 const logsSnap = await getDocs(query(collection(db, "daily_logs"), where("date", ">=", dateStr7DaysAgo)));
                 state.dailyLogs = logsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                // Fetch products scheduled for TODAY OR YESTERDAY (For carry-over logic)
                 const todayDay = getCurrentDayName();
                 const yesterdayDay = getYesterdayDayName();
                 const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any", [todayDay, yesterdayDay])));
@@ -549,7 +546,6 @@
             document.getElementById('stat-total-products').innerText = state.totalProductsCount;
             document.getElementById('stat-completed-reviews').innerText = state.dailyLogs.reduce((acc, curr) => acc + (curr.completedReviews || 0), 0) + "+";
             
-            // Calculate total pending for today & yesterday
             let totalPendingCount = 0;
             const todayStr = getCurrentDateString();
             const yesterdayStr = getYesterdayDateString();
@@ -680,7 +676,6 @@
             finally { document.getElementById('save-product-text').classList.remove('hidden'); document.getElementById('save-product-spinner').classList.add('hidden'); document.getElementById('save-product-btn').disabled = false; }
         });
 
-        // CASCADING DELETE
         window.deleteProduct = async (id) => {
             if(!confirm('🚨 Delete this product and ALL its review records? This cannot be undone.')) return;
             try {
@@ -700,7 +695,7 @@
         };
 
         // ==========================================
-        // 9. TODAY'S TASKS (CARRY-OVER & QTY LOGIC)
+        // 9. TODAY'S TASKS (CHECKLIST, AUTO-QTY, RESET)
         // ==========================================
         function renderTodayTasks() {
             const container = document.getElementById('today-tasks-container');
@@ -735,7 +730,6 @@
             const badge = document.getElementById('sidebar-today-badge');
             if (pendingCount > 0) { badge.innerText = pendingCount; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); }
             
-            // Sort: Carry-over first -> Pending today -> Completed
             taskCards.sort((a, b) => {
                 if (a.isComplete !== b.isComplete) return a.isComplete ? 1 : -1;
                 if (a.isCarryOver !== b.isCarryOver) return a.isCarryOver ? -1 : 1;
@@ -774,25 +768,20 @@
         
         window.openTaskModal = (id, dateStr) => {
             const p = state.todayProducts.find(x => x.id === id); if(!p) return; 
-            activeTaskContext = p;
-            activeTaskDate = dateStr; // Store date to save log against correct day (Yesterday or Today)
+            activeTaskContext = p; activeTaskDate = dateStr; 
             
             document.getElementById('task-modal-header').innerText = dateStr === getCurrentDateString() ? "Today's Checklist" : "Yesterday's Pending Checklist";
-            document.getElementById('task-modal-title').innerText = p.title; 
-            document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`;
+            document.getElementById('task-modal-title').innerText = p.title; document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`;
             
-            // Set current QTY in the header input
             const qtyInput = document.getElementById('task-modal-qty-input');
             qtyInput.value = p.qty || 0;
-            
-            // QTY Auto-save Logic
             qtyInput.onchange = async (e) => {
                 const newQty = parseInt(e.target.value) || 0;
                 try {
                     await updateDoc(doc(db, "products", p.id), { qty: newQty });
-                    p.qty = newQty; // update local context
+                    p.qty = newQty; 
                     const pInAll = state.paginatedProducts.find(x => x.id === id); if(pInAll) pInAll.qty = newQty;
-                    renderTodayTasks(); renderProductsTable(); // UI refresh
+                    renderTodayTasks(); renderProductsTable(); 
                     showToast('QTY Auto-Saved!');
                 } catch(err) { showToast('Error saving QTY', 'error'); }
             };
@@ -816,34 +805,72 @@
 
         document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { taskModal.classList.remove('modal-active'); setTimeout(() => taskModal.classList.add('hidden-view'), 300); }));
 
+        // SAVE TASK & AUTO-MINUS QTY
         document.getElementById('save-task-btn').addEventListener('click', async () => {
             if(!activeTaskContext) return;
             document.getElementById('save-task-text').classList.add('hidden'); document.getElementById('save-task-spinner').classList.remove('hidden'); document.getElementById('save-task-btn').disabled = true;
 
             const checkedCount = document.querySelectorAll('.task-checkbox:checked').length;
-            const logId = `${activeTaskContext.id}_${activeTaskDate}`; // Use activeTaskDate (could be yesterday)
+            const logId = `${activeTaskContext.id}_${activeTaskDate}`;
             const logData = { productId: activeTaskContext.id, productTitle: activeTaskContext.title, date: activeTaskDate, completedReviews: checkedCount, targetReviews: activeTaskContext.targetReviews, timestamp: serverTimestamp() };
             
+            // Calculate Difference for QTY auto-minus
+            const previousLog = state.dailyLogs.find(l => l.id === logId);
+            const previousCompleted = previousLog ? previousLog.completedReviews : 0;
+            const difference = checkedCount - previousCompleted;
+
             try {
+                // Save Log
                 await setDoc(doc(db, "daily_logs", logId), logData);
                 const existIdx = state.dailyLogs.findIndex(l => l.id === logId);
                 if(existIdx > -1) state.dailyLogs[existIdx] = { id: logId, ...logData }; else state.dailyLogs.push({ id: logId, ...logData });
-                document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard();
+                
+                // Auto-Minus QTY logic
+                if(difference !== 0) {
+                    const currentQty = parseInt(activeTaskContext.qty) || 0;
+                    const updatedQty = Math.max(0, currentQty - difference); // Prevent negative QTY
+                    
+                    await updateDoc(doc(db, "products", activeTaskContext.id), { qty: updatedQty });
+                    
+                    // Update Local State for QTY
+                    activeTaskContext.qty = updatedQty;
+                    const pInPaginated = state.paginatedProducts.find(x => x.id === activeTaskContext.id);
+                    if(pInPaginated) pInPaginated.qty = updatedQty;
+                }
+
+                document.querySelector('.close-task-modal').click(); 
+                renderTodayTasks(); renderDashboard(); renderProductsTable();
+                
                 if(checkedCount === activeTaskContext.targetReviews && document.querySelectorAll('#today-tasks-container .bg-orange-100').length <= 1) triggerConfetti();
             } catch(e) { showToast('Error saving progress', 'error'); } 
             finally { document.getElementById('save-task-text').classList.remove('hidden'); document.getElementById('save-task-spinner').classList.add('hidden'); document.getElementById('save-task-btn').disabled = false; }
         });
 
-        // RESET SPECIFIC TASK LOG
+        // RESET LOG & RESTORE QTY
         window.resetTask = async (productId, dateStr) => {
-            if(!confirm("Clear review progress for this task?")) return;
+            if(!confirm("Clear review progress for this task? (This will restore the deducted QTY back to stock)")) return;
             const logId = `${productId}_${dateStr}`;
+            
             try {
+                const log = state.dailyLogs.find(l => l.id === logId);
+                // Restore QTY logic
+                if(log) {
+                    const p = state.todayProducts.find(x => x.id === productId);
+                    if(p) {
+                        const restoredQty = (parseInt(p.qty) || 0) + log.completedReviews;
+                        await updateDoc(doc(db, "products", productId), { qty: restoredQty });
+                        p.qty = restoredQty;
+                        const pInAll = state.paginatedProducts.find(x => x.id === productId);
+                        if(pInAll) pInAll.qty = restoredQty;
+                    }
+                }
+
                 await deleteDoc(doc(db, "daily_logs", logId));
                 state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
+                
                 document.querySelector('.close-task-modal').click();
-                renderTodayTasks(); renderDashboard();
-                showToast('Progress log cleared successfully.');
+                renderTodayTasks(); renderDashboard(); renderProductsTable();
+                showToast('Progress cleared and QTY restored.');
             } catch(e) { showToast('Error clearing progress', 'error'); }
         };
 
