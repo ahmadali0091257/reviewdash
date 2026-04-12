@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReviewFlow Pro Max - Gamified</title>
+    <title>ReviewFlow Pro Max</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Libraries -->
+    <!-- Libraries: Tailwind, Chart.js, Confetti, HTML2PDF -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- Theme Config -->
+    <!-- Dynamic Theme Engine -->
     <script>
         tailwind.config = {
             theme: {
@@ -32,77 +32,85 @@
 
     <style>
         :root {
+            /* LIGHT */
             --brand-50: #eff6ff; --brand-100: #dbeafe; --brand-200: #bfdbfe; --brand-500: #3b82f6; --brand-600: #2563eb; --brand-700: #1d4ed8; --brand-800: #1e40af; --brand-900: #1e3a8a;
             --bg-main: #f8fafc; --bg-card: #ffffff; --border-col: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b;
         }[data-theme="dark"] {
+            /* DARK */
             --brand-50: #1e1e2f; --brand-100: #2a2a40; --brand-200: #3b3b5c; --brand-500: #6366f1; --brand-600: #4f46e5; --brand-700: #4338ca; --brand-800: #3730a3; --brand-900: #312e81;
             --bg-main: #0f172a; --bg-card: #1e293b; --border-col: #334155; --text-main: #f8fafc; --text-muted: #94a3b8;
-        }[data-theme="spiderman"] {
+        }
+        [data-theme="spiderman"] {
+            /* SPIDER-MAN */
             --brand-50: #fef2f2; --brand-100: #fee2e2; --brand-200: #fecaca; --brand-500: #ef4444; --brand-600: #dc2626; --brand-700: #b91c1c; --brand-800: #991b1b; --brand-900: #7f1d1d;
             --bg-main: #020617; --bg-card: #172554; --border-col: #1e3a8a; --text-main: #f8fafc; --text-muted: #93c5fd;
-        }[data-theme="shopify"] {
+        }
+        [data-theme="shopify"] {
+            /* SHOPIFY */
             --brand-50: #f0fdf4; --brand-100: #dcfce7; --brand-200: #bbf7d0; --brand-500: #22c55e; --brand-600: #16a34a; --brand-700: #15803d; --brand-800: #166534; --brand-900: #14532d;
             --bg-main: #f4f6f8; --bg-card: #ffffff; --border-col: #dfe3e8; --text-main: #212b36; --text-muted: #637381;
         }[data-theme="batman"] {
+            /* BATMAN */
             --brand-50: #fefce8; --brand-100: #fef9c3; --brand-200: #fef08a; --brand-500: #eab308; --brand-600: #ca8a04; --brand-700: #a16207; --brand-800: #854d0e; --brand-900: #713f12;
             --bg-main: #000000; --bg-card: #171717; --border-col: #262626; --text-main: #e5e5e5; --text-muted: #a3a3a3;
-        }[data-theme="hacker"] {
+        }
+        [data-theme="hacker"] {
+            /* HACKER */
             --brand-50: #022c22; --brand-100: #064e3b; --brand-200: #065f46; --brand-500: #10b981; --brand-600: #059669; --brand-700: #047857; --brand-800: #064e3b; --brand-900: #022c22;
             --bg-main: #000000; --bg-card: #0a0a0a; --border-col: #064e3b; --text-main: #10b981; --text-muted: #047857;
-        }[data-theme="cyberpunk"] {
+        }
+        [data-theme="cyberpunk"] {
+            /* CYBERPUNK */
             --brand-50: #fffbeb; --brand-100: #fef3c7; --brand-200: #fde047; --brand-500: #eab308; --brand-600: #d97706; --brand-700: #b45309; --brand-800: #92400e; --brand-900: #78350f;
             --bg-main: #000913; --bg-card: #120458; --border-col: #ff007f; --text-main: #00ffff; --text-muted: #ff007f;
-        }[data-theme="netflix"] {
+        }
+        [data-theme="netflix"] {
+            /* NETFLIX */
             --brand-50: #fef2f2; --brand-100: #fee2e2; --brand-200: #fecaca; --brand-500: #ef4444; --brand-600: #e50914; --brand-700: #b91c1c; --brand-800: #991b1b; --brand-900: #7f1d1d;
             --bg-main: #000000; --bg-card: #141414; --border-col: #333333; --text-main: #ffffff; --text-muted: #a3a3a3;
-        }[data-theme="gold"] {
-            --brand-50: #fefce8; --brand-100: #fef9c3; --brand-200: #fef08a; --brand-500: #eab308; --brand-600: #ca8a04; --brand-700: #a16207; --brand-800: #854d0e; --brand-900: #713f12;
-            --bg-main: #1c1917; --bg-card: #262626; --border-col: #ca8a04; --text-main: #fef08a; --text-muted: #d4d4d8;
-        }[data-theme="ironman"] {
-            --brand-50: #fef2f2; --brand-100: #fee2e2; --brand-200: #fecaca; --brand-500: #ef4444; --brand-600: #dc2626; --brand-700: #b91c1c; --brand-800: #991b1b; --brand-900: #7f1d1d;
-            --bg-main: #083344; --bg-card: #164e63; --border-col: #06b6d4; --text-main: #cffafe; --text-muted: #67e8f9;
         }
 
         body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .urdu-text { font-family: 'Noto Sans Arabic', sans-serif; }
         .modal-overlay { transition: opacity 0.3s ease; }
         .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; transform: scale(0.95); opacity: 0; }
         .modal-active .modal-content { transform: scale(1); opacity: 1; }
         .hidden-view { display: none !important; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeInUp 0.4s ease-out forwards; }
-        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--border-col); border-radius: 4px; }
         
-        .coin-text { background: linear-gradient(to right, #fbbf24, #f59e0b); -webkit-background-clip: text; color: transparent; }
-        .text-gradient-gold { background: linear-gradient(to right, #facc15, #b45309); -webkit-background-clip: text; color: transparent; font-weight: 900; text-shadow: 0px 0px 10px rgba(250,204,21,0.4); }
-        .text-gradient-rgb { background: linear-gradient(to right, #ef4444, #10b981, #3b82f6, #ef4444); background-size: 200% auto; -webkit-background-clip: text; color: transparent; font-weight: 900; animation: rgbShift 3s linear infinite; }
-        @keyframes rgbShift { to { background-position: 200% center; } }
-        .aura-neon { box-shadow: 0 0 15px #ec4899, inset 0 0 10px #ec4899; border-color: #ec4899; }
-        .aura-gold { box-shadow: 0 0 20px #facc15; border-color: #facc15; animation: pulseGlow 2s infinite; }
-        .aura-fire { box-shadow: 0 0 20px #ef4444, 0 0 40px #f97316; border-color: #ef4444; }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 15px #facc15; } 50% { box-shadow: 0 0 30px #facc15; } 100% { box-shadow: 0 0 15px #facc15; } }
+        /* Animated Transitions */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.4s ease-out forwards; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-col); border-radius: 4px; }
     </style>
 </head>
 <body class="bg-main text-txt h-screen overflow-hidden flex selection:bg-brand-200 selection:text-brand-900">
 
-    <div id="toast" class="fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-[-150%] bg-card border-theme border-l-4 shadow-xl rounded-xl px-5 py-4 flex items-center gap-3 min-w-[280px]">
+    <!-- Toast -->
+    <div id="toast" class="fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-[-150%] bg-card border-theme border-l-4 shadow-lg rounded-xl px-5 py-4 flex items-center gap-3 min-w-[280px]">
         <div id="toast-icon"></div>
-        <p id="toast-message" class="text-sm font-bold text-txt"></p>
+        <p id="toast-message" class="text-sm font-medium text-txt"></p>
     </div>
 
     <!-- LOGIN -->
     <div id="login-view" class="fixed inset-0 z-50 bg-main flex items-center justify-center transition-opacity duration-300">
         <div class="bg-card p-8 rounded-2xl shadow-xl w-full max-w-md border border-theme animate-fade-in">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-600 text-white mb-4 shadow-lg border-4 border-brand-200">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-brand-600 text-white mb-4 shadow-lg">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
                 </div>
-                <h2 class="text-3xl font-extrabold text-txt">ReviewFlow</h2>
-                <p class="text-sm text-muted mt-2">Sign in to your workspace</p>
+                <h2 class="text-2xl font-bold text-txt">ReviewFlow</h2>
+                <p class="text-sm text-muted mt-1">Sign in to your workspace</p>
             </div>
             <form id="login-form" class="space-y-5">
-                <div><label class="block text-sm font-bold text-txt mb-1">Email</label><input type="email" id="login-email" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl focus:ring-2 focus:ring-brand-500 outline-none transition"></div>
-                <div><label class="block text-sm font-bold text-txt mb-1">Password</label><input type="password" id="login-password" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl focus:ring-2 focus:ring-brand-500 outline-none transition"></div>
-                <button type="submit" id="login-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl transition shadow-md text-lg mt-2">Sign In to Dashboard</button>
+                <div><label class="block text-sm font-medium text-txt mb-1">Email</label><input type="email" id="login-email" required class="w-full px-4 py-2 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition"></div>
+                <div><label class="block text-sm font-medium text-txt mb-1">Password</label><input type="password" id="login-password" required class="w-full px-4 py-2 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition"></div>
+                <button type="submit" id="login-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2.5 rounded-lg transition shadow-md">Sign In</button>
             </form>
         </div>
     </div>
@@ -112,51 +120,42 @@
         
         <!-- Sidebar -->
         <aside class="w-64 bg-card border-r border-theme flex flex-col shadow-sm relative z-10 transition-colors">
-            <div class="h-16 flex items-center justify-between px-6 border-b border-theme shrink-0">
-                <span class="text-2xl font-black text-brand-600 tracking-tight">ReviewFlow</span>
+            <div class="h-16 flex items-center px-6 border-b border-theme shrink-0"><span class="text-xl font-extrabold text-brand-600">ReviewFlow</span></div>
+            <div class="px-6 py-4 border-b border-theme bg-main shrink-0">
+                <p class="text-xs text-muted">Logged in as:</p>
+                <p id="user-email-display" class="text-sm font-semibold text-txt truncate"></p>
+                <span class="mt-2 inline-block text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-bold border border-brand-200 bg-brand-50 text-brand-700">Workspace Admin</span>
             </div>
-            
-            <div class="px-5 py-5 border-b border-theme bg-main shrink-0 flex flex-col items-center text-center">
-                <div id="user-avatar" class="w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-black text-2xl mb-3 border-2 border-brand-300 transition-all duration-300">U</div>
-                <p id="user-email-display" class="text-sm font-bold text-txt truncate w-full mb-1 transition-all duration-300"></p>
-                <div class="flex items-center gap-2 mt-1">
-                    <span id="role-badge" class="inline-flex items-center text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-md font-bold bg-brand-600 text-white shadow-sm">Rookie</span>
-                </div>
-                <div class="mt-4 bg-card border border-theme w-full rounded-xl p-2.5 flex items-center justify-between shadow-sm cursor-pointer hover:bg-brand-50 transition" onclick="switchView('shop')">
-                    <span class="text-xs font-bold text-muted uppercase">Wallet</span><span class="text-base font-black coin-text flex items-center gap-1">🪙 <span id="sidebar-coins">0</span></span>
-                </div>
-            </div>
-
-            <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-                <button data-target="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-colors bg-brand-50 text-brand-700 shadow-sm border border-brand-100">
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <button data-target="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-brand-50 text-brand-700">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path></svg> Dashboard
                 </button>
-                <button data-target="products" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-colors text-muted hover:bg-main border border-transparent">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> Catalog
+                <button data-target="products" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> Products
                 </button>
-                <button data-target="today" class="nav-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-colors text-muted hover:bg-main border border-transparent">
-                    <div class="flex items-center gap-3"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Checklist</div>
+                <button data-target="today" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
+                    <div class="flex items-center gap-3"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Today's Tasks</div>
                     <span id="sidebar-today-badge" class="bg-red-500 text-white py-0.5 px-2 rounded-full text-xs hidden shadow-sm">0</span>
                 </button>
-                <button data-target="topsellers" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-colors text-muted hover:bg-main border border-transparent">
-                    <span class="text-lg leading-none">🌟</span> Top Sellers
-                </button>
-                <button data-target="history" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-colors text-muted hover:bg-main border border-transparent">
+                <button data-target="history" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> History
                 </button>
-                <div class="my-2 border-t border-theme"></div>
-                <button data-target="shop" class="nav-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-colors text-yellow-600 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-700/50 dark:text-yellow-500 shadow-sm">
-                    <div class="flex items-center gap-3"><span class="text-lg">🛒</span> Reward Shop</div>
-                    <span class="animate-pulse bg-yellow-500 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-widest">Hot</span>
-                </button>
             </nav>
-
             <div class="p-4 border-t border-theme space-y-3 shrink-0">
                 <div class="relative w-full">
-                    <label class="text-[10px] font-black text-muted uppercase tracking-wider mb-1 block px-1">🎨 Theme</label>
-                    <select id="theme-selector" class="w-full bg-main border border-theme text-txt text-sm rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer font-bold shadow-sm"></select>
+                    <label class="text-xs font-bold text-muted uppercase tracking-wider mb-1 block px-1">🎨 Theme</label>
+                    <select id="theme-selector" class="w-full bg-main border border-theme text-txt text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
+                        <option value="light">☀️ Light</option>
+                        <option value="dark">🌙 Dark</option>
+                        <option value="spiderman">🕷️ Spider-Man</option>
+                        <option value="shopify">🛍️ Shopify</option>
+                        <option value="batman">🦇 Batman</option>
+                        <option value="hacker">💻 Hacker</option>
+                        <option value="cyberpunk">🌃 Cyberpunk</option>
+                        <option value="netflix">🍿 Netflix</option>
+                    </select>
                 </div>
-                <button id="logout-btn" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-red-500 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:shadow-md">
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500 hover:text-white transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg> Sign Out
                 </button>
             </div>
@@ -167,94 +166,121 @@
             
             <!-- Dashboard View -->
             <div id="view-dashboard" class="view-section flex-1 overflow-y-auto p-8 animate-fade-in">
-                <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div><h1 class="text-3xl font-extrabold text-txt">Overview Analytics</h1><p class="text-sm text-muted mt-1 font-medium">Real-time workflow monitoring</p></div>
-                    <div class="flex gap-2">
-                        <button id="export-csv-btn" class="bg-card border border-theme text-txt px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm hover:bg-theme transition flex items-center gap-2">📊 Export CSV</button>
-                        <button id="export-pdf-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition flex items-center gap-2">📥 PDF Report</button>
+                <!-- Header & Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-txt">Overview Analytics</h1>
+                            <p class="text-sm text-muted mt-1">Real-time workflow and performance monitoring</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="export-csv-btn" class="bg-card border border-theme text-txt px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-theme transition flex items-center gap-2">
+                                📊 Export CSV
+                            </button>
+                            <button id="export-pdf-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition flex items-center gap-2">
+                                📥 PDF Report
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Overall Progress Bar -->
+                    <div class="bg-card p-5 rounded-2xl border border-theme shadow-sm mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-bold text-txt">Today's Overall Progress</span>
+                            <span class="text-sm font-bold text-brand-600" id="overall-progress-text">0%</span>
+                        </div>
+                        <div class="w-full bg-theme rounded-full h-3">
+                            <div class="bg-brand-500 h-3 rounded-full transition-all duration-1000 ease-out" id="overall-progress-bar" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-card p-5 rounded-2xl border border-theme shadow-sm mb-8">
-                    <div class="flex justify-between mb-2"><span class="text-sm font-bold text-txt">Today's Overall Progress</span><span class="text-sm font-black text-brand-600" id="overall-progress-text">0%</span></div>
-                    <div class="w-full bg-theme rounded-full h-4 overflow-hidden"><div class="bg-brand-500 h-4 rounded-full transition-all duration-1000 ease-out" id="overall-progress-bar" style="width: 0%"></div></div>
-                </div>
+                
+                <!-- Stat Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-brand-600 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between transform hover:-translate-y-1 transition">
-                        <div><p class="text-brand-100 text-sm font-bold mb-1 uppercase tracking-wide">Total Products</p><h3 id="stat-total-products" class="text-5xl font-black">0</h3></div>
+                    <div class="bg-brand-600 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                        <div><p class="text-brand-100 text-sm font-medium mb-1">Total Products</p><h3 id="stat-total-products" class="text-4xl font-extrabold">0</h3></div>
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
                     </div>
-                    <div class="bg-emerald-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between transform hover:-translate-y-1 transition">
-                        <div><p class="text-emerald-100 text-sm font-bold mb-1 uppercase tracking-wide">Completed (7 Days)</p><h3 id="stat-completed-reviews" class="text-5xl font-black">0</h3></div>
+                    <div class="bg-emerald-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                        <div><p class="text-emerald-100 text-sm font-medium mb-1">Completed (7 Days)</p><h3 id="stat-completed-reviews" class="text-4xl font-extrabold">0</h3></div>
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     </div>
-                    <div class="bg-orange-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between transform hover:-translate-y-1 transition">
-                        <div><p class="text-orange-100 text-sm font-bold mb-1 uppercase tracking-wide">Total Pending</p><h3 id="stat-pending-today" class="text-5xl font-black">0</h3></div>
+                    <div class="bg-orange-500 p-6 rounded-2xl shadow-lg text-white flex items-center justify-between">
+                        <div><p class="text-orange-100 text-sm font-medium mb-1">Total Pending</p><h3 id="stat-pending-today" class="text-4xl font-extrabold">0</h3></div>
                         <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     </div>
                 </div>
+
+                <!-- Charts & Liabilities -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm lg:col-span-2"><h3 class="text-lg font-bold text-txt mb-4">Weekly Progress Activity</h3><div class="relative h-64 w-full"><canvas id="growthChart"></canvas></div></div>
-                    <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm flex flex-col"><h3 class="text-lg font-bold text-txt mb-4">Top Liabilities (Pending)</h3><div id="liability-list" class="flex-1 overflow-y-auto space-y-3 pr-2"></div></div>
+                    <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm lg:col-span-2">
+                        <h3 class="text-lg font-semibold text-txt mb-4">Weekly Progress Activity</h3>
+                        <div class="relative h-64 w-full"><canvas id="growthChart"></canvas></div>
+                    </div>
+                    <!-- Pending Liability Report -->
+                    <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm flex flex-col">
+                        <h3 class="text-lg font-semibold text-txt mb-4">Top Pending Liabilities</h3>
+                        <div id="liability-list" class="flex-1 overflow-y-auto space-y-3 pr-2">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm"><h3 class="text-lg font-bold text-txt mb-4">Activity Heatmap (30 Days)</h3><div id="heatmap-container" class="flex flex-wrap gap-1.5"></div></div>
+
+                <!-- Activity Heatmap -->
+                <div class="bg-card p-6 rounded-2xl border border-theme shadow-sm">
+                    <h3 class="text-lg font-semibold text-txt mb-4">Activity Heatmap (Last 30 Days)</h3>
+                    <div id="heatmap-container" class="flex flex-wrap gap-1.5"></div>
+                </div>
             </div>
 
             <!-- Products View -->
             <div id="view-products" class="view-section hidden-view flex-1 flex flex-col h-full animate-fade-in">
                 <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div><h1 class="text-2xl font-extrabold text-txt">Product Catalog</h1><p class="text-sm text-muted mt-1 font-medium">Manage schedules and filters</p></div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-txt">Product Catalog</h1>
+                        <p class="text-sm text-muted mt-1">Manage schedules, QTY, and filters</p>
+                    </div>
                     <div class="flex flex-wrap gap-3 w-full md:w-auto items-center">
-                        <select id="filter-day" class="px-4 py-2.5 border border-theme bg-main text-txt rounded-xl outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-bold shadow-sm"><option value="">🗓️ All Days</option><option value="Monday">Monday</option><option value="Tuesday">Tuesday</option><option value="Wednesday">Wednesday</option><option value="Thursday">Thursday</option><option value="Friday">Friday</option><option value="Saturday">Saturday</option><option value="Sunday">Sunday</option></select>
-                        <input type="text" id="search-product" placeholder="Search title..." class="px-4 py-2.5 border border-theme bg-main text-txt rounded-xl outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm font-medium">
-                        <button id="btn-search" class="bg-theme border border-theme text-txt px-5 py-2.5 rounded-xl hover:bg-main transition font-bold text-sm shadow-sm">Search</button>
-                        <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl transition shadow-md flex items-center gap-2 font-bold text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add</button>
+                        <select id="filter-day" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-medium shadow-sm">
+                            <option value="">🗓️ All Days</option>
+                            <option value="Monday">Monday</option> <option value="Tuesday">Tuesday</option> <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option> <option value="Friday">Friday</option> <option value="Saturday">Saturday</option> <option value="Sunday">Sunday</option>
+                        </select>
+                        <input type="text" id="search-product" placeholder="Search title..." class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm">
+                        <button id="btn-search" class="bg-theme border border-theme text-txt px-4 py-2 rounded-lg hover:bg-main transition font-medium text-sm shadow-sm">Search</button>
+                        <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add
+                        </button>
                     </div>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
-                    <div class="bg-card border border-theme rounded-2xl shadow-sm overflow-hidden">
+                    <div class="bg-card border border-theme rounded-xl shadow-sm overflow-hidden">
                         <table class="w-full text-left border-collapse">
-                            <thead><tr class="bg-main text-muted text-xs uppercase tracking-wider border-b border-theme font-bold"><th class="p-4">Title</th><th class="p-4">SKU</th><th class="p-4 text-center">QTY</th><th class="p-4">Schedule</th><th class="p-4 text-center">Target</th><th class="p-4 text-right">Actions</th></tr></thead>
+                            <thead>
+                                <tr class="bg-main text-muted text-xs uppercase tracking-wider border-b border-theme">
+                                    <th class="p-4 font-medium">Title</th> <th class="p-4 font-medium">SKU</th> <th class="p-4 font-medium text-center">QTY</th>
+                                    <th class="p-4 font-medium">Schedule</th> <th class="p-4 font-medium text-center">Target</th> <th class="p-4 font-medium text-right">Actions</th>
+                                </tr>
+                            </thead>
                             <tbody id="products-table-body" class="divide-y divide-theme text-sm text-txt"></tbody>
                         </table>
-                        <div id="products-empty-state" class="p-8 text-center hidden"><p class="text-muted font-medium">No products found.</p></div>
-                        <div class="p-4 text-center bg-main border-t border-theme"><button id="load-more-btn" class="text-brand-600 font-bold hover:underline hidden">Load More</button></div>
+                        <div id="products-empty-state" class="p-8 text-center hidden"><p class="text-muted">No products found.</p></div>
+                        <div class="p-4 text-center bg-main border-t border-theme"><button id="load-more-btn" class="text-brand-600 font-semibold hover:underline hidden">Load More</button></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Today's Tasks View -->
+            <!-- Today's View -->
             <div id="view-today" class="view-section hidden-view flex-1 flex flex-col h-full animate-fade-in">
                 <div class="p-8 border-b border-theme bg-card shrink-0">
-                    <h1 class="text-2xl font-extrabold text-txt">Pending Tasks</h1>
-                    <p class="text-sm text-brand-600 font-bold mt-1" id="today-date-subtitle">Loading Date...</p>
+                    <h1 class="text-2xl font-bold text-txt">Pending Tasks</h1>
+                    <p class="text-sm text-brand-600 font-medium mt-1" id="today-date-subtitle">Loading Date...</p>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
                     <div id="today-tasks-container" class="space-y-4 max-w-4xl mx-auto"></div>
-                    <div id="today-empty-state" class="p-16 text-center hidden bg-card border border-theme rounded-3xl shadow-sm max-w-4xl mx-auto">
-                        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-100 text-emerald-600 mb-6 shadow-inner"><svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg></div>
-                        <h3 class="text-3xl font-black text-txt">You're all caught up!</h3><p class="text-muted mt-3 text-lg font-medium">Awesome work! No pending reviews.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TOP SELLERS VIEW (NEW!) -->
-            <div id="view-topsellers" class="view-section hidden-view flex-1 flex flex-col h-full animate-fade-in">
-                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div>
-                        <h1 class="text-2xl font-extrabold text-txt">🌟 Top Sellers Tracking</h1>
-                        <p class="text-sm text-muted mt-1 font-medium">Verify updates and track best performing products</p>
-                    </div>
-                    <button id="open-topseller-modal-btn" class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-5 py-2.5 rounded-xl transition shadow-md flex items-center gap-2 font-bold text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add Top Seller
-                    </button>
-                </div>
-                <div class="p-8 flex-1 overflow-y-auto">
-                    <div id="topsellers-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                        <!-- Top Seller Cards injected here -->
-                    </div>
-                    <div id="topsellers-empty-state" class="p-16 text-center hidden bg-card border border-theme rounded-3xl shadow-sm max-w-4xl mx-auto">
-                        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-yellow-100 text-yellow-600 mb-6 shadow-inner text-4xl">🌟</div>
-                        <h3 class="text-3xl font-black text-txt">No Top Sellers yet!</h3><p class="text-muted mt-3 text-lg font-medium">Add products that are performing best.</p>
+                    <div id="today-empty-state" class="p-16 text-center hidden bg-card border border-theme rounded-2xl shadow-sm max-w-4xl mx-auto">
+                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-5"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <h3 class="text-2xl font-bold text-txt">You're all caught up!</h3><p class="text-muted mt-2 text-base">No pending reviews from today or yesterday.</p>
                     </div>
                 </div>
             </div>
@@ -262,82 +288,100 @@
             <!-- History View -->
             <div id="view-history" class="view-section hidden-view flex-1 flex flex-col h-full animate-fade-in">
                 <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div><h1 class="text-2xl font-extrabold text-txt">Work History</h1><p class="text-sm text-muted mt-1 font-medium">Check past completions</p></div>
-                    <div class="flex items-center gap-2"><span class="text-sm text-muted font-bold">Date:</span><input type="date" id="history-date-picker" class="px-4 py-2.5 border border-theme bg-main text-txt rounded-xl outline-none cursor-pointer focus:ring-2 focus:ring-brand-500 shadow-sm font-medium"></div>
+                    <div><h1 class="text-2xl font-bold text-txt">Work History</h1><p class="text-sm text-muted mt-1">Check past completions and logs</p></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-muted font-medium">Select Date:</span>
+                        <input type="date" id="history-date-picker" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none cursor-pointer focus:ring-2 focus:ring-brand-500 shadow-sm">
+                    </div>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
-                    <div class="max-w-4xl mx-auto bg-card border border-theme rounded-2xl shadow-sm overflow-hidden">
-                        <ul id="history-list" class="divide-y divide-theme"><li class="p-8 text-center text-muted font-medium">Select a date.</li></ul>
+                    <div class="max-w-4xl mx-auto bg-card border border-theme rounded-xl shadow-sm overflow-hidden">
+                        <ul id="history-list" class="divide-y divide-theme"><li class="p-8 text-center text-muted">Select a date.</li></ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- REWARD SHOP VIEW -->
-            <div id="view-shop" class="view-section hidden-view flex-1 flex flex-col h-full animate-fade-in bg-main">
-                <div class="p-8 border-b border-theme bg-card shrink-0">
-                    <div class="flex flex-col md:flex-row justify-between md:items-center gap-6">
-                        <div><h1 class="text-3xl font-extrabold text-txt flex items-center gap-3"><span class="text-4xl">🛒</span> Reward Shop</h1><p class="text-sm text-muted mt-2 font-medium">Spend coins on Themes, Auras, and Badges!</p></div>
-                        <div class="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 px-8 py-4 rounded-3xl shadow-sm text-center transform hover:scale-105 transition">
-                            <p class="text-xs font-black text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">Your Balance</p>
-                            <p class="text-4xl font-black coin-text flex items-center justify-center gap-2">🪙 <span id="shop-coins-display">0</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-8 flex-1 overflow-y-auto space-y-12">
-                    <div><h2 class="text-2xl font-black text-txt mb-5 flex items-center gap-2">🔥 Profile Avatar Auras</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="shop-avatars-container"></div></div>
-                    <div><h2 class="text-2xl font-black text-txt mb-5 flex items-center gap-2">✨ VIP Name Colors</h2><div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6" id="shop-namecolors-container"></div></div>
-                    <div><h2 class="text-2xl font-black text-txt mb-5 flex items-center gap-2">🛡️ Status Badges</h2><div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="shop-badges-container"></div></div>
-                    <div><h2 class="text-2xl font-black text-txt mb-5 flex items-center gap-2">🎨 Premium Dashboard Themes</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-themes-container"></div></div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- MODALS SECTION -->
-    <div id="add-product-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"><div class="bg-card rounded-3xl shadow-2xl w-full max-w-xl modal-content flex flex-col border border-theme"><div class="p-6 border-b border-theme flex justify-between items-center bg-main rounded-t-3xl shrink-0"><h3 id="modal-product-title" class="text-xl font-extrabold text-txt">Add Product</h3><button class="close-add-modal text-muted hover:text-red-500 bg-card rounded-full p-2 border border-theme">X</button></div><div class="p-6 overflow-y-auto max-h-[75vh]"><form id="product-form" class="space-y-5"><input type="hidden" id="edit-product-id" value=""><div><label class="block text-sm font-bold text-txt mb-1">Product Title</label><input type="text" id="prod-title" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none"></div><div class="grid grid-cols-3 gap-4"><div class="col-span-1"><label class="block text-sm font-bold text-txt mb-1">Stock/QTY</label><input type="number" id="prod-qty" required min="0" value="0" class="w-full px-4 py-3 border border-theme bg-main rounded-xl outline-none font-black text-brand-600 text-lg"></div><div class="col-span-1"><label class="block text-sm font-bold text-txt mb-1">Initial</label><input type="number" id="prod-initial" required min="0" value="0" class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none"></div><div class="col-span-1"><label class="block text-sm font-bold text-txt mb-1">SKU</label><input type="text" id="prod-sku" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none font-mono text-sm"></div></div><div><label class="block text-sm font-bold text-txt mb-2">Schedule Days</label><div class="grid grid-cols-2 gap-3" id="days-checkbox-container"></div><p id="days-error" class="text-red-500 text-xs mt-2 hidden font-bold">Select at least one day.</p></div><div><label class="block text-sm font-bold text-txt mb-1">Target Reviews Per Day</label><input type="number" id="prod-target" required min="1" value="1" class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none"></div></form></div><div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-3xl shrink-0 bg-main"><button type="button" class="close-add-modal px-6 py-3 text-sm font-bold text-muted hover:bg-theme rounded-xl transition">Cancel</button><button type="button" id="save-product-btn" class="px-8 py-3 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-md transition">Save</button></div></div></div>
+    <!-- MODALS -->
 
-    <!-- Top Seller Modal (NEW) -->
-    <div id="topseller-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-card rounded-3xl shadow-2xl w-full max-w-lg modal-content flex flex-col border border-theme">
-            <div class="p-6 border-b border-theme flex justify-between items-center bg-main rounded-t-3xl shrink-0">
-                <h3 id="ts-modal-title" class="text-xl font-extrabold text-txt">Add Top Seller</h3>
-                <button class="close-ts-modal text-muted hover:text-red-500 bg-card rounded-full p-2 border border-theme">X</button>
+    <!-- Add/Edit Product Modal -->
+    <div id="add-product-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-xl modal-content flex flex-col border border-theme">
+            <div class="p-5 border-b border-theme flex justify-between items-center bg-main rounded-t-2xl shrink-0">
+                <h3 id="modal-product-title" class="text-lg font-bold text-txt">Add New Product</h3>
+                <button class="close-add-modal text-muted hover:text-red-500 transition-colors bg-card rounded-full p-1 border border-theme">X</button>
             </div>
-            <div class="p-6 overflow-y-auto">
-                <form id="topseller-form" class="space-y-5">
-                    <input type="hidden" id="edit-ts-id" value="">
-                    <div><label class="block text-sm font-bold text-txt mb-1">Product Title</label><input type="text" id="ts-title" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none focus:ring-2 focus:ring-brand-500"></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-sm font-bold text-txt mb-1">SKU</label><input type="text" id="ts-sku" required class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none font-mono focus:ring-2 focus:ring-brand-500"></div>
-                        <div><label class="block text-sm font-bold text-txt mb-1">Ranking Position (#)</label><input type="number" id="ts-position" required min="1" value="1" class="w-full px-4 py-3 border border-theme bg-main text-brand-600 font-black rounded-xl outline-none focus:ring-2 focus:ring-brand-500"></div>
+            <div class="p-6 overflow-y-auto max-h-[75vh]">
+                <form id="product-form" class="space-y-5">
+                    <input type="hidden" id="edit-product-id" value="">
+                    <div><label class="block text-sm font-semibold text-txt mb-1">Product Title</label><input type="text" id="prod-title" required class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg outline-none"></div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-1"><label class="block text-sm font-semibold text-txt mb-1">Stock / QTY</label><input type="number" id="prod-qty" required min="0" value="0" class="w-full px-4 py-2.5 border border-theme bg-main rounded-lg outline-none font-bold text-brand-600"></div>
+                        <div class="col-span-1"><label class="block text-sm font-semibold text-txt mb-1">Initial Reviews</label><input type="number" id="prod-initial" required min="0" value="0" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg outline-none"></div>
+                        <div class="col-span-1"><label class="block text-sm font-semibold text-txt mb-1">SKU</label><input type="text" id="prod-sku" required class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg outline-none font-mono text-sm"></div>
                     </div>
-                    <div><label class="block text-sm font-bold text-txt mb-1">Additional Details / Notes</label><textarea id="ts-notes" rows="3" placeholder="e.g. Needs updated keywords..." class="w-full px-4 py-3 border border-theme bg-main text-txt rounded-xl outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea></div>
+                    <div><label class="block text-sm font-semibold text-txt mb-2">Schedule Days</label><div class="grid grid-cols-2 gap-3" id="days-checkbox-container"></div><p id="days-error" class="text-red-500 text-xs mt-2 hidden font-medium">Please select at least one day.</p></div>
+                    <div><label class="block text-sm font-semibold text-txt mb-1">Target Reviews Per Day</label><input type="number" id="prod-target" required min="1" value="1" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg outline-none"></div>
                 </form>
             </div>
-            <div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-3xl shrink-0 bg-main">
-                <button type="button" class="close-ts-modal px-6 py-3 text-sm font-bold text-muted hover:bg-theme rounded-xl transition">Cancel</button>
-                <button type="button" id="save-ts-btn" class="px-8 py-3 text-sm font-bold text-white bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 rounded-xl shadow-md transition">Save Top Seller</button>
+            <div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-2xl shrink-0 bg-main">
+                <button type="button" class="close-add-modal px-5 py-2.5 text-sm font-bold text-muted hover:bg-theme rounded-lg transition">Cancel</button>
+                <button type="button" id="save-product-btn" class="px-6 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-md transition flex items-center gap-2">
+                    <span id="save-product-text">Save Product</span><svg id="save-product-spinner" class="animate-spin hidden h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Task Modal -->
     <div id="daily-task-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-card rounded-3xl shadow-2xl w-full max-w-md modal-content flex flex-col max-h-[85vh] border border-theme"><div class="p-6 border-b border-theme flex justify-between items-center shrink-0"><h3 class="text-2xl font-black text-txt" id="task-modal-header">Checklist</h3><button class="close-task-modal text-muted hover:text-red-500 bg-main rounded-full p-2 border border-theme">X</button></div><div class="p-6 overflow-y-auto"><div class="flex items-center justify-between bg-brand-50 p-4 rounded-2xl border border-brand-200 mb-5"><span class="text-sm font-bold text-brand-900">Stock QTY</span><input type="number" id="task-modal-qty-input" class="w-24 px-3 py-2 border border-brand-300 rounded-xl text-right text-xl font-black bg-white text-brand-800 outline-none"></div><div class="mb-6 bg-main p-5 rounded-2xl border border-theme flex justify-between items-center"><div><h4 id="task-modal-title" class="font-black text-txt text-xl">Title</h4><p id="task-modal-sku" class="text-sm text-muted font-mono mt-1">SKU</p></div><button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 px-4 py-2 rounded-xl hover:bg-red-200 font-bold border border-red-200 shrink-0">Clear Log</button></div><div id="task-checkboxes-container" class="space-y-3"></div></div><div class="p-6 border-t border-theme shrink-0 bg-main rounded-b-3xl"><button type="button" id="save-task-btn" class="w-full px-4 py-4 text-lg font-black text-white bg-emerald-500 hover:bg-emerald-600 shadow-xl rounded-2xl transition">Save & Earn Coins! 🪙</button></div></div>
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-md modal-content flex flex-col max-h-[85vh] border border-theme">
+            <div class="p-5 border-b border-theme flex justify-between items-center shrink-0">
+                <h3 class="text-xl font-bold text-txt" id="task-modal-header">Review Checklist</h3><button class="close-task-modal text-muted hover:text-red-500 bg-main rounded-full p-1.5 border border-theme">X</button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div class="flex items-center justify-between bg-brand-50 p-3 rounded-xl border border-brand-200 mb-4">
+                    <div class="flex items-center gap-2"><span class="text-sm font-bold text-brand-900">Available QTY</span></div>
+                    <input type="number" id="task-modal-qty-input" class="w-20 px-2 py-1 border border-brand-300 rounded-lg text-right text-lg font-bold bg-white text-brand-800 outline-none">
+                </div>
+                <div class="mb-5 bg-main p-4 rounded-xl border border-theme flex justify-between items-center">
+                    <div><h4 id="task-modal-title" class="font-bold text-txt text-lg">Title</h4><p id="task-modal-sku" class="text-sm text-muted font-mono mt-0.5">SKU</p></div>
+                    <button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-200 font-bold border border-red-200 shrink-0">Clear Log</button>
+                </div>
+                <div id="task-checkboxes-container" class="space-y-3"></div>
+            </div>
+            <div class="p-6 border-t border-theme shrink-0 bg-main rounded-b-2xl">
+                <button type="button" id="save-task-btn" class="w-full px-4 py-3.5 text-base font-extrabold text-white bg-emerald-500 hover:bg-emerald-600 shadow-lg rounded-xl transition flex justify-center gap-2">
+                    <span id="save-task-text">Save Progress</span><svg id="save-task-spinner" class="animate-spin hidden h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </button>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Stats Modal -->
-    <div id="stats-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"><div class="bg-card rounded-[2rem] shadow-2xl w-full max-w-sm modal-content relative overflow-hidden border border-theme"><div class="h-28 bg-brand-600 absolute top-0 left-0 w-full"></div><div class="relative z-10 p-6 pt-10 text-center flex flex-col items-center"><button class="close-stats-modal absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 rounded-full p-1.5">X</button><div class="w-20 h-20 bg-card rounded-full shadow-xl flex items-center justify-center mb-5 border-4 border-card"><svg class="w-10 h-10 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div><h3 id="stats-modal-title" class="text-2xl font-black text-txt mb-6 w-full truncate">Title</h3><div class="w-full bg-brand-50 p-6 rounded-2xl border border-brand-100"><p class="text-sm font-bold text-brand-700 mb-2 uppercase tracking-widest">Total Reviews</p><p id="stats-total-completed" class="text-6xl font-black text-brand-900">0</p></div><div class="w-full flex justify-between mt-6 px-4 text-sm text-muted font-bold"><div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Target/Day</span> <span id="stats-target" class="text-txt text-xl font-black">0</span></div><div class="w-px bg-theme"></div><div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Current QTY</span> <span id="stats-qty" class="text-brand-600 text-xl font-black">0</span></div></div></div></div></div>
+    <div id="stats-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-3xl shadow-2xl w-full max-w-sm modal-content relative overflow-hidden border border-theme">
+            <div class="h-24 bg-brand-600 absolute top-0 left-0 w-full rounded-t-3xl"></div>
+            <div class="relative z-10 p-6 pt-8 text-center flex flex-col items-center">
+                <button class="close-stats-modal absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 rounded-full p-1">X</button>
+                <div class="w-16 h-16 bg-card rounded-full shadow-lg flex items-center justify-center mb-4 border-4 border-card"><svg class="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
+                <h3 id="stats-modal-title" class="text-xl font-bold text-txt mb-6 w-full truncate">Title</h3>
+                <div class="w-full bg-brand-50 p-6 rounded-2xl border border-brand-100"><p class="text-sm font-medium text-brand-700 mb-2 uppercase tracking-wide">Total All-Time</p><p id="stats-total-completed" class="text-5xl font-black text-brand-900">0</p></div>
+                <div class="w-full flex justify-between mt-6 px-2 text-sm text-muted font-medium"><div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Target/Day</span> <span id="stats-target" class="text-txt text-lg font-bold">0</span></div><div class="w-px bg-theme"></div><div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Current QTY</span> <span id="stats-qty" class="text-brand-600 text-lg font-bold">0</span></div></div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
-        import { getFirestore, collection, getDoc, getDocs, addDoc, doc, setDoc, updateDoc, deleteDoc, serverTimestamp, query, where, limit, startAfter, orderBy, getCountFromServer, increment } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, addDoc, doc, setDoc, updateDoc, deleteDoc, serverTimestamp, query, where, limit, startAfter, orderBy, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
         // ==========================================
-        // 1. FIREBASE CONFIG
+        // 1. FIREBASE CONFIGURATION
         // ==========================================
         const firebaseConfig = {
   apiKey: "AIzaSyAZ2tjY-FPWkAeI4CCQ3--BfcDgShHA6zM",
@@ -354,333 +398,402 @@
         const db = getFirestore(app);
 
         // ==========================================
-        // 2. SHOP DATA & THEMES
+        // 2. GLOBAL STATE
         // ==========================================
-        const SHOP_ITEMS = {
-            themes:[ { id: 'hacker', name: 'Hacker Mode', icon: '💻', cost: 500, bg: 'bg-green-900', txt: 'text-green-400' }, { id: 'cyberpunk', name: 'Cyberpunk', icon: '🌃', cost: 800, bg: 'bg-pink-900', txt: 'text-pink-400' }, { id: 'netflix', name: 'Cinema Red', icon: '🍿', cost: 1000, bg: 'bg-red-900', txt: 'text-red-400' }, { id: 'gold', name: 'Luxury Gold', icon: '👑', cost: 1500, bg: 'bg-yellow-900', txt: 'text-yellow-400' }, { id: 'ironman', name: 'Iron-Man HUD', icon: '🤖', cost: 2000, bg: 'bg-cyan-900', txt: 'text-cyan-400' } ],
-            badges:[ { id: 'Pro Reviewer', icon: '⭐', cost: 300, color: 'bg-blue-100 text-blue-700 border-blue-300' }, { id: 'Master', icon: '🌟', cost: 800, color: 'bg-purple-100 text-purple-700 border-purple-300' }, { id: 'Legend', icon: '🏆', cost: 1500, color: 'bg-yellow-100 text-yellow-700 border-yellow-300' } ],
-            avatars:[ { id: 'none', name: 'Default', icon: '⚪', cost: 0, style: 'border-2 border-brand-300 shadow-none' }, { id: 'neon', name: 'Cyber Pink', icon: '💖', cost: 500, style: 'border-2 aura-neon' }, { id: 'gold', name: 'Golden Glow', icon: '✨', cost: 1000, style: 'border-2 aura-gold' }, { id: 'fire', name: 'Inferno Aura', icon: '🔥', cost: 1800, style: 'border-2 aura-fire' } ],
-            nameColors:[ { id: 'none', name: 'Solid', icon: '✒️', cost: 0, class: 'text-txt' }, { id: 'gold-gradient', name: 'Golden VIP', icon: '💰', cost: 1200, class: 'text-gradient-gold' }, { id: 'rgb-gradient', name: 'RGB Fade', icon: '🎮', cost: 2500, class: 'text-gradient-rgb' } ]
-        };
-        const ALL_THEMES_MAP = { light: '☀️ Light', dark: '🌙 Dark', spiderman: '🕷️ Spider-Man', shopify: '🛍️ Shopify', batman: '🦇 Batman', hacker: '💻 Hacker', cyberpunk: '🌃 Cyberpunk', netflix: '🍿 Netflix', gold: '👑 Luxury Gold', ironman: '🤖 Iron-Man HUD' };
-
-        // ==========================================
-        // 3. GLOBAL STATE
-        // ==========================================
-        let state = { 
-            userProfile: { coins: 0, unlockedThemes:['light','dark','spiderman','shopify','batman'], badges:['Rookie'], activeBadge: 'Rookie', unlockedAvatars:['none'], activeAvatar: 'none', unlockedNameColors:['none'], activeNameColor: 'none' },
-            todayProducts:[], paginatedProducts:[], topSellers:[], dailyLogs:[], lastVisibleDoc: null, totalProductsCount: 0, searchQuery: "", filterDay: "" 
-        };
-
+        let state = { todayProducts:[], paginatedProducts:[], dailyLogs:[], lastVisibleDoc: null, totalProductsCount: 0, searchQuery: "", filterDay: "" };
         const daysBilingual =[{ id: 'Monday', en: 'Monday', ur: 'پیر' }, { id: 'Tuesday', en: 'Tuesday', ur: 'منگل' }, { id: 'Wednesday', en: 'Wednesday', ur: 'بدھ' }, { id: 'Thursday', en: 'Thursday', ur: 'جمعرات' }, { id: 'Friday', en: 'Friday', ur: 'جمعہ' }, { id: 'Saturday', en: 'Saturday', ur: 'ہفتہ' }, { id: 'Sunday', en: 'Sunday', ur: 'اتوار' }];
         let chartInstance = null; let activeTaskContext = null; let activeTaskDate = null; 
 
-        // Utilities
-        const showToast = (msg, type = 'success') => { const toast = document.getElementById('toast'); document.getElementById('toast-message').innerText = msg; toast.className = `fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-0 bg-card border-theme border-l-4 shadow-2xl rounded-xl px-6 py-4 flex items-center gap-4 min-w-[280px] ${type === 'success' ? 'border-emerald-500' : 'border-red-500'}`; document.getElementById('toast-icon').innerHTML = type === 'success' ? `<div class="bg-emerald-100 p-2 rounded-full"><svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>` : `<div class="bg-red-100 p-2 rounded-full"><svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg></div>`; setTimeout(() => toast.classList.replace('translate-y-0', 'translate-y-[-150%]'), 3500); };
+        // ==========================================
+        // 3. UTILITIES & THEME ENGINE
+        // ==========================================
+        const showToast = (msg, type = 'success') => {
+            const toast = document.getElementById('toast'); document.getElementById('toast-message').innerText = msg;
+            toast.className = `fixed top-4 right-4 z-[100] transform transition-all duration-300 translate-y-0 bg-card border-theme border-l-4 shadow-xl rounded-lg px-5 py-4 flex items-center gap-3 min-w-[280px] ${type === 'success' ? 'border-green-500' : 'border-red-500'}`;
+            document.getElementById('toast-icon').innerHTML = type === 'success' ? `<div class="bg-green-100 p-1.5 rounded-full"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg></div>` : `<div class="bg-red-100 p-1.5 rounded-full"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></div>`;
+            setTimeout(() => toast.classList.replace('translate-y-0', 'translate-y-[-150%]'), 3500);
+        };
+
         const getCurrentDateString = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
         const getCurrentDayName = () => { return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]; };
         const getYesterdayDateString = () => { const d = new Date(); d.setDate(d.getDate() - 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
         const getYesterdayDayName = () => { const d = new Date(); d.setDate(d.getDate() - 1); return['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getDay()]; };
         window.copyToClipboard = (text, type) => { navigator.clipboard.writeText(text).then(() => showToast(`Copied ${type}: ${text}`)); };
 
-        const applyTheme = (themeName) => { document.documentElement.setAttribute('data-theme', themeName); localStorage.setItem('theme', themeName); if(document.getElementById('theme-selector')) document.getElementById('theme-selector').value = themeName; if(chartInstance) renderChart(); };
-
         // ==========================================
-        // 4. AUTH & SETUP
+        // 4. AUTHENTICATION
         // ==========================================
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const userRef = doc(db, "users", user.uid); const userSnap = await getDoc(userRef);
-                if (!userSnap.exists()) { const defaultProfile = { email: user.email, coins: 0, unlockedThemes:['light', 'dark', 'spiderman', 'shopify', 'batman'], badges: ['Rookie'], activeBadge: 'Rookie', unlockedAvatars:['none'], activeAvatar: 'none', unlockedNameColors:['none'], activeNameColor:'none' }; await setDoc(userRef, defaultProfile); state.userProfile = defaultProfile; } 
-                else { state.userProfile = userSnap.data(); if(!state.userProfile.unlockedThemes) state.userProfile.unlockedThemes =['light', 'dark', 'spiderman', 'shopify', 'batman']; if(!state.userProfile.badges) state.userProfile.badges = ['Rookie']; if(!state.userProfile.activeBadge) state.userProfile.activeBadge = 'Rookie'; if(!state.userProfile.unlockedAvatars) state.userProfile.unlockedAvatars = ['none']; if(!state.userProfile.activeAvatar) state.userProfile.activeAvatar = 'none'; if(!state.userProfile.unlockedNameColors) state.userProfile.unlockedNameColors = ['none']; if(!state.userProfile.activeNameColor) state.userProfile.activeNameColor = 'none'; }
-
-                updateSidebarProfileUI(user.email); updateThemeDropdown();
-                const savedTheme = localStorage.getItem('theme') || 'light'; applyTheme(state.userProfile.unlockedThemes.includes(savedTheme) ? savedTheme : 'light');
-                document.getElementById('login-view').classList.add('opacity-0', 'pointer-events-none'); setTimeout(() => document.getElementById('login-view').classList.add('hidden-view'), 300); document.getElementById('app-view').classList.remove('hidden-view');
+                document.getElementById('user-email-display').innerText = user.email; document.getElementById('user-email-display').title = user.email;
+                document.getElementById('login-view').classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => document.getElementById('login-view').classList.add('hidden-view'), 300);
+                document.getElementById('app-view').classList.remove('hidden-view');
                 await initializeData();
             } else {
-                document.getElementById('login-view').classList.remove('hidden-view', 'opacity-0', 'pointer-events-none'); document.getElementById('app-view').classList.add('hidden-view');
+                document.getElementById('login-view').classList.remove('hidden-view', 'opacity-0', 'pointer-events-none');
+                document.getElementById('app-view').classList.add('hidden-view');
             }
         });
-        document.getElementById('login-form').addEventListener('submit', async (e) => { e.preventDefault(); const btn = document.getElementById('login-btn'); btn.innerText = 'Signing In...'; btn.disabled = true; try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-password').value); } catch (err) { showToast(err.message, 'error'); btn.innerText = 'Sign In'; btn.disabled = false; } });
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); const btn = document.getElementById('login-btn'); btn.innerText = 'Signing In...'; btn.disabled = true;
+            try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-password').value); } 
+            catch (err) { showToast(err.message, 'error'); } finally { btn.innerText = 'Sign In'; btn.disabled = false; }
+        });
         document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
-        function updateSidebarProfileUI(emailStr = state.userProfile.email) {
-            document.getElementById('sidebar-coins').innerText = state.userProfile.coins; document.getElementById('shop-coins-display').innerText = state.userProfile.coins;
-            const emailElem = document.getElementById('user-email-display'); emailElem.innerText = emailStr; emailElem.title = emailStr;
-            const nameColorConfig = SHOP_ITEMS.nameColors.find(x => x.id === state.userProfile.activeNameColor) || SHOP_ITEMS.nameColors[0]; emailElem.className = `text-sm truncate w-full mb-2 transition-all duration-300 text-center block ${nameColorConfig.class}`; if(state.userProfile.activeNameColor === 'none') emailElem.classList.add('font-bold');
-            const avatarElem = document.getElementById('user-avatar'); avatarElem.innerText = emailStr.charAt(0).toUpperCase(); const avatarConfig = SHOP_ITEMS.avatars.find(x => x.id === state.userProfile.activeAvatar) || SHOP_ITEMS.avatars[0]; avatarElem.className = `w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 font-black text-2xl mb-3 transition-all duration-500 ${avatarConfig.style}`;
-            const badgeMap = SHOP_ITEMS.badges.reduce((acc, b) => ({...acc, [b.id]: b}), { 'Rookie': { icon: '🔰', color: 'bg-gray-100 text-gray-700 border-gray-300' } }); const activeB = badgeMap[state.userProfile.activeBadge] || badgeMap['Rookie'];
-            document.getElementById('role-badge').className = `inline-flex items-center gap-1 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md font-black border ${activeB.color} shadow-sm transition`; document.getElementById('role-badge').innerHTML = `<span>${activeB.icon}</span> ${state.userProfile.activeBadge}`;
-        }
-        function updateThemeDropdown() { const select = document.getElementById('theme-selector'); select.innerHTML = state.userProfile.unlockedThemes.map(t => `<option value="${t}">${ALL_THEMES_MAP[t]}</option>`).join(''); select.value = document.documentElement.getAttribute('data-theme') || 'light'; }
-        document.getElementById('theme-selector').addEventListener('change', (e) => { applyTheme(e.target.value); });
-
+        // ==========================================
+        // 5. DATA FETCHING
+        // ==========================================
         async function initializeData() {
             try {
                 const countSnap = await getCountFromServer(collection(db, "products")); state.totalProductsCount = countSnap.data().count;
-                const d = new Date(); d.setDate(d.getDate() - 30); const dateStr30DaysAgo = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+                const d = new Date(); d.setDate(d.getDate() - 30); // 30 days for heatmap
+                const dateStr30DaysAgo = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
                 
-                const logsSnap = await getDocs(query(collection(db, "daily_logs"), where("date", ">=", dateStr30DaysAgo))); state.dailyLogs = logsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const logsSnap = await getDocs(query(collection(db, "daily_logs"), where("date", ">=", dateStr30DaysAgo)));
+                state.dailyLogs = logsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any",[getCurrentDayName(), getYesterdayDayName()]))); state.todayProducts = todaySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-                // Load Top Sellers
-                const tsSnap = await getDocs(query(collection(db, "top_sellers"), orderBy("position")));
-                state.topSellers = tsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any",[getCurrentDayName(), getYesterdayDayName()])));
+                state.todayProducts = todaySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
                 setupUI(); switchView('dashboard'); await fetchPaginatedProducts(true);
             } catch(e) { showToast("Error loading data", "error"); }
         }
 
-        function setupUI() { document.getElementById('days-checkbox-container').innerHTML = daysBilingual.map(d => `<label class="flex items-center space-x-3 p-3 border border-theme bg-main rounded-xl cursor-pointer hover:bg-theme transition group"><input type="checkbox" value="${d.id}" class="day-checkbox rounded w-5 h-5 text-brand-600 focus:ring-brand-500 border-theme bg-card"><span class="text-sm font-bold text-txt">${d.en}</span></label>`).join(''); document.getElementById('today-date-subtitle').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }
-        
+        // ==========================================
+        // 6. UI NAVIGATION
+        // ==========================================
+        function setupUI() {
+            document.getElementById('days-checkbox-container').innerHTML = daysBilingual.map(d => `
+                <label class="flex items-center space-x-3 p-3 border border-theme bg-main rounded-lg cursor-pointer hover:bg-theme transition"><input type="checkbox" value="${d.id}" class="day-checkbox rounded w-4 h-4 text-brand-600 focus:ring-brand-500"><span class="text-sm font-medium text-txt">${d.en}</span></label>
+            `).join('');
+            document.getElementById('today-date-subtitle').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
         document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.getAttribute('data-target'))));
-        
-        window.switchView = function(target) {
+
+        function switchView(target) {
             document.querySelectorAll('.view-section').forEach(sec => { sec.classList.add('hidden-view'); sec.classList.remove('animate-fade-in'); });
-            const view = document.getElementById(`view-${target}`); view.classList.remove('hidden-view'); setTimeout(() => view.classList.add('animate-fade-in'), 10);
+            const view = document.getElementById(`view-${target}`); view.classList.remove('hidden-view'); 
+            setTimeout(() => view.classList.add('animate-fade-in'), 10);
             
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                if(btn.getAttribute('data-target')==='shop') { btn.classList.remove('bg-yellow-200', 'dark:bg-yellow-900/60'); if(target === 'shop') btn.classList.add('bg-yellow-200', 'dark:bg-yellow-900/60'); } 
-                else { btn.classList.remove('bg-brand-50', 'text-brand-700', 'border-brand-100'); btn.classList.add('text-muted', 'border-transparent'); if (btn.getAttribute('data-target') === target) { btn.classList.add('bg-brand-50', 'text-brand-700', 'border-brand-100'); btn.classList.remove('text-muted', 'border-transparent'); } }
+                btn.classList.remove('bg-brand-50', 'text-brand-700'); btn.classList.add('text-muted');
+                if (btn.getAttribute('data-target') === target) { btn.classList.add('bg-brand-50', 'text-brand-700'); btn.classList.remove('text-muted'); }
             });
-
-            if (target === 'dashboard') renderDashboard(); 
-            if (target === 'today') renderTodayTasks(); 
-            if (target === 'history') document.getElementById('history-date-picker').value = getCurrentDateString(); 
-            if (target === 'shop') renderShop();
-            if (target === 'topsellers') renderTopSellers();
+            if (target === 'dashboard') renderDashboard(); if (target === 'today') renderTodayTasks(); if (target === 'history') document.getElementById('history-date-picker').value = getCurrentDateString();
         }
 
-        // Dashboard & Others are same...
+        // ==========================================
+        // 7. DASHBOARD & CHARTS
+        // ==========================================
         function renderDashboard() {
             document.getElementById('stat-total-products').innerText = state.totalProductsCount;
+            // 7 Days
             const d7 = new Date(); d7.setDate(d7.getDate() - 7); const ds7 = `${d7.getFullYear()}-${String(d7.getMonth()+1).padStart(2,'0')}-${String(d7.getDate()).padStart(2,'0')}`;
             document.getElementById('stat-completed-reviews').innerText = state.dailyLogs.filter(l => l.date >= ds7).reduce((acc, curr) => acc + (curr.completedReviews || 0), 0) + "+";
+            
             let totalPendingCount = 0; let totalTargetToday = 0; let totalCompletedToday = 0;
-            const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString(); const tDay = getCurrentDayName(); const yDay = getYesterdayDayName();
+            const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString();
+            const tDay = getCurrentDayName(); const yDay = getYesterdayDayName();
+
             state.todayProducts.forEach(p => {
-                if(p.days.includes(yDay)) { const yLog = state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr); const yComp = yLog ? yLog.completedReviews : 0; if(yComp < p.targetReviews) { totalPendingCount += (p.targetReviews - yComp); totalTargetToday += (p.targetReviews - yComp); } }
-                if(p.days.includes(tDay)) { const tLog = state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr); const tComp = tLog ? tLog.completedReviews : 0; totalTargetToday += p.targetReviews; totalCompletedToday += tComp; if(tComp < p.targetReviews) totalPendingCount += (p.targetReviews - tComp); }
+                if(p.days.includes(yDay)) {
+                    const yLog = state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr);
+                    const yComp = yLog ? yLog.completedReviews : 0;
+                    if(yComp < p.targetReviews) { totalPendingCount += (p.targetReviews - yComp); totalTargetToday += (p.targetReviews - yComp); }
+                }
+                if(p.days.includes(tDay)) {
+                    const tLog = state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr);
+                    const tComp = tLog ? tLog.completedReviews : 0;
+                    totalTargetToday += p.targetReviews; totalCompletedToday += tComp;
+                    if(tComp < p.targetReviews) totalPendingCount += (p.targetReviews - tComp);
+                }
             });
+
             document.getElementById('stat-pending-today').innerText = totalPendingCount;
+            
+            // Overall Progress Bar Logic
             const progressPercent = totalTargetToday === 0 ? 100 : Math.min(100, Math.round((totalCompletedToday / totalTargetToday) * 100));
-            document.getElementById('overall-progress-bar').style.width = `${progressPercent}%`; document.getElementById('overall-progress-text').innerText = `${progressPercent}%`;
+            document.getElementById('overall-progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('overall-progress-text').innerText = `${progressPercent}%`;
+
             renderChart(); renderLiability(); renderHeatmap();
         }
-        function renderLiability() { const list = document.getElementById('liability-list'); const todayStr = getCurrentDateString(); const tDay = getCurrentDayName(); let liabilities =[]; state.todayProducts.forEach(p => { if(p.days.includes(tDay)){ const tComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr) || {}).completedReviews || 0; if(tComp < p.targetReviews) liabilities.push({title: p.title, pending: p.targetReviews - tComp}); } }); liabilities.sort((a,b)=>b.pending - a.pending); if(liabilities.length===0) { list.innerHTML = `<p class="text-sm text-muted font-bold">No pending liabilities!</p>`; return; } list.innerHTML = liabilities.slice(0,5).map(l => `<div class="flex justify-between items-center bg-main p-4 rounded-xl border border-theme shadow-sm"><span class="text-sm font-bold text-txt truncate w-2/3">${l.title}</span><span class="text-xs bg-red-100 text-red-600 font-black px-3 py-1 rounded-lg">${l.pending} Left</span></div>`).join(''); }
-        function renderHeatmap() { const container = document.getElementById('heatmap-container'); let html = ''; const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim() || '#3b82f6'; for(let i=29; i>=0; i--){ let d = new Date(); d.setDate(d.getDate()-i); let ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; let count = state.dailyLogs.filter(l=>l.date===ds).reduce((a,c)=>a+c.completedReviews,0); let opacity = count > 0 ? Math.min(1, 0.3 + (count * 0.1)) : 0.05; html += `<div class="w-4 h-4 md:w-5 md:h-5 rounded-md border border-theme" style="background-color: ${brandColor}; opacity: ${opacity}" title="${ds}: ${count} completed"></div>`; } container.innerHTML = html; }
-        function renderChart() { const ctx = document.getElementById('growthChart').getContext('2d'); const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim() || '#3b82f6'; const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#64748b'; const labels =[]; const data =[]; for(let i=6; i>=0; i--) { const d = new Date(); d.setDate(d.getDate() - i); const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; labels.push(d.toLocaleDateString('en-US', { weekday: 'short' })); data.push(state.dailyLogs.filter(l => l.date === ds).reduce((a, c) => a + (c.completedReviews || 0), 0)); } if(chartInstance) chartInstance.destroy(); chartInstance = new Chart(ctx, { type: 'bar', data: { labels, datasets:[{ data, backgroundColor: brandColor, borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textColor, font:{family:'Inter', weight:'bold'} } }, y: { beginAtZero: true, ticks: { color: textColor, stepSize: 1, font:{family:'Inter', weight:'bold'} } } } } }); }
-        
-        document.getElementById('export-csv-btn').addEventListener('click', () => { let csvContent = "data:text/csv;charset=utf-8,Date,Product,Target_Reviews,Completed_Reviews\n"; state.dailyLogs.forEach(l => { csvContent += `${l.date},"${l.productTitle}",${l.targetReviews},${l.completedReviews}\n`; }); const link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent)); link.setAttribute("download", `ReviewFlow_${getCurrentDateString()}.csv`); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast('CSV Exported!'); });
-        document.getElementById('export-pdf-btn').addEventListener('click', () => { const element = document.getElementById('view-dashboard'); const opt = { margin: 0.5, filename: `Report_${getCurrentDateString()}.pdf`, html2canvas: { scale: 2 }, jsPDF: { format: 'a4', orientation: 'landscape' } }; document.getElementById('export-pdf-btn').innerText = "Generating..."; html2pdf().set(opt).from(element).save().then(() => { document.getElementById('export-pdf-btn').innerHTML = "📥 PDF Report"; showToast('PDF Downloaded!'); }); });
 
-        // PRODUCTS TAB Logic Unchanged...
-        async function fetchPaginatedProducts(isReset = false) { const tbody = document.getElementById('products-table-body'); const btnMore = document.getElementById('load-more-btn'); if(isReset) { state.paginatedProducts =[]; state.lastVisibleDoc = null; tbody.innerHTML = ''; } let baseQuery; if(state.searchQuery) baseQuery = query(collection(db, "products"), where("title", ">=", state.searchQuery), where("title", "<=", state.searchQuery + '\uf8ff'), orderBy("title"), limit(15)); else if (state.filterDay) baseQuery = query(collection(db, "products"), where("days", "array-contains", state.filterDay), limit(15)); else baseQuery = query(collection(db, "products"), orderBy("createdAt", "desc"), limit(10)); if(!isReset && state.lastVisibleDoc) baseQuery = query(baseQuery, startAfter(state.lastVisibleDoc)); const snap = await getDocs(baseQuery); let newProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() })); if(state.searchQuery && state.filterDay) newProducts = newProducts.filter(p => p.days && p.days.includes(state.filterDay)); state.paginatedProducts =[...state.paginatedProducts, ...newProducts]; state.lastVisibleDoc = snap.docs[snap.docs.length - 1]; if(snap.docs.length < (state.searchQuery ? 15 : 10)) btnMore.classList.add('hidden'); else btnMore.classList.remove('hidden'); renderProductsTable(); }
-        function renderProductsTable() { document.getElementById('products-empty-state').classList.toggle('hidden', state.paginatedProducts.length > 0); document.getElementById('products-table-body').innerHTML = state.paginatedProducts.map(p => { const daysStr = p.days.map(d => `<span class="inline-block bg-theme text-[11px] font-black uppercase tracking-wider px-2 py-1 rounded-md mr-1.5 mb-1.5 text-txt">${d.substring(0,3)}</span>`).join(''); return `<tr class="border-b border-theme hover:bg-theme/30 transition-colors"><td class="p-5"><div class="font-black text-txt text-base">${p.title}</div></td><td class="p-5"><div class="font-mono text-xs bg-main border border-theme px-2 py-1 rounded-md inline-block text-muted font-bold shadow-sm">${p.sku}</div></td><td class="p-5 text-center"><span class="font-black text-brand-600 text-lg">${p.qty || 0}</span></td><td class="p-5 max-w-[200px]">${daysStr}</td><td class="p-5 text-center"><span class="inline-flex items-center justify-center bg-brand-50 text-brand-700 w-10 h-10 rounded-full font-black border border-brand-200 shadow-sm">${p.targetReviews}</span></td><td class="p-5 text-right space-x-2 whitespace-nowrap"><button onclick="window.viewProductStats('${p.id}')" class="text-xs font-bold bg-main border border-theme px-4 py-2.5 rounded-xl hover:bg-theme transition text-txt shadow-sm">Stats</button><button onclick="window.openEditModal('${p.id}')" class="text-xs font-bold bg-main border border-theme px-4 py-2.5 rounded-xl hover:bg-theme transition text-txt shadow-sm">Edit</button><button onclick="window.deleteProduct('${p.id}')" class="text-xs font-bold bg-red-50 text-red-600 px-4 py-2.5 rounded-xl hover:bg-red-100 transition border border-red-100 shadow-sm">Delete</button></td></tr>`; }).join(''); }
-        document.getElementById('load-more-btn').addEventListener('click', () => fetchPaginatedProducts()); document.getElementById('btn-search').addEventListener('click', () => { state.searchQuery = document.getElementById('search-product').value.trim(); fetchPaginatedProducts(true); }); document.getElementById('filter-day').addEventListener('change', (e) => { state.filterDay = e.target.value; fetchPaginatedProducts(true); });
-        
-        const prodModal = document.getElementById('add-product-modal');
-        document.getElementById('open-add-modal-btn').addEventListener('click', () => { document.getElementById('product-form').reset(); document.getElementById('edit-product-id').value = ""; document.getElementById('modal-product-title').innerText = "Add New Product"; document.getElementById('days-error').classList.add('hidden'); prodModal.classList.remove('hidden-view'); setTimeout(() => prodModal.classList.add('modal-active'), 10); });
-        window.openEditModal = (id) => { const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return; document.getElementById('edit-product-id').value = p.id; document.getElementById('modal-product-title').innerText = "Edit Product"; document.getElementById('prod-title').value = p.title; document.getElementById('prod-sku').value = p.sku; document.getElementById('prod-qty').value = p.qty || 0; document.getElementById('prod-initial').value = p.initialCount; document.getElementById('prod-target').value = p.targetReviews; document.getElementById('days-error').classList.add('hidden'); document.querySelectorAll('.day-checkbox').forEach(cb => { cb.checked = p.days.includes(cb.value); }); prodModal.classList.remove('hidden-view'); setTimeout(() => prodModal.classList.add('modal-active'), 10); };
-        document.querySelectorAll('.close-add-modal').forEach(btn => btn.addEventListener('click', () => { prodModal.classList.remove('modal-active'); setTimeout(() => prodModal.classList.add('hidden-view'), 300); }));
-        document.getElementById('save-product-btn').addEventListener('click', async () => { const form = document.getElementById('product-form'); if(!form.checkValidity()) { form.reportValidity(); return; } const checkedDays = Array.from(document.querySelectorAll('.day-checkbox:checked')).map(cb => cb.value); if(checkedDays.length === 0) { document.getElementById('days-error').classList.remove('hidden'); return; } document.getElementById('save-product-text').classList.add('hidden'); document.getElementById('save-product-spinner').classList.remove('hidden'); document.getElementById('save-product-btn').disabled = true; const editId = document.getElementById('edit-product-id').value; const prodData = { title: document.getElementById('prod-title').value, sku: document.getElementById('prod-sku').value, qty: parseInt(document.getElementById('prod-qty').value) || 0, initialCount: parseInt(document.getElementById('prod-initial').value), targetReviews: parseInt(document.getElementById('prod-target').value), days: checkedDays }; try { if(editId) { await updateDoc(doc(db, "products", editId), prodData); showToast('Product updated!'); } else { prodData.createdAt = serverTimestamp(); await addDoc(collection(db, "products"), prodData); state.totalProductsCount++; showToast('Product added!'); } await initializeData(); document.querySelector('.close-add-modal').click(); } catch(e) { showToast('Error saving product', 'error'); } finally { document.getElementById('save-product-text').classList.remove('hidden'); document.getElementById('save-product-spinner').classList.add('hidden'); document.getElementById('save-product-btn').disabled = false; } });
-        window.deleteProduct = async (id) => { if(!confirm('🚨 Delete this product and ALL its review records? This cannot be undone.')) return; try { await deleteDoc(doc(db, "products", id)); const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id))); snap.forEach(async (d) => { await deleteDoc(doc(db, "daily_logs", d.id)); }); state.paginatedProducts = state.paginatedProducts.filter(p => p.id !== id); state.todayProducts = state.todayProducts.filter(p => p.id !== id); state.dailyLogs = state.dailyLogs.filter(l => l.productId !== id); state.totalProductsCount--; renderProductsTable(); renderDashboard(); renderTodayTasks(); showToast('Product deleted.'); } catch(e) { showToast('Error deleting product', 'error'); } };
+        function renderLiability() {
+            const list = document.getElementById('liability-list');
+            const todayStr = getCurrentDateString(); const tDay = getCurrentDayName();
+            let liabilities =[];
+            state.todayProducts.forEach(p => {
+                if(p.days.includes(tDay)){
+                    const tLog = state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr);
+                    const tComp = tLog ? tLog.completedReviews : 0;
+                    if(tComp < p.targetReviews) liabilities.push({title: p.title, pending: p.targetReviews - tComp});
+                }
+            });
+            liabilities.sort((a,b)=>b.pending - a.pending);
+            if(liabilities.length===0) { list.innerHTML = `<p class="text-sm text-muted">No pending liabilities!</p>`; return; }
+            list.innerHTML = liabilities.slice(0,5).map(l => `
+                <div class="flex justify-between items-center bg-main p-3 rounded-lg border border-theme">
+                    <span class="text-sm font-bold text-txt truncate w-2/3">${l.title}</span>
+                    <span class="text-xs bg-red-100 text-red-600 font-bold px-2 py-1 rounded">${l.pending} Left</span>
+                </div>
+            `).join('');
+        }
 
-        // TODAY TASKS & HISTORY LOGIC Unchanged... (keeping concise for space)
-        function renderTodayTasks() { const container = document.getElementById('today-tasks-container'); const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString(); const tDay = getCurrentDayName(); const yDay = getYesterdayDayName(); let pendingCount = 0; const taskCards =[]; state.todayProducts.forEach(p => { if(p.days.includes(yDay)) { const yComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr) || {}).completedReviews || 0; if(yComp < p.targetReviews) { pendingCount++; taskCards.push({ p, completed: yComp, isComplete: false, isCarryOver: true, taskDate: yesterdayStr }); } } if(p.days.includes(tDay)) { const tComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr) || {}).completedReviews || 0; const isComplete = tComp >= p.targetReviews; if (!isComplete) pendingCount++; taskCards.push({ p, completed: tComp, isComplete: isComplete, isCarryOver: false, taskDate: todayStr }); } }); const badge = document.getElementById('sidebar-today-badge'); if (pendingCount > 0) { badge.innerText = pendingCount; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); } taskCards.sort((a, b) => { if (a.isComplete !== b.isComplete) return a.isComplete ? 1 : -1; if (a.isCarryOver !== b.isCarryOver) return a.isCarryOver ? -1 : 1; return 0; }); if (taskCards.length === 0) { document.getElementById('today-empty-state').classList.remove('hidden'); container.innerHTML=''; return; } document.getElementById('today-empty-state').classList.add('hidden'); container.innerHTML = taskCards.map(t => { const borderStyle = t.isComplete ? 'border-theme opacity-60' : t.isCarryOver ? 'border-red-300 shadow-xl ring-2 ring-red-100' : 'border-brand-400 shadow-xl shadow-brand-500/10'; const badgeHtml = t.isComplete ? `<span class="text-[10px] uppercase tracking-widest px-3 py-1 rounded-md font-black bg-emerald-100 text-emerald-700 shadow-sm border border-emerald-200">Completed</span>` : t.isCarryOver ? `<span class="text-[10px] uppercase tracking-widest px-3 py-1 rounded-md font-black bg-red-100 text-red-700 shadow-sm border border-red-200 animate-pulse">⚠️ Pending Yesterday</span>` : `<span class="text-[10px] uppercase tracking-widest px-3 py-1 rounded-md font-black bg-orange-100 text-orange-700 shadow-sm border border-orange-200">Action Required</span>`; return `<div class="bg-card border-2 ${borderStyle} rounded-[1.5rem] p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 transition-all transform hover:-translate-y-1 hover:shadow-2xl"><div class="flex-1 cursor-pointer" onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')"><div class="flex items-center gap-3 mb-3"><h3 class="text-2xl font-black text-txt">${t.p.title}</h3>${badgeHtml}</div><div class="flex flex-wrap items-center gap-3 text-sm"><span class="font-mono bg-main px-3 py-1.5 rounded-lg border border-theme text-xs font-bold text-muted shadow-sm">SKU: ${t.p.sku}</span><span class="font-black bg-brand-50 text-brand-700 px-3 py-1.5 rounded-lg text-xs border border-brand-200 shadow-sm">QTY: ${t.p.qty || 0}</span><span class="font-bold bg-main px-4 py-1.5 rounded-full text-muted border border-theme shadow-sm">Progress: <strong class="text-txt text-base">${t.completed} / ${t.p.targetReviews}</strong></span></div></div><div class="shrink-0 flex gap-2"><button onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')" class="text-base font-black ${t.isComplete ? 'bg-main border border-theme text-txt hover:bg-theme' : 'bg-brand-600 text-white shadow-xl hover:-translate-y-1 transform'} px-8 py-4 rounded-xl transition-all">${t.isComplete ? 'Review / Edit' : 'Submit Task'}</button></div></div>` }).join(''); }
-        
-        const taskModal = document.getElementById('daily-task-modal');
-        window.openTaskModal = (id, dateStr) => { const p = state.todayProducts.find(x => x.id === id); if(!p) return; activeTaskContext = p; activeTaskDate = dateStr; document.getElementById('task-modal-header').innerText = dateStr === getCurrentDateString() ? "Today's Checklist" : "Yesterday's Pending"; document.getElementById('task-modal-title').innerText = p.title; document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`; const qtyInput = document.getElementById('task-modal-qty-input'); qtyInput.value = p.qty || 0; qtyInput.onchange = async (e) => { const newQty = parseInt(e.target.value) || 0; try { await updateDoc(doc(db, "products", p.id), { qty: newQty }); p.qty = newQty; const pInAll = state.paginatedProducts.find(x => x.id === id); if(pInAll) pInAll.qty = newQty; renderTodayTasks(); renderProductsTable(); showToast('QTY Saved!'); } catch(err) { showToast('Error', 'error'); } }; const log = state.dailyLogs.find(l => l.productId === p.id && l.date === dateStr); const completed = log ? log.completedReviews : 0; const resetBtn = document.getElementById('reset-task-btn'); if(completed > 0) { resetBtn.classList.remove('hidden'); resetBtn.onclick = () => window.resetTask(p.id, dateStr); } else { resetBtn.classList.add('hidden'); } let cbHTML = ''; for(let i=1; i<=p.targetReviews; i++) { const isChecked = i <= completed ? 'checked' : ''; const styleActive = isChecked ? 'bg-emerald-50 border-emerald-300 shadow-sm' : 'bg-card border-theme hover:bg-main'; cbHTML += `<label class="flex items-center space-x-4 p-5 rounded-2xl border-2 ${styleActive} cursor-pointer group transition-all"><input type="checkbox" class="task-checkbox rounded text-emerald-500 w-7 h-7 border-theme bg-main transition" ${isChecked}><span class="text-txt font-black text-lg select-none">Task Checkpoint #${i}</span></label>`; } document.getElementById('task-checkboxes-container').innerHTML = cbHTML; taskModal.classList.remove('hidden-view'); setTimeout(() => taskModal.classList.add('modal-active'), 10); };
-        document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { taskModal.classList.remove('modal-active'); setTimeout(() => taskModal.classList.add('hidden-view'), 300); }));
-        document.getElementById('save-task-btn').addEventListener('click', async () => { if(!activeTaskContext) return; document.getElementById('save-task-text').classList.add('hidden'); document.getElementById('save-task-spinner').classList.remove('hidden'); document.getElementById('save-task-btn').disabled = true; const checkedCount = document.querySelectorAll('.task-checkbox:checked').length; const logId = `${activeTaskContext.id}_${activeTaskDate}`; const logData = { productId: activeTaskContext.id, productTitle: activeTaskContext.title, date: activeTaskDate, completedReviews: checkedCount, targetReviews: activeTaskContext.targetReviews, timestamp: serverTimestamp() }; const prevLog = state.dailyLogs.find(l => l.id === logId); const diff = checkedCount - (prevLog ? prevLog.completedReviews : 0); try { await setDoc(doc(db, "daily_logs", logId), logData); const existIdx = state.dailyLogs.findIndex(l => l.id === logId); if(existIdx > -1) state.dailyLogs[existIdx] = { id: logId, ...logData }; else state.dailyLogs.push({ id: logId, ...logData }); if(diff !== 0) { if(diff > 0) { const newQty = Math.max(0, (parseInt(activeTaskContext.qty) || 0) - diff); await updateDoc(doc(db, "products", activeTaskContext.id), { qty: newQty }); activeTaskContext.qty = newQty; const pInAll = state.paginatedProducts.find(x => x.id === activeTaskContext.id); if(pInAll) pInAll.qty = newQty; const earned = diff * 10; state.userProfile.coins += earned; await updateDoc(doc(db, "users", auth.currentUser.uid), { coins: state.userProfile.coins }); updateSidebarProfileUI(); showToast(`🪙 ${earned} Coins Earned!`, 'success'); } else if (diff < 0) { const lost = Math.abs(diff) * 10; state.userProfile.coins = Math.max(0, state.userProfile.coins - lost); await updateDoc(doc(db, "users", auth.currentUser.uid), { coins: state.userProfile.coins }); updateSidebarProfileUI(); showToast(`Unchecked! 🪙 ${lost} Coins deducted.`, 'error'); } } document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable(); if(checkedCount === activeTaskContext.targetReviews && document.querySelectorAll('#today-tasks-container .bg-orange-100').length <= 1) { confetti({ particleCount: 150, spread: 80, origin: {y: 0.6} }); } } catch(e) { showToast('Error saving progress', 'error'); } finally { document.getElementById('save-task-text').classList.remove('hidden'); document.getElementById('save-task-spinner').classList.add('hidden'); document.getElementById('save-task-btn').disabled = false; } });
-        window.resetTask = async (productId, dateStr) => { if(!confirm("Clear progress? (Restores QTY, loses coins)")) return; const logId = `${productId}_${dateStr}`; try { const log = state.dailyLogs.find(l => l.id === logId); if(log) { const p = state.todayProducts.find(x => x.id === productId); if(p) { const restoredQty = (parseInt(p.qty) || 0) + log.completedReviews; await updateDoc(doc(db, "products", productId), { qty: restoredQty }); p.qty = restoredQty; } const lost = log.completedReviews * 10; state.userProfile.coins = Math.max(0, state.userProfile.coins - lost); await updateDoc(doc(db, "users", auth.currentUser.uid), { coins: state.userProfile.coins }); updateSidebarProfileUI(); } await deleteDoc(doc(db, "daily_logs", logId)); state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId); document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable(); showToast('Cleared & Coins deducted.', 'error'); } catch(e) { showToast('Error', 'error'); } };
-        
-        document.getElementById('history-date-picker').addEventListener('change', async (e) => { const list = document.getElementById('history-list'); list.innerHTML = `<li class="p-12 text-center text-muted font-bold">Loading...</li>`; try { const snap = await getDocs(query(collection(db, "daily_logs"), where("date", "==", e.target.value))); if(snap.empty) { list.innerHTML = `<li class="p-12 text-center text-muted font-bold">No reviews completed on this date.</li>`; return; } list.innerHTML = snap.docs.map(doc => { const d = doc.data(); const badgeColor = d.completedReviews >= d.targetReviews ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800'; return `<li class="p-6 flex flex-col md:flex-row md:items-center justify-between hover:bg-theme border-b border-theme last:border-0 gap-4 transition"><div class="w-2/3"><p class="font-black text-txt text-lg truncate">${d.productTitle}</p><p class="text-xs text-muted mt-1 font-mono font-bold">Date: ${d.date}</p></div><div class="flex items-center self-end md:self-auto"><span class="${badgeColor} px-4 py-1.5 rounded-full text-sm font-black shadow-sm">${d.completedReviews} / ${d.targetReviews}</span><button onclick="window.deleteLog('${doc.id}')" class="text-xs bg-red-50 text-red-600 px-4 py-2 rounded-xl hover:bg-red-100 transition ml-4 font-black border border-red-200">Remove Record</button></div></li>`; }).join(''); } catch(e) { list.innerHTML = `<li class="p-12 text-center text-red-500 font-bold">Error loading history.</li>`; } });
-        window.deleteLog = async (logId) => { if(!confirm('🚨 Delete record?')) return; try { await deleteDoc(doc(db, "daily_logs", logId)); state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId); showToast('Log deleted.'); document.getElementById('history-date-picker').dispatchEvent(new Event('change')); renderDashboard(); if(logId.includes(getCurrentDateString()) || logId.includes(getYesterdayDateString())) renderTodayTasks(); } catch(e) { showToast('Error', 'error'); } };
-        
-        const statsModal = document.getElementById('stats-modal'); window.viewProductStats = async (id) => { const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return; document.getElementById('stats-modal-title').innerText = p.title; document.getElementById('stats-target').innerText = p.targetReviews; document.getElementById('stats-qty').innerText = p.qty || 0; document.getElementById('stats-total-completed').innerText = "..."; statsModal.classList.remove('hidden-view'); setTimeout(() => statsModal.classList.add('modal-active'), 10); try { const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id))); const sumReviews = snap.docs.reduce((a, c) => a + (c.data().completedReviews || 0), 0); document.getElementById('stats-total-completed').innerText = sumReviews + parseInt(p.initialCount || 0); } catch (e) { document.getElementById('stats-total-completed').innerText = "Err"; } }; document.querySelectorAll('.close-stats-modal').forEach(b => b.addEventListener('click', () => { statsModal.classList.remove('modal-active'); setTimeout(() => statsModal.classList.add('hidden-view'), 300); }));
+        function renderHeatmap() {
+            const container = document.getElementById('heatmap-container'); let html = '';
+            const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim() || '#3b82f6';
+            for(let i=29; i>=0; i--){
+                let d = new Date(); d.setDate(d.getDate()-i); let ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+                let count = state.dailyLogs.filter(l=>l.date===ds).reduce((a,c)=>a+c.completedReviews,0);
+                let opacity = count > 0 ? Math.min(1, 0.3 + (count * 0.1)) : 0.05;
+                html += `<div class="w-4 h-4 md:w-5 md:h-5 rounded-sm border border-theme" style="background-color: ${brandColor}; opacity: ${opacity}" title="${ds}: ${count} completed"></div>`;
+            }
+            container.innerHTML = html;
+        }
 
+        function renderChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim() || '#3b82f6';
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#64748b';
+            const labels =[]; const data =[];
+            for(let i=6; i>=0; i--) {
+                const d = new Date(); d.setDate(d.getDate() - i); const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+                labels.push(d.toLocaleDateString('en-US', { weekday: 'short' }));
+                data.push(state.dailyLogs.filter(l => l.date === ds).reduce((a, c) => a + (c.completedReviews || 0), 0));
+            }
+            if(chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, { type: 'bar', data: { labels, datasets:[{ data, backgroundColor: brandColor, borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textColor } }, y: { beginAtZero: true, ticks: { color: textColor, stepSize: 1 } } } } });
+        }
 
         // ==========================================
-        // 11. TOP SELLERS SECTION LOGIC (NEW)
+        // EXPORT LOGIC (CSV & PDF)
         // ==========================================
-        
-        // Open Top Seller Add Modal
-        const tsModal = document.getElementById('topseller-modal');
-        document.getElementById('open-topseller-modal-btn').addEventListener('click', () => {
-            document.getElementById('topseller-form').reset(); 
-            document.getElementById('edit-ts-id').value = ""; 
-            document.getElementById('ts-modal-title').innerText = "Add Top Seller";
-            tsModal.classList.remove('hidden-view'); setTimeout(() => tsModal.classList.add('modal-active'), 10);
+        document.getElementById('export-csv-btn').addEventListener('click', () => {
+            let csvContent = "data:text/csv;charset=utf-8,Date,Product,Target_Reviews,Completed_Reviews\n";
+            state.dailyLogs.forEach(l => {
+                csvContent += `${l.date},"${l.productTitle}",${l.targetReviews},${l.completedReviews}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", `ReviewFlow_Data_${getCurrentDateString()}.csv`);
+            document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast('CSV Exported!');
         });
 
-        // Close Modals
-        document.querySelectorAll('.close-ts-modal').forEach(b => b.addEventListener('click', () => { 
-            tsModal.classList.remove('modal-active'); setTimeout(() => tsModal.classList.add('hidden-view'), 300); 
-        }));
+        document.getElementById('export-pdf-btn').addEventListener('click', () => {
+            const element = document.getElementById('view-dashboard');
+            const opt = { margin: 0.5, filename: `ReviewFlow_Report_${getCurrentDateString()}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' } };
+            document.getElementById('export-pdf-btn').innerText = "Generating...";
+            html2pdf().set(opt).from(element).save().then(() => { document.getElementById('export-pdf-btn').innerHTML = "📥 PDF Report"; showToast('PDF Downloaded!'); });
+        });
 
-        // Render Function for Top Sellers
-        function renderTopSellers() {
-            const container = document.getElementById('topsellers-container');
-            const emptyState = document.getElementById('topsellers-empty-state');
-            
-            // Sort by position ascending
-            state.topSellers.sort((a,b) => a.position - b.position);
+        // ==========================================
+        // 8. PRODUCTS LIST
+        // ==========================================
+        async function fetchPaginatedProducts(isReset = false) {
+            const tbody = document.getElementById('products-table-body'); const btnMore = document.getElementById('load-more-btn');
+            if(isReset) { state.paginatedProducts =[]; state.lastVisibleDoc = null; tbody.innerHTML = ''; }
+            let baseQuery;
+            if(state.searchQuery) baseQuery = query(collection(db, "products"), where("title", ">=", state.searchQuery), where("title", "<=", state.searchQuery + '\uf8ff'), orderBy("title"), limit(15));
+            else if (state.filterDay) baseQuery = query(collection(db, "products"), where("days", "array-contains", state.filterDay), limit(15));
+            else baseQuery = query(collection(db, "products"), orderBy("createdAt", "desc"), limit(10));
+            if(!isReset && state.lastVisibleDoc) baseQuery = query(baseQuery, startAfter(state.lastVisibleDoc));
 
-            if(state.topSellers.length === 0) {
-                container.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
-            emptyState.classList.add('hidden');
+            const snap = await getDocs(baseQuery);
+            let newProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            if(state.searchQuery && state.filterDay) newProducts = newProducts.filter(p => p.days && p.days.includes(state.filterDay));
+            state.paginatedProducts =[...state.paginatedProducts, ...newProducts];
+            state.lastVisibleDoc = snap.docs[snap.docs.length - 1];
 
-            container.innerHTML = state.topSellers.map(ts => {
-                const isVerified = ts.status === 'verified';
-                const statusBadge = isVerified 
-                    ? '<span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border border-emerald-200 shadow-sm">Verified ✅</span>'
-                    : '<span class="bg-orange-100 text-orange-700 px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border border-orange-200 shadow-sm animate-pulse">Pending Update ⏳</span>';
+            if(snap.docs.length < (state.searchQuery ? 15 : 10)) btnMore.classList.add('hidden'); else btnMore.classList.remove('hidden');
+            renderProductsTable();
+        }
 
-                const actionButton = isVerified 
-                    ? `<button disabled class="w-full mt-4 py-2.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-black rounded-xl text-sm opacity-70">Already Updated</button>`
-                    : `<button onclick="window.verifyTopSeller('${ts.id}')" class="w-full mt-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-md hover:shadow-lg font-black rounded-xl text-sm transition flex items-center justify-center gap-2">Verify Update & Earn 🪙</button>`;
-
-                return `
-                <div class="bg-card border border-theme rounded-2xl p-6 shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1 relative group">
-                    <div class="absolute top-0 right-0 bg-yellow-500 text-yellow-950 font-black px-4 py-1.5 rounded-bl-2xl rounded-tr-2xl shadow-sm text-sm"># ${ts.position}</div>
-                    <div class="mt-2 mb-3">
-                        <h3 class="text-xl font-black text-txt pr-10 truncate">${ts.title}</h3>
-                        <p class="text-xs font-mono text-muted mt-2 bg-main inline-block px-2.5 py-1 rounded-lg border border-theme shadow-inner">SKU: ${ts.sku}</p>
-                    </div>
-                    <p class="text-sm text-txt mb-5 line-clamp-3 min-h-[40px] opacity-90">${ts.notes || 'No extra notes provided.'}</p>
-                    
-                    <div class="flex items-center justify-between border-t border-theme pt-4 mb-1">
-                        ${statusBadge}
-                        <div class="flex gap-2">
-                            <button onclick="window.editTopSeller('${ts.id}')" class="p-1.5 bg-main border border-theme text-txt rounded-lg hover:bg-theme transition" title="Edit"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
-                            <button onclick="window.deleteTopSeller('${ts.id}')" class="p-1.5 bg-red-50 border border-red-100 text-red-500 rounded-lg hover:bg-red-100 transition" title="Delete"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                        </div>
-                    </div>
-                    ${actionButton}
-                </div>
-                `;
+        function renderProductsTable() {
+            document.getElementById('products-empty-state').classList.toggle('hidden', state.paginatedProducts.length > 0);
+            document.getElementById('products-table-body').innerHTML = state.paginatedProducts.map(p => {
+                const daysStr = p.days.map(d => `<span class="inline-block bg-theme text-xs px-2 py-1 rounded mr-1 mb-1 text-txt">${d.substring(0,3)}</span>`).join('');
+                return `<tr class="border-b border-theme hover:bg-theme/30 transition-colors">
+                        <td class="p-4"><div class="font-bold text-txt text-base">${p.title}</div></td><td class="p-4"><div class="font-mono text-xs bg-theme px-2 py-1 rounded inline-block text-muted">${p.sku}</div></td>
+                        <td class="p-4 text-center"><span class="font-bold text-brand-600">${p.qty || 0}</span></td><td class="p-4 max-w-[200px]">${daysStr}</td><td class="p-4 text-center"><span class="inline-flex items-center justify-center bg-brand-50 text-brand-700 w-8 h-8 rounded-full font-bold border border-brand-100">${p.targetReviews}</span></td>
+                        <td class="p-4 text-right space-x-2 whitespace-nowrap"><button onclick="window.viewProductStats('${p.id}')" class="text-xs font-bold bg-main border border-theme px-3.5 py-2 rounded-lg hover:bg-theme transition text-txt">Stats</button><button onclick="window.openEditModal('${p.id}')" class="text-xs font-bold bg-main border border-theme px-3.5 py-2 rounded-lg hover:bg-theme transition text-txt">Edit</button><button onclick="window.deleteProduct('${p.id}')" class="text-xs font-bold bg-red-50 text-red-600 px-3.5 py-2 rounded-lg hover:bg-red-100 transition border border-red-100">Delete</button></td>
+                    </tr>`;
             }).join('');
         }
 
-        // Add or Update Top Seller to DB
-        document.getElementById('save-ts-btn').addEventListener('click', async () => {
-            const form = document.getElementById('topseller-form'); if(!form.checkValidity()) { form.reportValidity(); return; }
-            
-            const btn = document.getElementById('save-ts-btn');
-            btn.innerText = "Saving..."; btn.disabled = true;
-            
-            const editId = document.getElementById('edit-ts-id').value;
-            const tsData = { 
-                title: document.getElementById('ts-title').value, 
-                sku: document.getElementById('ts-sku').value, 
-                position: parseInt(document.getElementById('ts-position').value) || 99,
-                notes: document.getElementById('ts-notes').value,
-                status: 'pending', // Always defaults to pending on save/edit to re-verify
-            };
-            
-            try {
-                if(editId) { 
-                    await updateDoc(doc(db, "top_sellers", editId), tsData); 
-                    const idx = state.topSellers.findIndex(t => t.id === editId);
-                    if(idx > -1) state.topSellers[idx] = {id: editId, ...tsData};
-                    showToast('Top Seller Updated! Status changed to Pending.'); 
-                } else { 
-                    tsData.createdAt = serverTimestamp(); 
-                    const docRef = await addDoc(collection(db, "top_sellers"), tsData); 
-                    state.topSellers.push({id: docRef.id, ...tsData});
-                    showToast('Top Seller Added!'); 
-                }
-                
-                renderTopSellers();
-                document.querySelector('.close-ts-modal').click(); 
-            } catch(e) { showToast('Error saving top seller', 'error'); } 
-            finally { btn.innerText = "Save Top Seller"; btn.disabled = false; }
+        document.getElementById('load-more-btn').addEventListener('click', () => fetchPaginatedProducts());
+        document.getElementById('btn-search').addEventListener('click', () => { state.searchQuery = document.getElementById('search-product').value.trim(); fetchPaginatedProducts(true); });
+        document.getElementById('filter-day').addEventListener('change', (e) => { state.filterDay = e.target.value; fetchPaginatedProducts(true); });
+
+        // Add/Edit Product
+        const prodModal = document.getElementById('add-product-modal');
+        document.getElementById('open-add-modal-btn').addEventListener('click', () => {
+            document.getElementById('product-form').reset(); document.getElementById('edit-product-id').value = ""; document.getElementById('modal-product-title').innerText = "Add New Product"; document.getElementById('days-error').classList.add('hidden');
+            prodModal.classList.remove('hidden-view'); setTimeout(() => prodModal.classList.add('modal-active'), 10);
         });
 
-        // Edit
-        window.editTopSeller = (id) => {
-            const ts = state.topSellers.find(x => x.id === id); if(!ts) return;
-            document.getElementById('edit-ts-id').value = ts.id; 
-            document.getElementById('ts-modal-title').innerText = "Edit Top Seller";
-            document.getElementById('ts-title').value = ts.title; 
-            document.getElementById('ts-sku').value = ts.sku; 
-            document.getElementById('ts-position').value = ts.position; 
-            document.getElementById('ts-notes').value = ts.notes; 
-            tsModal.classList.remove('hidden-view'); setTimeout(() => tsModal.classList.add('modal-active'), 10);
+        window.openEditModal = (id) => {
+            const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return;
+            document.getElementById('edit-product-id').value = p.id; document.getElementById('modal-product-title').innerText = "Edit Product";
+            document.getElementById('prod-title').value = p.title; document.getElementById('prod-sku').value = p.sku; document.getElementById('prod-qty').value = p.qty || 0;
+            document.getElementById('prod-initial').value = p.initialCount; document.getElementById('prod-target').value = p.targetReviews;
+            document.getElementById('days-error').classList.add('hidden'); document.querySelectorAll('.day-checkbox').forEach(cb => { cb.checked = p.days.includes(cb.value); });
+            prodModal.classList.remove('hidden-view'); setTimeout(() => prodModal.classList.add('modal-active'), 10);
         };
+        document.querySelectorAll('.close-add-modal').forEach(btn => btn.addEventListener('click', () => { prodModal.classList.remove('modal-active'); setTimeout(() => prodModal.classList.add('hidden-view'), 300); }));
 
-        // Delete
-        window.deleteTopSeller = async (id) => {
-            if(!confirm('Remove this top seller card?')) return;
+        document.getElementById('save-product-btn').addEventListener('click', async () => {
+            const form = document.getElementById('product-form'); if(!form.checkValidity()) { form.reportValidity(); return; }
+            const checkedDays = Array.from(document.querySelectorAll('.day-checkbox:checked')).map(cb => cb.value);
+            if(checkedDays.length === 0) { document.getElementById('days-error').classList.remove('hidden'); return; }
+
+            document.getElementById('save-product-text').classList.add('hidden'); document.getElementById('save-product-spinner').classList.remove('hidden'); document.getElementById('save-product-btn').disabled = true;
+            const editId = document.getElementById('edit-product-id').value;
+            const prodData = { title: document.getElementById('prod-title').value, sku: document.getElementById('prod-sku').value, qty: parseInt(document.getElementById('prod-qty').value) || 0, initialCount: parseInt(document.getElementById('prod-initial').value), targetReviews: parseInt(document.getElementById('prod-target').value), days: checkedDays };
             try {
-                await deleteDoc(doc(db, "top_sellers", id));
-                state.topSellers = state.topSellers.filter(t => t.id !== id);
-                renderTopSellers(); showToast('Top Seller Removed.');
-            } catch(e) { showToast('Error', 'error'); }
-        };
+                if(editId) { await updateDoc(doc(db, "products", editId), prodData); showToast('Product updated!'); } 
+                else { prodData.createdAt = serverTimestamp(); await addDoc(collection(db, "products"), prodData); state.totalProductsCount++; showToast('Product added!'); }
+                await initializeData(); document.querySelector('.close-add-modal').click();
+            } catch(e) { showToast('Error saving product', 'error'); } finally { document.getElementById('save-product-text').classList.remove('hidden'); document.getElementById('save-product-spinner').classList.add('hidden'); document.getElementById('save-product-btn').disabled = false; }
+        });
 
-        // Verification & Gamification Reward
-        window.verifyTopSeller = async (id) => {
+        window.deleteProduct = async (id) => {
+            if(!confirm('🚨 Delete this product and ALL its review records? This cannot be undone.')) return;
             try {
-                await updateDoc(doc(db, "top_sellers", id), { status: 'verified' });
-                
-                const idx = state.topSellers.findIndex(t => t.id === id);
-                if(idx > -1) state.topSellers[idx].status = 'verified';
-                
-                // Gamification: Give 20 Coins for verifying a Top Seller!
-                const earned = 20;
-                state.userProfile.coins += earned;
-                await updateDoc(doc(db, "users", auth.currentUser.uid), { coins: state.userProfile.coins });
-                updateSidebarProfileUI();
-                
-                renderTopSellers();
-                showToast(`Verified! You earned 🪙 ${earned} Coins!`, 'success');
-                confetti({ particleCount: 100, spread: 60, origin: { y: 0.7 } });
-                
-            } catch(e) { showToast('Error verifying', 'error'); }
+                await deleteDoc(doc(db, "products", id));
+                const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id)));
+                snap.forEach(async (d) => { await deleteDoc(doc(db, "daily_logs", d.id)); });
+                state.paginatedProducts = state.paginatedProducts.filter(p => p.id !== id); state.todayProducts = state.todayProducts.filter(p => p.id !== id); state.dailyLogs = state.dailyLogs.filter(l => l.productId !== id); state.totalProductsCount--;
+                renderProductsTable(); renderDashboard(); renderTodayTasks(); showToast('Product deleted.');
+            } catch(e) { showToast('Error deleting product', 'error'); }
         };
-
 
         // ==========================================
-        // 12. SHOP PURCHASING LOGIC
+        // 9. TODAY'S TASKS
         // ==========================================
-        window.buyShopItem = async (type, id, cost) => {
-            if (state.userProfile.coins < cost) { showToast("Not enough Coins! 🪙 Earn more by doing tasks.", "error"); return; }
-            if(!confirm(`Spend ${cost} Coins on this?`)) return;
+        function renderTodayTasks() {
+            const container = document.getElementById('today-tasks-container');
+            const todayStr = getCurrentDateString(); const yesterdayStr = getYesterdayDateString(); const tDay = getCurrentDayName(); const yDay = getYesterdayDayName();
+            let pendingCount = 0; const taskCards =[]; 
+            state.todayProducts.forEach(p => {
+                if(p.days.includes(yDay)) { const yComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === yesterdayStr) || {}).completedReviews || 0; if(yComp < p.targetReviews) { pendingCount++; taskCards.push({ p, completed: yComp, isComplete: false, isCarryOver: true, taskDate: yesterdayStr }); } }
+                if(p.days.includes(tDay)) { const tComp = (state.dailyLogs.find(l => l.productId === p.id && l.date === todayStr) || {}).completedReviews || 0; const isComplete = tComp >= p.targetReviews; if (!isComplete) pendingCount++; taskCards.push({ p, completed: tComp, isComplete: isComplete, isCarryOver: false, taskDate: todayStr }); }
+            });
+            const badge = document.getElementById('sidebar-today-badge'); if (pendingCount > 0) { badge.innerText = pendingCount; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); }
+            taskCards.sort((a, b) => { if (a.isComplete !== b.isComplete) return a.isComplete ? 1 : -1; if (a.isCarryOver !== b.isCarryOver) return a.isCarryOver ? -1 : 1; return 0; });
 
-            state.userProfile.coins -= cost;
+            if (taskCards.length === 0) { document.getElementById('today-empty-state').classList.remove('hidden'); container.innerHTML=''; return; }
+            document.getElementById('today-empty-state').classList.add('hidden');
+            container.innerHTML = taskCards.map(t => {
+                const borderStyle = t.isComplete ? 'border-theme opacity-60' : t.isCarryOver ? 'border-red-300 shadow-md' : 'border-brand-300 shadow-md';
+                const badgeHtml = t.isComplete ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-emerald-100 text-emerald-700">Completed</span>` : t.isCarryOver ? `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-red-100 text-red-700">⚠️ Pending from Yesterday</span>` : `<span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-extrabold bg-orange-100 text-orange-700">Action Required</span>`;
+                return `<div class="bg-card border ${borderStyle} rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all">
+                    <div class="flex-1 cursor-pointer" onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')">
+                        <div class="flex items-center gap-3 mb-1.5"><h3 class="text-xl font-bold text-txt">${t.p.title}</h3>${badgeHtml}</div>
+                        <div class="flex flex-wrap items-center gap-3 text-sm mt-2">
+                            <span class="font-mono bg-main px-2.5 py-1 rounded border border-theme text-xs text-muted">SKU: ${t.p.sku}</span>
+                            <span class="font-bold bg-brand-50 text-brand-700 px-2.5 py-1 rounded text-xs border border-brand-200">QTY: ${t.p.qty || 0}</span>
+                            <span class="font-medium bg-main px-3 py-1 rounded-full text-muted border border-theme">Progress: <strong class="text-txt">${t.completed} / ${t.p.targetReviews}</strong></span>
+                        </div>
+                    </div>
+                    <div class="shrink-0 flex gap-2"><button onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')" class="text-sm font-extrabold ${t.isComplete ? 'bg-main border border-theme text-txt' : 'bg-brand-600 text-white shadow-md'} px-6 py-3 rounded-xl">${t.isComplete ? 'Review / Edit' : 'Submit Check'}</button></div>
+                </div>`
+            }).join('');
+        }
+
+        const taskModal = document.getElementById('daily-task-modal');
+        window.openTaskModal = (id, dateStr) => {
+            const p = state.todayProducts.find(x => x.id === id); if(!p) return; activeTaskContext = p; activeTaskDate = dateStr; 
+            document.getElementById('task-modal-header').innerText = dateStr === getCurrentDateString() ? "Today's Checklist" : "Yesterday's Pending Checklist";
+            document.getElementById('task-modal-title').innerText = p.title; document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`;
+            
+            const qtyInput = document.getElementById('task-modal-qty-input'); qtyInput.value = p.qty || 0;
+            qtyInput.onchange = async (e) => { const newQty = parseInt(e.target.value) || 0; try { await updateDoc(doc(db, "products", p.id), { qty: newQty }); p.qty = newQty; const pInAll = state.paginatedProducts.find(x => x.id === id); if(pInAll) pInAll.qty = newQty; renderTodayTasks(); renderProductsTable(); showToast('QTY Auto-Saved!'); } catch(err) { showToast('Error saving QTY', 'error'); } };
+
+            const log = state.dailyLogs.find(l => l.productId === p.id && l.date === dateStr); const completed = log ? log.completedReviews : 0;
+            const resetBtn = document.getElementById('reset-task-btn'); if(completed > 0) { resetBtn.classList.remove('hidden'); resetBtn.onclick = () => window.resetTask(p.id, dateStr); } else { resetBtn.classList.add('hidden'); }
+
+            let cbHTML = '';
+            for(let i=1; i<=p.targetReviews; i++) {
+                const isChecked = i <= completed ? 'checked' : ''; const styleActive = isChecked ? 'bg-emerald-50 border-emerald-200' : 'bg-card border-theme hover:bg-main';
+                cbHTML += `<label class="flex items-center space-x-4 p-4 rounded-xl border ${styleActive} cursor-pointer"><input type="checkbox" class="task-checkbox rounded text-emerald-500 w-6 h-6 border-theme bg-main" ${isChecked}><span class="text-txt font-bold">Review Setup Task #${i}</span></label>`;
+            }
+            document.getElementById('task-checkboxes-container').innerHTML = cbHTML; taskModal.classList.remove('hidden-view'); setTimeout(() => taskModal.classList.add('modal-active'), 10);
+        };
+        document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { taskModal.classList.remove('modal-active'); setTimeout(() => taskModal.classList.add('hidden-view'), 300); }));
+
+        document.getElementById('save-task-btn').addEventListener('click', async () => {
+            if(!activeTaskContext) return;
+            document.getElementById('save-task-text').classList.add('hidden'); document.getElementById('save-task-spinner').classList.remove('hidden'); document.getElementById('save-task-btn').disabled = true;
+            const checkedCount = document.querySelectorAll('.task-checkbox:checked').length; const logId = `${activeTaskContext.id}_${activeTaskDate}`;
+            const logData = { productId: activeTaskContext.id, productTitle: activeTaskContext.title, date: activeTaskDate, completedReviews: checkedCount, targetReviews: activeTaskContext.targetReviews, timestamp: serverTimestamp() };
+            const prevLog = state.dailyLogs.find(l => l.id === logId); const diff = checkedCount - (prevLog ? prevLog.completedReviews : 0);
+
             try {
-                const updateData = { coins: state.userProfile.coins };
-                if (type === 'theme') { state.userProfile.unlockedThemes.push(id); updateData.unlockedThemes = state.userProfile.unlockedThemes; }
-                else if (type === 'badge') { state.userProfile.badges.push(id); state.userProfile.activeBadge = id; updateData.badges = state.userProfile.badges; updateData.activeBadge = id; }
-                else if (type === 'avatar') { state.userProfile.unlockedAvatars.push(id); state.userProfile.activeAvatar = id; updateData.unlockedAvatars = state.userProfile.unlockedAvatars; updateData.activeAvatar = id; }
-                else if (type === 'namecolor') { state.userProfile.unlockedNameColors.push(id); state.userProfile.activeNameColor = id; updateData.unlockedNameColors = state.userProfile.unlockedNameColors; updateData.activeNameColor = id; }
+                await setDoc(doc(db, "daily_logs", logId), logData);
+                const existIdx = state.dailyLogs.findIndex(l => l.id === logId); if(existIdx > -1) state.dailyLogs[existIdx] = { id: logId, ...logData }; else state.dailyLogs.push({ id: logId, ...logData });
+                if(diff !== 0) { const newQty = Math.max(0, (parseInt(activeTaskContext.qty) || 0) - diff); await updateDoc(doc(db, "products", activeTaskContext.id), { qty: newQty }); activeTaskContext.qty = newQty; const pInAll = state.paginatedProducts.find(x => x.id === activeTaskContext.id); if(pInAll) pInAll.qty = newQty; }
+                document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable();
+                if(checkedCount === activeTaskContext.targetReviews && document.querySelectorAll('#today-tasks-container .bg-orange-100').length <= 1) { const colors =['#10b981', '#3b82f6', '#f59e0b']; confetti({ particleCount: 50, spread: 60, colors }); }
+            } catch(e) { showToast('Error saving progress', 'error'); } finally { document.getElementById('save-task-text').classList.remove('hidden'); document.getElementById('save-task-spinner').classList.add('hidden'); document.getElementById('save-task-btn').disabled = false; }
+        });
 
-                await updateDoc(doc(db, "users", auth.currentUser.uid), updateData);
-                
-                if(type === 'theme') { updateThemeDropdown(); applyTheme(id); }
-                updateSidebarProfileUI(); renderShop();
-                confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
-                showToast("Purchase Successful! 🎉", "success");
-            } catch(e) { state.userProfile.coins += cost; showToast("Error buying item", "error"); }
+        window.resetTask = async (productId, dateStr) => {
+            if(!confirm("Clear progress and restore deducted QTY back to stock?")) return;
+            const logId = `${productId}_${dateStr}`;
+            try {
+                const log = state.dailyLogs.find(l => l.id === logId);
+                if(log) { const p = state.todayProducts.find(x => x.id === productId); if(p) { const restoredQty = (parseInt(p.qty) || 0) + log.completedReviews; await updateDoc(doc(db, "products", productId), { qty: restoredQty }); p.qty = restoredQty; const pInAll = state.paginatedProducts.find(x => x.id === productId); if(pInAll) pInAll.qty = restoredQty; } }
+                await deleteDoc(doc(db, "daily_logs", logId)); state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
+                document.querySelector('.close-task-modal').click(); renderTodayTasks(); renderDashboard(); renderProductsTable(); showToast('Progress cleared & QTY restored.');
+            } catch(e) { showToast('Error clearing progress', 'error'); }
         };
 
-        window.equipShopItem = async (type, id) => {
-            const updateData = {};
-            if(type === 'badge') { state.userProfile.activeBadge = id; updateData.activeBadge = id; }
-            else if (type === 'avatar') { state.userProfile.activeAvatar = id; updateData.activeAvatar = id; }
-            else if (type === 'namecolor') { state.userProfile.activeNameColor = id; updateData.activeNameColor = id; }
+        // ==========================================
+        // 10. HISTORY VIEW
+        // ==========================================
+        document.getElementById('history-date-picker').addEventListener('change', async (e) => {
+            const list = document.getElementById('history-list'); list.innerHTML = `<li class="p-12 text-center text-muted">Loading...</li>`;
+            try {
+                const snap = await getDocs(query(collection(db, "daily_logs"), where("date", "==", e.target.value)));
+                if(snap.empty) { list.innerHTML = `<li class="p-12 text-center text-muted">No reviews completed on this date.</li>`; return; }
+                list.innerHTML = snap.docs.map(doc => {
+                    const d = doc.data(); const badgeColor = d.completedReviews >= d.targetReviews ? 'bg-emerald-100 text-emerald-800' : 'bg-orange-100 text-orange-800';
+                    return `<li class="p-6 flex flex-col md:flex-row md:items-center justify-between hover:bg-theme border-b border-theme last:border-0 gap-4 transition">
+                        <div><p class="font-bold text-txt text-lg">${d.productTitle}</p><p class="text-xs text-muted mt-1 font-mono">Date: ${d.date}</p></div>
+                        <div class="flex items-center self-end md:self-auto"><span class="${badgeColor} px-4 py-1.5 rounded-full text-sm font-black">${d.completedReviews} / ${d.targetReviews}</span><button onclick="window.deleteLog('${doc.id}')" class="text-xs bg-red-50 text-red-600 px-3.5 py-1.5 rounded-lg hover:bg-red-100 transition ml-4 font-bold border border-red-200">Remove Record</button></div>
+                    </li>`;
+                }).join('');
+            } catch(e) { list.innerHTML = `<li class="p-12 text-center text-red-500">Error loading history.</li>`; }
+        });
 
-            try { await updateDoc(doc(db, "users", auth.currentUser.uid), updateData); updateSidebarProfileUI(); renderShop(); showToast("Equipped successfully!", "success"); } 
-            catch(e) { showToast("Error equipping", "error"); }
+        window.deleteLog = async (logId) => {
+            if(!confirm('🚨 Delete this review record? (Does NOT restore QTY, use Clear Log in Today tab for that).')) return;
+            try {
+                await deleteDoc(doc(db, "daily_logs", logId)); state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId); 
+                showToast('Log deleted.'); document.getElementById('history-date-picker').dispatchEvent(new Event('change')); renderDashboard(); 
+                if(logId.includes(getCurrentDateString()) || logId.includes(getYesterdayDateString())) renderTodayTasks(); 
+            } catch(e) { showToast('Error deleting log', 'error'); }
         };
 
+        // ==========================================
+        // 11. STATS MODAL
+        // ==========================================
+        const statsModal = document.getElementById('stats-modal');
+        window.viewProductStats = async (id) => {
+            const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return;
+            document.getElementById('stats-modal-title').innerText = p.title; document.getElementById('stats-target').innerText = p.targetReviews; document.getElementById('stats-qty').innerText = p.qty || 0; document.getElementById('stats-total-completed').innerText = "...";
+            statsModal.classList.remove('hidden-view'); setTimeout(() => statsModal.classList.add('modal-active'), 10);
+            try {
+                const snap = await getDocs(query(collection(db, "daily_logs"), where("productId", "==", id)));
+                const sumReviews = snap.docs.reduce((a, c) => a + (c.data().completedReviews || 0), 0);
+                document.getElementById('stats-total-completed').innerText = sumReviews + parseInt(p.initialCount || 0);
+            } catch (e) { document.getElementById('stats-total-completed').innerText = "Err"; }
+        };
+        document.querySelectorAll('.close-stats-modal').forEach(b => b.addEventListener('click', () => { statsModal.classList.remove('modal-active'); setTimeout(() => statsModal.classList.add('hidden-view'), 300); }));
     </script>
 </body>
 </html>
