@@ -1,0 +1,490 @@
+/* ==========================================
+   🛒 AMAZON.COM PROFESSIONAL THEME
+   Clean, Professional, E-commerce Giant
+   ========================================== */
+
+[data-theme="amazon"] {
+    /* Amazon's Signature Colors */
+    --brand-50: #fff8f0;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-500: #ff9900;  /* Amazon Orange */
+    --brand-600: #ff8800;
+    --brand-700: #e67700;
+    --brand-800: #cc6600;
+    --brand-900: #b35500;
+    
+    /* Amazon's Clean Background */
+    --bg-main: #eaeded;      /* Light gray background */
+    --bg-card: #ffffff;      /* Pure white cards */
+    --border-col: #d5d9d9;   /* Subtle borders */
+    --text-main: #0f1111;    /* Almost black text */
+    --text-muted: #565959;   /* Gray text */
+    
+    /* Additional Amazon Colors */
+    --amazon-blue: #146eb4;
+    --amazon-dark: #232f3e;  /* Dark header color */
+    --amazon-light-blue: #f3f3f3;
+}
+
+/* ==========================================
+   AMAZON THEME - HEADER STYLING
+   ========================================== */
+
+[data-theme="amazon"] aside {
+    background: var(--amazon-dark);
+    border-right: none;
+}
+
+[data-theme="amazon"] aside .text-brand-600 {
+    color: var(--brand-500) !important;
+}
+
+[data-theme="amazon"] .nav-btn {
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+[data-theme="amazon"] .nav-btn:hover {
+    background: rgba(255, 153, 0, 0.1);
+    transform: translateX(0);
+}
+
+[data-theme="amazon"] .nav-btn.bg-brand-50 {
+    background: rgba(255, 153, 0, 0.15) !important;
+    border-left: 3px solid var(--brand-500);
+}
+
+/* ==========================================
+   AMAZON THEME - BUTTONS
+   ========================================== */
+
+[data-theme="amazon"] button.bg-brand-600,
+[data-theme="amazon"] .bg-brand-600 {
+    background: linear-gradient(to bottom, #f7dfa5, #f0c14b) !important;
+    border: 1px solid #a88734;
+    color: #111 !important;
+    box-shadow: 0 1px 0 rgba(255,255,255,.4) inset;
+}
+
+[data-theme="amazon"] button.bg-brand-600:hover,
+[data-theme="amazon"] .bg-brand-600:hover {
+    background: linear-gradient(to bottom, #f5d78e, #edb933) !important;
+}
+
+[data-theme="amazon"] button.bg-brand-600:active {
+    background: linear-gradient(to bottom, #f0c14b, #f7dfa5) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+}
+
+/* Secondary Buttons */
+[data-theme="amazon"] button.bg-main,
+[data-theme="amazon"] button.border-theme {
+    background: #fff;
+    border: 1px solid #d5d9d9;
+    box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+}
+
+[data-theme="amazon"] button.bg-main:hover {
+    background: #f7fafa;
+    border-color: #c7c7c7;
+}
+
+/* ==========================================
+   AMAZON THEME - CARDS & CONTAINERS
+   ========================================== */
+
+[data-theme="amazon"] .bg-card {
+    background: #ffffff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+[data-theme="amazon"] .bg-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,.12);
+}
+
+/* ==========================================
+   AMAZON THEME - STATS CARDS
+   ========================================== */
+
+[data-theme="amazon"] .bg-brand-600.p-6.rounded-2xl {
+    background: linear-gradient(135deg, #ff9900 0%, #ff8800 100%) !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+}
+
+[data-theme="amazon"] .bg-emerald-500 {
+    background: linear-gradient(135deg, #067d62 0%, #05a081 100%) !important;
+    box-shadow: 0 4px 12px rgba(6, 125, 98, 0.3);
+}
+
+[data-theme="amazon"] .bg-orange-500 {
+    background: linear-gradient(135deg, #c7511f 0%, #e47911 100%) !important;
+    box-shadow: 0 4px 12px rgba(199, 81, 31, 0.3);
+}
+
+/* ==========================================
+   AMAZON THEME - TABLE STYLING
+   ========================================== */
+
+[data-theme="amazon"] table thead {
+    background: #f3f3f3;
+    border-bottom: 2px solid #d5d9d9;
+}
+
+[data-theme="amazon"] table tbody tr {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+[data-theme="amazon"] table tbody tr:hover {
+    background: #f7fafa;
+}
+
+/* ==========================================
+   AMAZON THEME - INPUTS & FORMS
+   ========================================== */
+
+[data-theme="amazon"] input,
+[data-theme="amazon"] select,
+[data-theme="amazon"] textarea {
+    border: 1px solid #888c8c;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(15,17,17,.15) inset;
+}
+
+[data-theme="amazon"] input:focus,
+[data-theme="amazon"] select:focus,
+[data-theme="amazon"] textarea:focus {
+    border-color: #e77600;
+    box-shadow: 0 0 3px 2px rgba(228,121,17,.5);
+    outline: none;
+}
+
+/* ==========================================
+   AMAZON THEME - BADGES & TAGS
+   ========================================== */
+
+[data-theme="amazon"] .bg-brand-50 {
+    background: #fff8f0 !important;
+    border: 1px solid #ffd699;
+}
+
+[data-theme="amazon"] .text-brand-700 {
+    color: #cc6600 !important;
+}
+
+[data-theme="amazon"] .bg-theme {
+    background: #f3f3f3 !important;
+}
+
+/* ==========================================
+   AMAZON THEME - MODALS
+   ========================================== */
+
+[data-theme="amazon"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="amazon"] .modal-content {
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.3);
+}
+
+/* ==========================================
+   AMAZON THEME - TOAST NOTIFICATIONS
+   ========================================== */
+
+[data-theme="amazon"] #toast {
+    border-radius: 8px;
+    border: 1px solid #d5d9d9;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+   AMAZON THEME - SPECIAL EFFECTS
+   ========================================== */
+
+/* Amazon's signature hover effect */
+[data-theme="amazon"] .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.15);
+}
+
+/* Amazon's focus ring */
+[data-theme="amazon"] *:focus-visible {
+    outline: 2px solid #e77600;
+    outline-offset: 2px;
+}
+
+/* Amazon's link style */
+[data-theme="amazon"] a {
+    color: #007185;
+    text-decoration: none;
+}
+
+[data-theme="amazon"] a:hover {
+    color: #c7511f;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   AMAZON THEME - SCROLLBAR
+   ========================================== */
+
+[data-theme="amazon"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-theme="amazon"] ::-webkit-scrollbar-track {
+    background: #f3f3f3;
+}
+
+[data-theme="amazon"] ::-webkit-scrollbar-thumb {
+    background: #888c8c;
+    border-radius: 5px;
+}
+
+[data-theme="amazon"] ::-webkit-scrollbar-thumb:hover {
+    background: #565959;
+}
+
+/* ==========================================
+   AMAZON THEME - PRICING STYLE
+   ========================================== */
+
+[data-theme="amazon"] .text-brand-600 {
+    color: #b12704 !important;
+    font-weight: 600;
+}
+
+/* ==========================================
+   AMAZON THEME - SIDEBAR USER INFO
+   ========================================== */
+
+[data-theme="amazon"] aside .bg-main {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="amazon"] aside .text-txt {
+    color: #ffffff !important;
+}
+
+[data-theme="amazon"] aside .text-muted {
+    color: #cccccc !important;
+}
+
+/* ==========================================
+   AMAZON THEME - LOGOUT BUTTON
+   ========================================== */
+
+[data-theme="amazon"] #logout-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+}
+
+[data-theme="amazon"] #logout-btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+/* ==========================================
+   AMAZON THEME - THEME SELECTOR
+   ========================================== */
+
+[data-theme="amazon"] #theme-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+[data-theme="amazon"] #theme-selector option {
+    background: #232f3e;
+    color: #ffffff;
+}
+
+/* ==========================================
+   AMAZON THEME - DASHBOARD ENHANCEMENTS
+   ========================================== */
+
+[data-theme="amazon"] .bg-main {
+    background: #eaeded;
+}
+
+/* Chart container */
+[data-theme="amazon"] canvas {
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+/* ==========================================
+   AMAZON THEME - PRODUCT CARDS
+   ========================================== */
+
+[data-theme="amazon"] tbody tr {
+    transition: all 0.2s ease;
+}
+
+[data-theme="amazon"] tbody tr:hover {
+    background: #f7fafa;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   AMAZON THEME - TODAY'S TASKS
+   ========================================== */
+
+[data-theme="amazon"] .border-brand-300 {
+    border-color: #ffd699 !important;
+}
+
+[data-theme="amazon"] .border-red-300 {
+    border-color: #f1c6c6 !important;
+}
+
+[data-theme="amazon"] .bg-emerald-100 {
+    background: #d1f2eb !important;
+}
+
+[data-theme="amazon"] .text-emerald-700 {
+    color: #067d62 !important;
+}
+
+[data-theme="amazon"] .bg-red-100 {
+    background: #f9e7e7 !important;
+}
+
+[data-theme="amazon"] .text-red-700 {
+    color: #c7511f !important;
+}
+
+[data-theme="amazon"] .bg-orange-100 {
+    background: #fff3e6 !important;
+}
+
+[data-theme="amazon"] .text-orange-700 {
+    color: #e47911 !important;
+}
+
+/* ==========================================
+   AMAZON THEME - PROFESSIONAL TOUCHES
+   ========================================== */
+
+/* Add subtle shadow to main content */
+[data-theme="amazon"] main {
+    box-shadow: -2px 0 8px rgba(0,0,0,.05);
+}
+
+/* Professional border radius */
+[data-theme="amazon"] .rounded-lg {
+    border-radius: 8px !important;
+}
+
+[data-theme="amazon"] .rounded-xl {
+    border-radius: 8px !important;
+}
+
+[data-theme="amazon"] .rounded-2xl {
+    border-radius: 8px !important;
+}
+
+/* Amazon's signature font weight */
+[data-theme="amazon"] h1,
+[data-theme="amazon"] h2,
+[data-theme="amazon"] h3 {
+    font-weight: 600;
+}
+
+/* ==========================================
+   AMAZON THEME - RESPONSIVE ADJUSTMENTS
+   ========================================== */
+
+@media (max-width: 768px) {
+    [data-theme="amazon"] aside {
+        background: #232f3e;
+    }
+}
+
+/* ==========================================
+   AMAZON THEME - PRINT STYLES
+   ========================================== */
+
+@media print {
+    [data-theme="amazon"] {
+        --bg-main: #ffffff;
+        --bg-card: #ffffff;
+        --text-main: #000000;
+    }
+}
+
+/* ==========================================
+   AMAZON THEME - ACCESSIBILITY
+   ========================================== */
+
+[data-theme="amazon"] *:focus-visible {
+    outline: 2px solid #e77600;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    [data-theme="amazon"] {
+        --border-col: #000000;
+        --text-main: #000000;
+    }
+}
+
+/* ==========================================
+   AMAZON THEME - ANIMATIONS
+   ========================================== */
+
+[data-theme="amazon"] button {
+    transition: all 0.15s ease;
+}
+
+[data-theme="amazon"] .bg-card {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* ==========================================
+   AMAZON PRIME BADGE STYLE (BONUS)
+   ========================================== */
+
+[data-theme="amazon"] .badge-prime {
+    background: linear-gradient(135deg, #00a8e1 0%, #0066c0 100%);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   AMAZON THEME - SPECIAL INDICATORS
+   ========================================== */
+
+/* Deal badge */
+[data-theme="amazon"] .deal-badge {
+    background: #cc0c39;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Best seller badge */
+[data-theme="amazon"] .bestseller-badge {
+    background: #ff9900;
+    color: #0f1111;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 700;
+}

@@ -8,17 +8,27 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="theme-amazon.css">
+    <link rel="stylesheet" href="theme-ecommerce.css">
+    <link rel="stylesheet" href="theme-hacker.css">
+    <link rel="stylesheet" href="styles.css">
+    
     <!-- Tailwind CSS, Chart.js, Confetti -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- Dynamic Theme Engine -->
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans:['Inter', 'sans-serif'], urdu:['Noto Sans Arabic', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        urdu: ['Noto Sans Arabic', 'sans-serif'] 
+                    },
                     colors: {
                         main: 'var(--bg-main)',
                         card: 'var(--bg-card)',
@@ -26,52 +36,20 @@
                         txt: 'var(--text-main)',
                         muted: 'var(--text-muted)',
                         brand: {
-                            50: 'var(--brand-50)', 100: 'var(--brand-100)', 200: 'var(--brand-200)',
-                            500: 'var(--brand-500)', 600: 'var(--brand-600)', 700: 'var(--brand-700)',
-                            800: 'var(--brand-800)', 900: 'var(--brand-900)'
+                            50: 'var(--brand-50)', 
+                            100: 'var(--brand-100)', 
+                            200: 'var(--brand-200)',
+                            500: 'var(--brand-500)', 
+                            600: 'var(--brand-600)', 
+                            700: 'var(--brand-700)',
+                            800: 'var(--brand-800)', 
+                            900: 'var(--brand-900)'
                         }
                     }
                 }
             }
         }
     </script>
-
-    <style>
-        :root {
-            /* LIGHT THEME (Default) */
-            --brand-50: #eff6ff; --brand-100: #dbeafe; --brand-200: #bfdbfe; --brand-500: #3b82f6; --brand-600: #2563eb; --brand-700: #1d4ed8; --brand-800: #1e40af; --brand-900: #1e3a8a;
-            --bg-main: #f8fafc; --bg-card: #ffffff; --border-col: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b;
-        }
-        [data-theme="dark"] {
-            /* DARK THEME */
-            --brand-50: #1e1e2f; --brand-100: #2a2a40; --brand-200: #3b3b5c; --brand-500: #6366f1; --brand-600: #4f46e5; --brand-700: #4338ca; --brand-800: #3730a3; --brand-900: #312e81;
-            --bg-main: #0f172a; --bg-card: #1e293b; --border-col: #334155; --text-main: #f8fafc; --text-muted: #94a3b8;
-        }[data-theme="spiderman"] {
-            /* SPIDER-MAN (Red & Dark Blue) */
-            --brand-50: #fef2f2; --brand-100: #fee2e2; --brand-200: #fecaca; --brand-500: #ef4444; --brand-600: #dc2626; --brand-700: #b91c1c; --brand-800: #991b1b; --brand-900: #7f1d1d;
-            --bg-main: #020617; --bg-card: #172554; --border-col: #1e3a8a; --text-main: #f8fafc; --text-muted: #93c5fd;
-        }
-        [data-theme="shopify"] {
-            /* SHOPIFY (Green & Clean Light) */
-            --brand-50: #f0fdf4; --brand-100: #dcfce7; --brand-200: #bbf7d0; --brand-500: #22c55e; --brand-600: #16a34a; --brand-700: #15803d; --brand-800: #166534; --brand-900: #14532d;
-            --bg-main: #f4f6f8; --bg-card: #ffffff; --border-col: #dfe3e8; --text-main: #212b36; --text-muted: #637381;
-        }
-        [data-theme="batman"] {
-            /* BATMAN (Yellow & True Black) */
-            --brand-50: #fefce8; --brand-100: #fef9c3; --brand-200: #fef08a; --brand-500: #eab308; --brand-600: #ca8a04; --brand-700: #a16207; --brand-800: #854d0e; --brand-900: #713f12;
-            --bg-main: #000000; --bg-card: #171717; --border-col: #262626; --text-main: #e5e5e5; --text-muted: #a3a3a3;
-        }
-
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        .urdu-text { font-family: 'Noto Sans Arabic', sans-serif; }
-        .modal-overlay { transition: opacity 0.3s ease; }
-        .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; transform: scale(0.95); opacity: 0; }
-        .modal-active .modal-content { transform: scale(1); opacity: 1; }
-        .hidden-view { display: none !important; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-col); border-radius: 4px; }
-    </style>
 </head>
 <body class="bg-main text-txt h-screen overflow-hidden flex selection:bg-brand-200 selection:text-brand-900">
 
@@ -129,6 +107,9 @@
                 <button data-target="products" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> Products
                 </button>
+                <button data-target="featured" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg> Featured
+                </button>
                 <button data-target="today" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Today's Tasks
@@ -145,11 +126,47 @@
                 <div class="relative w-full">
                     <label class="text-xs font-bold text-muted uppercase tracking-wider mb-1 block px-1">🎨 Theme</label>
                     <select id="theme-selector" class="w-full bg-main border border-theme text-txt text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
-                        <option value="light">☀️ Light Theme</option>
-                        <option value="dark">🌙 Dark Theme</option>
-                        <option value="spiderman">🕷️ Spider-Man</option>
-                        <option value="shopify">🛍️ Shopify Green</option>
-                        <option value="batman">🦇 Batman</option>
+                        <optgroup label="🌟 Classic Themes">
+                            <option value="light">☀️ Light Theme</option>
+                            <option value="dark">🌙 Dark Theme</option>
+                            <option value="midnight">🌃 Midnight Blue</option>
+                        </optgroup>
+                        <optgroup label="🛒 E-Commerce Professional">
+                            <option value="amazon">📦 Amazon Style</option>
+                            <option value="flipkart">🛍️ Flipkart Blue</option>
+                            <option value="alibaba">🟠 Alibaba Orange</option>
+                            <option value="ebay">🔴 eBay Classic</option>
+                            <option value="walmart">💙 Walmart Blue</option>
+                            <option value="shopee">🧡 Shopee Orange</option>
+                            <option value="lazada">💜 Lazada Purple</option>
+                            <option value="etsy">🎨 Etsy Handmade</option>
+                            <option value="shopify">💚 Shopify Green</option>
+                        </optgroup>
+                        <optgroup label="🎬 Pop Culture">
+                            <option value="spiderman">🕷️ Spider-Man</option>
+                            <option value="batman">🦇 Batman</option>
+                            <option value="cyberpunk">🤖 Cyberpunk</option>
+                            <option value="matrix">💚 Matrix</option>
+                            <option value="dracula">🧛 Dracula</option>
+                            <option value="hacker">💻 Hacker Terminal</option>
+                        </optgroup>
+                        <optgroup label="🌈 Nature & Colors">
+                            <option value="sakura">🌸 Sakura Blossom</option>
+                            <option value="ocean">🌊 Ocean Breeze</option>
+                            <option value="forest">🌲 Forest Green</option>
+                            <option value="sunset">🌅 Sunset Glow</option>
+                            <option value="mint">🍃 Mint Fresh</option>
+                            <option value="nord">❄️ Nord Arctic</option>
+                        </optgroup>
+                        <optgroup label="💼 Professional">
+                            <option value="coffee">☕ Coffee Brown</option>
+                            <option value="monokai">💻 Monokai Pro</option>
+                        </optgroup>
+                        <optgroup label="✨ Luxury & Elegant">
+                            <option value="rosegold">🌹 Rose Gold</option>
+                            <option value="gold">👑 Gold Luxury</option>
+                            <option value="purple">💜 Purple Haze</option>
+                        </optgroup>
                     </select>
                 </div>
                 <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-500 hover:text-white transition-colors">
@@ -219,8 +236,21 @@
                             <option value="Sunday">Sunday</option>
                         </select>
 
-                        <input type="text" id="search-product" placeholder="Search title..." class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm">
-                        <button id="btn-search" class="bg-theme border border-theme text-txt px-4 py-2 rounded-lg hover:bg-main transition font-medium text-sm shadow-sm">Search</button>
+                        <!-- Search Type Selector -->
+                        <select id="search-type" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-medium shadow-sm">
+                            <option value="title">🔍 Search by Title</option>
+                            <option value="sku">📦 Search by SKU</option>
+                            <option value="both">🔎 Search Both</option>
+                        </select>
+
+                        <input type="text" id="search-product" placeholder="Search title or SKU..." class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm">
+                        <button id="btn-search" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition font-medium text-sm shadow-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            Search
+                        </button>
+                        <button id="btn-clear-search" class="bg-theme border border-theme text-txt px-4 py-2 rounded-lg hover:bg-main transition font-medium text-sm shadow-sm hidden">
+                            Clear
+                        </button>
                         
                         <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add
@@ -250,6 +280,31 @@
                         <div class="p-4 text-center bg-main border-t border-theme">
                             <button id="load-more-btn" class="text-brand-600 font-semibold hover:underline hidden">Load More</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products View -->
+            <div id="view-featured" class="view-section hidden-view flex-1 flex flex-col h-full">
+                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-txt">⭐ Featured Products</h1>
+                        <p class="text-sm text-muted mt-1">Showcase products with custom positions</p>
+                    </div>
+                    <button id="open-add-featured-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add Featured
+                    </button>
+                </div>
+                <div class="p-8 flex-1 overflow-y-auto">
+                    <div id="featured-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Featured products will be injected here -->
+                    </div>
+                    <div id="featured-empty-state" class="p-16 text-center bg-card border border-theme rounded-2xl shadow-sm">
+                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-100 text-brand-600 mb-5">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-txt">No Featured Products Yet</h3>
+                        <p class="text-muted mt-2 text-base">Add your first featured product to showcase it here!</p>
                     </div>
                 </div>
             </div>
@@ -331,6 +386,19 @@
                     </div>
                     
                     <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-semibold text-txt">Additional SKUs (Optional)</label>
+                            <button type="button" id="add-sku-btn" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                Add More SKU
+                            </button>
+                        </div>
+                        <div id="additional-skus-container" class="space-y-2">
+                            <!-- Additional SKU inputs will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div>
                         <label class="block text-sm font-semibold text-txt mb-2">Schedule Days</label>
                         <div class="grid grid-cols-2 gap-3" id="days-checkbox-container"></div>
                         <p id="days-error" class="text-red-500 text-xs mt-2 hidden font-medium">Please select at least one day.</p>
@@ -384,6 +452,44 @@
                 <button type="button" id="save-task-btn" class="w-full px-4 py-3.5 text-base font-extrabold text-white bg-emerald-500 hover:bg-emerald-600 shadow-lg rounded-xl transition flex items-center justify-center gap-2">
                     <span id="save-task-text">Save Progress</span>
                     <svg id="save-task-spinner" class="animate-spin hidden h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Featured Product Modal -->
+    <div id="add-featured-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-md modal-content flex flex-col border border-theme">
+            <div class="p-5 border-b border-theme flex justify-between items-center bg-main rounded-t-2xl shrink-0">
+                <h3 class="text-lg font-bold text-txt">⭐ Add Featured Product</h3>
+                <button class="close-featured-modal text-muted hover:text-red-500 transition-colors bg-card rounded-full p-1 border border-theme">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <form id="featured-form" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-1">Product Title</label>
+                        <input type="text" id="featured-title" required placeholder="e.g. Premium Wireless Earbuds" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-1">SKU</label>
+                        <input type="text" id="featured-sku" required placeholder="SKU-123" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition font-mono text-sm">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-1">Display Position</label>
+                        <input type="number" id="featured-position" required min="1" value="1" placeholder="1" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition font-bold text-brand-600">
+                        <p class="text-xs text-muted mt-1">Lower numbers appear first</p>
+                    </div>
+                </form>
+            </div>
+            <div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-2xl shrink-0 bg-main">
+                <button type="button" class="close-featured-modal px-5 py-2.5 text-sm font-bold text-muted hover:bg-theme rounded-lg transition">Cancel</button>
+                <button type="button" id="save-featured-btn" class="px-6 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-md transition flex items-center gap-2">
+                    <span id="save-featured-text">Add Featured</span>
+                    <svg id="save-featured-spinner" class="animate-spin hidden h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </button>
             </div>
         </div>
@@ -447,7 +553,7 @@
         // 2. GLOBAL STATE & CONSTANTS
         // ==========================================
         let state = { 
-            todayProducts:[], paginatedProducts:[], dailyLogs:[], 
+            todayProducts:[], paginatedProducts:[], dailyLogs:[], featuredProducts:[],
             lastVisibleDoc: null, totalProductsCount: 0, 
             searchQuery: "", filterDay: "" 
         };
@@ -666,10 +772,24 @@
             document.getElementById('products-empty-state').classList.toggle('hidden', state.paginatedProducts.length > 0);
             document.getElementById('products-table-body').innerHTML = state.paginatedProducts.map(p => {
                 const daysStr = p.days.map(d => `<span class="inline-block bg-theme text-xs px-2.5 py-1 rounded mr-1.5 mb-1.5 text-txt">${d.substring(0,3)}</span>`).join('');
+                
+                // Handle multiple SKUs display
+                const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+                const skuDisplay = skus.length > 1 
+                    ? `<div class="space-y-1">
+                        ${skus.map((sku, idx) => `
+                            <div class="font-mono text-xs bg-theme px-2 py-1 rounded inline-block text-muted mr-1">
+                                ${sku}${idx === 0 ? ' <span class="text-brand-600">★</span>' : ''}
+                            </div>
+                        `).join('')}
+                        <div class="text-[10px] text-muted mt-1">${skus.length} SKUs</div>
+                       </div>`
+                    : `<div class="font-mono text-xs bg-theme px-2 py-1 rounded inline-block text-muted">${skus[0]}</div>`;
+                
                 return `
                     <tr class="border-b border-theme hover:bg-theme/30 transition-colors">
                         <td class="p-4"><div class="font-bold text-txt text-base">${p.title}</div></td>
-                        <td class="p-4"><div class="font-mono text-xs bg-theme px-2 py-1 rounded inline-block text-muted">${p.sku}</div></td>
+                        <td class="p-4">${skuDisplay}</td>
                         <td class="p-4 text-center"><span class="font-bold text-brand-600">${p.qty || 0}</span></td>
                         <td class="p-4 max-w-[200px]">${daysStr}</td>
                         <td class="p-4 text-center"><span class="inline-flex items-center justify-center bg-brand-50 text-brand-700 w-8 h-8 rounded-full font-bold border border-brand-100">${p.targetReviews}</span></td>
@@ -684,7 +804,112 @@
         }
 
         document.getElementById('load-more-btn').addEventListener('click', () => fetchPaginatedProducts());
-        document.getElementById('btn-search').addEventListener('click', () => { state.searchQuery = document.getElementById('search-product').value.trim(); fetchPaginatedProducts(true); });
+        
+        // Improved Search System
+        let searchType = 'title';
+        
+        document.getElementById('search-type').addEventListener('change', (e) => {
+            searchType = e.target.value;
+            const searchInput = document.getElementById('search-product');
+            if (searchType === 'title') {
+                searchInput.placeholder = 'Search by title...';
+            } else if (searchType === 'sku') {
+                searchInput.placeholder = 'Search by SKU...';
+            } else {
+                searchInput.placeholder = 'Search title or SKU...';
+            }
+        });
+        
+        document.getElementById('btn-search').addEventListener('click', () => { 
+            const searchQuery = document.getElementById('search-product').value.trim();
+            if (!searchQuery) {
+                showToast('Please enter search term', 'error');
+                return;
+            }
+            
+            state.searchQuery = searchQuery;
+            state.searchType = searchType;
+            
+            // Show clear button
+            document.getElementById('btn-clear-search').classList.remove('hidden');
+            
+            performSearch();
+        });
+        
+        // Clear search
+        document.getElementById('btn-clear-search').addEventListener('click', () => {
+            document.getElementById('search-product').value = '';
+            state.searchQuery = '';
+            state.searchType = 'title';
+            document.getElementById('btn-clear-search').classList.add('hidden');
+            fetchPaginatedProducts(true);
+        });
+        
+        // Enter key to search
+        document.getElementById('search-product').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('btn-search').click();
+            }
+        });
+        
+        async function performSearch() {
+            try {
+                const searchQuery = state.searchQuery.toLowerCase();
+                const searchType = state.searchType || 'title';
+                
+                let results = [];
+                
+                if (searchType === 'title') {
+                    // Search by title
+                    const snap = await getDocs(query(
+                        collection(db, "products"),
+                        where("title", ">=", state.searchQuery),
+                        where("title", "<=", state.searchQuery + '\uf8ff'),
+                        limit(20)
+                    ));
+                    results = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                } else if (searchType === 'sku') {
+                    // Search by SKU - fetch all and filter locally
+                    const snap = await getDocs(collection(db, "products"));
+                    const allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    
+                    results = allProducts.filter(p => {
+                        const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+                        return skus.some(sku => sku.toLowerCase().includes(searchQuery));
+                    });
+                } else {
+                    // Search both title and SKU
+                    const snap = await getDocs(collection(db, "products"));
+                    const allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    
+                    results = allProducts.filter(p => {
+                        const titleMatch = p.title.toLowerCase().includes(searchQuery);
+                        const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+                        const skuMatch = skus.some(sku => sku.toLowerCase().includes(searchQuery));
+                        return titleMatch || skuMatch;
+                    });
+                }
+                
+                // Apply day filter if set
+                if (state.filterDay) {
+                    results = results.filter(p => p.days && p.days.includes(state.filterDay));
+                }
+                
+                state.paginatedProducts = results;
+                renderProductsTable();
+                
+                if (results.length === 0) {
+                    showToast('No products found', 'error');
+                } else {
+                    showToast(`Found ${results.length} product(s)`);
+                }
+                
+                document.getElementById('load-more-btn').classList.add('hidden');
+            } catch(e) {
+                console.error('Search error:', e);
+                showToast('Search error', 'error');
+            }
+        }
         
         // DAY FILTER
         document.getElementById('filter-day').addEventListener('change', (e) => { 
@@ -694,15 +919,71 @@
 
         // Add/Edit
         const prodModal = document.getElementById('add-product-modal');
+        
+        // Multiple SKU Management
+        let additionalSkuCount = 0;
+        
+        function addSkuInput() {
+            additionalSkuCount++;
+            const container = document.getElementById('additional-skus-container');
+            const skuDiv = document.createElement('div');
+            skuDiv.className = 'flex gap-2 items-center animate-fade-in';
+            skuDiv.id = `sku-row-${additionalSkuCount}`;
+            skuDiv.innerHTML = `
+                <input type="text" class="additional-sku flex-1 px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition font-mono text-sm" placeholder="Additional SKU-${additionalSkuCount}">
+                <button type="button" onclick="removeSkuInput(${additionalSkuCount})" class="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-lg transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+            `;
+            container.appendChild(skuDiv);
+        }
+        
+        window.removeSkuInput = function(id) {
+            const row = document.getElementById(`sku-row-${id}`);
+            if (row) {
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-20px)';
+                setTimeout(() => row.remove(), 300);
+            }
+        };
+        
+        document.getElementById('add-sku-btn').addEventListener('click', addSkuInput);
+        
         document.getElementById('open-add-modal-btn').addEventListener('click', () => {
-            document.getElementById('product-form').reset(); document.getElementById('edit-product-id').value = ""; document.getElementById('modal-product-title').innerText = "Add New Product"; document.getElementById('days-error').classList.add('hidden');
-            prodModal.classList.remove('hidden-view'); setTimeout(() => prodModal.classList.add('modal-active'), 10);
+            document.getElementById('product-form').reset(); 
+            document.getElementById('edit-product-id').value = ""; 
+            document.getElementById('modal-product-title').innerText = "Add New Product"; 
+            document.getElementById('days-error').classList.add('hidden');
+            
+            // Clear additional SKUs
+            document.getElementById('additional-skus-container').innerHTML = '';
+            additionalSkuCount = 0;
+            
+            prodModal.classList.remove('hidden-view'); 
+            setTimeout(() => prodModal.classList.add('modal-active'), 10);
         });
 
         window.openEditModal = (id) => {
             const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return;
             document.getElementById('edit-product-id').value = p.id; document.getElementById('modal-product-title').innerText = "Edit Product";
-            document.getElementById('prod-title').value = p.title; document.getElementById('prod-sku').value = p.sku; 
+            document.getElementById('prod-title').value = p.title; 
+            
+            // Handle main SKU and additional SKUs
+            const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+            document.getElementById('prod-sku').value = skus[0] || ''; 
+            
+            // Clear and add additional SKUs
+            document.getElementById('additional-skus-container').innerHTML = '';
+            additionalSkuCount = 0;
+            
+            if (skus.length > 1) {
+                for (let i = 1; i < skus.length; i++) {
+                    addSkuInput();
+                    const inputs = document.querySelectorAll('.additional-sku');
+                    inputs[inputs.length - 1].value = skus[i];
+                }
+            }
+            
             document.getElementById('prod-qty').value = p.qty || 0;
             document.getElementById('prod-initial').value = p.initialCount; document.getElementById('prod-target').value = p.targetReviews;
             
@@ -721,10 +1002,21 @@
             document.getElementById('save-product-text').classList.add('hidden'); document.getElementById('save-product-spinner').classList.remove('hidden'); document.getElementById('save-product-btn').disabled = true;
 
             const editId = document.getElementById('edit-product-id').value;
+            
+            // Collect all SKUs (main + additional)
+            const mainSku = document.getElementById('prod-sku').value.trim();
+            const additionalSkus = Array.from(document.querySelectorAll('.additional-sku'))
+                .map(input => input.value.trim())
+                .filter(sku => sku !== '');
+            
+            const allSkus = [mainSku, ...additionalSkus];
+            
             const prodData = { 
-                title: document.getElementById('prod-title').value, sku: document.getElementById('prod-sku').value, 
+                title: document.getElementById('prod-title').value, 
+                sku: allSkus, // Store as array
                 qty: parseInt(document.getElementById('prod-qty').value) || 0,
-                initialCount: parseInt(document.getElementById('prod-initial').value), targetReviews: parseInt(document.getElementById('prod-target').value), 
+                initialCount: parseInt(document.getElementById('prod-initial').value), 
+                targetReviews: parseInt(document.getElementById('prod-target').value), 
                 days: checkedDays 
             };
             
@@ -941,6 +1233,130 @@
             } catch (e) { document.getElementById('stats-total-completed').innerText = "Err"; }
         };
         document.querySelectorAll('.close-stats-modal').forEach(b => b.addEventListener('click', () => { statsModal.classList.remove('modal-active'); setTimeout(() => statsModal.classList.add('hidden-view'), 300); }));
+
+        // ==========================================
+        // 11. FEATURED PRODUCTS MANAGEMENT
+        // ==========================================
+        
+        // Fetch featured products
+        async function fetchFeaturedProducts() {
+            try {
+                const snap = await getDocs(query(collection(db, "featured_products"), orderBy("position", "asc")));
+                state.featuredProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderFeaturedProducts();
+            } catch(e) {
+                console.error('Error fetching featured products:', e);
+            }
+        }
+
+        // Render featured products
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featured-products-grid');
+            const emptyState = document.getElementById('featured-empty-state');
+            
+            if (state.featuredProducts.length === 0) {
+                container.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            
+            container.innerHTML = state.featuredProducts.map(p => `
+                <div class="bg-card border border-theme rounded-xl shadow-sm p-6 hover:shadow-lg transition-all relative overflow-hidden group">
+                    <div class="absolute top-3 right-3 bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                        #${p.position}
+                    </div>
+                    <div class="mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-100 text-brand-600 mb-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-txt mb-2">${p.title}</h3>
+                        <p class="text-sm text-muted font-mono bg-main px-3 py-1 rounded inline-block border border-theme">SKU: ${p.sku}</p>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <button onclick="window.deleteFeaturedProduct('${p.id}')" class="flex-1 text-xs font-bold bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition border border-red-100">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open add featured modal
+        document.getElementById('open-add-featured-modal-btn').addEventListener('click', () => {
+            document.getElementById('featured-form').reset();
+            const modal = document.getElementById('add-featured-modal');
+            modal.classList.remove('hidden-view');
+            setTimeout(() => modal.classList.add('modal-active'), 10);
+        });
+
+        // Close featured modal
+        document.querySelectorAll('.close-featured-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = document.getElementById('add-featured-modal');
+                modal.classList.remove('modal-active');
+                setTimeout(() => modal.classList.add('hidden-view'), 300);
+            });
+        });
+
+        // Save featured product
+        document.getElementById('save-featured-btn').addEventListener('click', async () => {
+            const form = document.getElementById('featured-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            document.getElementById('save-featured-text').classList.add('hidden');
+            document.getElementById('save-featured-spinner').classList.remove('hidden');
+            document.getElementById('save-featured-btn').disabled = true;
+
+            const featuredData = {
+                title: document.getElementById('featured-title').value,
+                sku: document.getElementById('featured-sku').value,
+                position: parseInt(document.getElementById('featured-position').value),
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "featured_products"), featuredData);
+                showToast('Featured product added successfully!');
+                await fetchFeaturedProducts();
+                document.querySelector('.close-featured-modal').click();
+            } catch(e) {
+                console.error('Error adding featured product:', e);
+                showToast('Error adding featured product', 'error');
+            } finally {
+                document.getElementById('save-featured-text').classList.remove('hidden');
+                document.getElementById('save-featured-spinner').classList.add('hidden');
+                document.getElementById('save-featured-btn').disabled = false;
+            }
+        });
+
+        // Delete featured product
+        window.deleteFeaturedProduct = async (id) => {
+            if (!confirm('Delete this featured product?')) return;
+            try {
+                await deleteDoc(doc(db, "featured_products", id));
+                state.featuredProducts = state.featuredProducts.filter(p => p.id !== id);
+                renderFeaturedProducts();
+                showToast('Featured product deleted successfully!');
+            } catch(e) {
+                console.error('Error deleting featured product:', e);
+                showToast('Error deleting featured product', 'error');
+            }
+        };
+
+        // Load featured products on view switch
+        const originalSwitchView = switchView;
+        switchView = function(target) {
+            originalSwitchView(target);
+            if (target === 'featured') {
+                fetchFeaturedProducts();
+            }
+        };
 
     </script>
 </body>

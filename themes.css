@@ -1,0 +1,472 @@
+/* ==========================================
+   🎨 REVIEWFLOW THEME SYSTEM
+   Premium Theme Collection
+   ========================================== */
+
+/* ==========================================
+   1. LIGHT THEME (Default - Clean & Professional)
+   ========================================== */
+:root,
+[data-theme="light"] {
+    --brand-50: #eff6ff;
+    --brand-100: #dbeafe;
+    --brand-200: #bfdbfe;
+    --brand-500: #3b82f6;
+    --brand-600: #2563eb;
+    --brand-700: #1d4ed8;
+    --brand-800: #1e40af;
+    --brand-900: #1e3a8a;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --border-col: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+}
+
+/* ==========================================
+   2. DARK THEME (Modern Dark Mode)
+   ========================================== */
+[data-theme="dark"] {
+    --brand-50: #1e1e2f;
+    --brand-100: #2a2a40;
+    --brand-200: #3b3b5c;
+    --brand-500: #6366f1;
+    --brand-600: #4f46e5;
+    --brand-700: #4338ca;
+    --brand-800: #3730a3;
+    --brand-900: #312e81;
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --border-col: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+/* ==========================================
+   3. SPIDER-MAN THEME (Red & Dark Blue)
+   ========================================== */
+[data-theme="spiderman"] {
+    --brand-50: #fef2f2;
+    --brand-100: #fee2e2;
+    --brand-200: #fecaca;
+    --brand-500: #ef4444;
+    --brand-600: #dc2626;
+    --brand-700: #b91c1c;
+    --brand-800: #991b1b;
+    --brand-900: #7f1d1d;
+    --bg-main: #020617;
+    --bg-card: #172554;
+    --border-col: #1e3a8a;
+    --text-main: #f8fafc;
+    --text-muted: #93c5fd;
+}
+
+/* ==========================================
+   4. SHOPIFY THEME (Fresh Green)
+   ========================================== */
+[data-theme="shopify"] {
+    --brand-50: #f0fdf4;
+    --brand-100: #dcfce7;
+    --brand-200: #bbf7d0;
+    --brand-500: #22c55e;
+    --brand-600: #16a34a;
+    --brand-700: #15803d;
+    --brand-800: #166534;
+    --brand-900: #14532d;
+    --bg-main: #f4f6f8;
+    --bg-card: #ffffff;
+    --border-col: #dfe3e8;
+    --text-main: #212b36;
+    --text-muted: #637381;
+}
+
+/* ==========================================
+   5. BATMAN THEME (Dark Knight - Yellow & Black)
+   ========================================== */
+[data-theme="batman"] {
+    --brand-50: #fefce8;
+    --brand-100: #fef9c3;
+    --brand-200: #fef08a;
+    --brand-500: #eab308;
+    --brand-600: #ca8a04;
+    --brand-700: #a16207;
+    --brand-800: #854d0e;
+    --brand-900: #713f12;
+    --bg-main: #000000;
+    --bg-card: #171717;
+    --border-col: #262626;
+    --text-main: #e5e5e5;
+    --text-muted: #a3a3a3;
+}
+
+/* ==========================================
+   6. OCEAN BREEZE (Calm Blue & Teal)
+   ========================================== */
+[data-theme="ocean"] {
+    --brand-50: #ecfeff;
+    --brand-100: #cffafe;
+    --brand-200: #a5f3fc;
+    --brand-500: #06b6d4;
+    --brand-600: #0891b2;
+    --brand-700: #0e7490;
+    --brand-800: #155e75;
+    --brand-900: #164e63;
+    --bg-main: #f0fdfa;
+    --bg-card: #ffffff;
+    --border-col: #ccfbf1;
+    --text-main: #134e4a;
+    --text-muted: #14b8a6;
+}
+
+/* ==========================================
+   7. SUNSET GLOW (Warm Orange & Pink)
+   ========================================== */
+[data-theme="sunset"] {
+    --brand-50: #fff7ed;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-500: #f97316;
+    --brand-600: #ea580c;
+    --brand-700: #c2410c;
+    --brand-800: #9a3412;
+    --brand-900: #7c2d12;
+    --bg-main: #fff1f2;
+    --bg-card: #ffffff;
+    --border-col: #fecdd3;
+    --text-main: #881337;
+    --text-muted: #be123c;
+}
+
+/* ==========================================
+   8. FOREST THEME (Nature Green & Brown)
+   ========================================== */
+[data-theme="forest"] {
+    --brand-50: #f7fee7;
+    --brand-100: #ecfccb;
+    --brand-200: #d9f99d;
+    --brand-500: #84cc16;
+    --brand-600: #65a30d;
+    --brand-700: #4d7c0f;
+    --brand-800: #3f6212;
+    --brand-900: #365314;
+    --bg-main: #fefce8;
+    --bg-card: #ffffff;
+    --border-col: #d9f99d;
+    --text-main: #3f6212;
+    --text-muted: #65a30d;
+}
+
+/* ==========================================
+   9. PURPLE HAZE (Royal Purple & Violet)
+   ========================================== */
+[data-theme="purple"] {
+    --brand-50: #faf5ff;
+    --brand-100: #f3e8ff;
+    --brand-200: #e9d5ff;
+    --brand-500: #a855f7;
+    --brand-600: #9333ea;
+    --brand-700: #7e22ce;
+    --brand-800: #6b21a8;
+    --brand-900: #581c87;
+    --bg-main: #faf5ff;
+    --bg-card: #ffffff;
+    --border-col: #e9d5ff;
+    --text-main: #581c87;
+    --text-muted: #7e22ce;
+}
+
+/* ==========================================
+   10. MIDNIGHT BLUE (Deep Blue Professional)
+   ========================================== */
+[data-theme="midnight"] {
+    --brand-50: #eff6ff;
+    --brand-100: #dbeafe;
+    --brand-200: #bfdbfe;
+    --brand-500: #3b82f6;
+    --brand-600: #2563eb;
+    --brand-700: #1d4ed8;
+    --brand-800: #1e40af;
+    --brand-900: #1e3a8a;
+    --bg-main: #0c1222;
+    --bg-card: #1a1f35;
+    --border-col: #2d3548;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+}
+
+/* ==========================================
+   11. ROSE GOLD (Elegant Pink & Gold)
+   ========================================== */
+[data-theme="rosegold"] {
+    --brand-50: #fdf2f8;
+    --brand-100: #fce7f3;
+    --brand-200: #fbcfe8;
+    --brand-500: #ec4899;
+    --brand-600: #db2777;
+    --brand-700: #be185d;
+    --brand-800: #9f1239;
+    --brand-900: #831843;
+    --bg-main: #fff5f7;
+    --bg-card: #ffffff;
+    --border-col: #fce7f3;
+    --text-main: #831843;
+    --text-muted: #be185d;
+}
+
+/* ==========================================
+   12. CYBERPUNK (Neon Pink & Cyan)
+   ========================================== */
+[data-theme="cyberpunk"] {
+    --brand-50: #fdf4ff;
+    --brand-100: #fae8ff;
+    --brand-200: #f5d0fe;
+    --brand-500: #d946ef;
+    --brand-600: #c026d3;
+    --brand-700: #a21caf;
+    --brand-800: #86198f;
+    --brand-900: #701a75;
+    --bg-main: #0a0118;
+    --bg-card: #1a0b2e;
+    --border-col: #2d1b4e;
+    --text-main: #f0abfc;
+    --text-muted: #c084fc;
+}
+
+/* ==========================================
+   13. MINT FRESH (Cool Mint Green)
+   ========================================== */
+[data-theme="mint"] {
+    --brand-50: #f0fdf4;
+    --brand-100: #dcfce7;
+    --brand-200: #bbf7d0;
+    --brand-500: #10b981;
+    --brand-600: #059669;
+    --brand-700: #047857;
+    --brand-800: #065f46;
+    --brand-900: #064e3b;
+    --bg-main: #f0fdfa;
+    --bg-card: #ffffff;
+    --border-col: #ccfbf1;
+    --text-main: #064e3b;
+    --text-muted: #047857;
+}
+
+/* ==========================================
+   14. COFFEE THEME (Warm Brown & Cream)
+   ========================================== */
+[data-theme="coffee"] {
+    --brand-50: #fef3c7;
+    --brand-100: #fde68a;
+    --brand-200: #fcd34d;
+    --brand-500: #92400e;
+    --brand-600: #78350f;
+    --brand-700: #451a03;
+    --brand-800: #292524;
+    --brand-900: #1c1917;
+    --bg-main: #fef3c7;
+    --bg-card: #fffbeb;
+    --border-col: #fde68a;
+    --text-main: #451a03;
+    --text-muted: #78350f;
+}
+
+/* ==========================================
+   15. DRACULA (Classic Dark Purple)
+   ========================================== */
+[data-theme="dracula"] {
+    --brand-50: #f8f8f2;
+    --brand-100: #f1fa8c;
+    --brand-200: #50fa7b;
+    --brand-500: #bd93f9;
+    --brand-600: #ff79c6;
+    --brand-700: #8be9fd;
+    --brand-800: #ffb86c;
+    --brand-900: #ff5555;
+    --bg-main: #282a36;
+    --bg-card: #44475a;
+    --border-col: #6272a4;
+    --text-main: #f8f8f2;
+    --text-muted: #bd93f9;
+}
+
+/* ==========================================
+   16. NORD THEME (Arctic Blue)
+   ========================================== */
+[data-theme="nord"] {
+    --brand-50: #eceff4;
+    --brand-100: #e5e9f0;
+    --brand-200: #d8dee9;
+    --brand-500: #88c0d0;
+    --brand-600: #81a1c1;
+    --brand-700: #5e81ac;
+    --brand-800: #4c566a;
+    --brand-900: #434c5e;
+    --bg-main: #2e3440;
+    --bg-card: #3b4252;
+    --border-col: #4c566a;
+    --text-main: #eceff4;
+    --text-muted: #d8dee9;
+}
+
+/* ==========================================
+   17. MONOKAI (Developer Favorite)
+   ========================================== */
+[data-theme="monokai"] {
+    --brand-50: #f8f8f2;
+    --brand-100: #f92672;
+    --brand-200: #fd971f;
+    --brand-500: #a6e22e;
+    --brand-600: #66d9ef;
+    --brand-700: #ae81ff;
+    --brand-800: #e6db74;
+    --brand-900: #f92672;
+    --bg-main: #272822;
+    --bg-card: #3e3d32;
+    --border-col: #49483e;
+    --text-main: #f8f8f2;
+    --text-muted: #75715e;
+}
+
+/* ==========================================
+   18. SAKURA (Japanese Cherry Blossom)
+   ========================================== */
+[data-theme="sakura"] {
+    --brand-50: #fef2f2;
+    --brand-100: #fce7f3;
+    --brand-200: #fbcfe8;
+    --brand-500: #f472b6;
+    --brand-600: #ec4899;
+    --brand-700: #db2777;
+    --brand-800: #be185d;
+    --brand-900: #9f1239;
+    --bg-main: #fff1f2;
+    --bg-card: #ffffff;
+    --border-col: #fce7f3;
+    --text-main: #881337;
+    --text-muted: #be185d;
+}
+
+/* ==========================================
+   19. MATRIX (Green Terminal)
+   ========================================== */
+[data-theme="matrix"] {
+    --brand-50: #f0fdf4;
+    --brand-100: #dcfce7;
+    --brand-200: #bbf7d0;
+    --brand-500: #22c55e;
+    --brand-600: #16a34a;
+    --brand-700: #15803d;
+    --brand-800: #166534;
+    --brand-900: #14532d;
+    --bg-main: #000000;
+    --bg-card: #0a0f0a;
+    --border-col: #1a2f1a;
+    --text-main: #00ff00;
+    --text-muted: #00cc00;
+}
+
+/* ==========================================
+   20. GOLD LUXURY (Premium Gold & Black)
+   ========================================== */
+[data-theme="gold"] {
+    --brand-50: #fffbeb;
+    --brand-100: #fef3c7;
+    --brand-200: #fde68a;
+    --brand-500: #fbbf24;
+    --brand-600: #f59e0b;
+    --brand-700: #d97706;
+    --brand-800: #b45309;
+    --brand-900: #92400e;
+    --bg-main: #1c1917;
+    --bg-card: #292524;
+    --border-col: #44403c;
+    --text-main: #fbbf24;
+    --text-muted: #d97706;
+}
+
+/* ==========================================
+   THEME-SPECIFIC ENHANCEMENTS
+   ========================================== */
+
+/* Cyberpunk Glow Effect */
+[data-theme="cyberpunk"] button:hover,
+[data-theme="cyberpunk"] .nav-btn:hover {
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.5);
+}
+
+/* Matrix Terminal Effect */
+[data-theme="matrix"] * {
+    font-family: 'Courier New', monospace;
+}
+
+/* Gold Luxury Shimmer */
+[data-theme="gold"] .bg-brand-600 {
+    background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+}
+
+/* Ocean Wave Animation */
+[data-theme="ocean"] .bg-brand-600 {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+}
+
+/* Sunset Gradient */
+[data-theme="sunset"] .bg-brand-600 {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+/* Sakura Soft Glow */
+[data-theme="sakura"] .bg-card {
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+}
+
+/* Nord Frost Effect */
+[data-theme="nord"] .border-theme {
+    border-color: #5e81ac;
+}
+
+/* Dracula Purple Accent */
+[data-theme="dracula"] .text-brand-600 {
+    color: #bd93f9;
+}
+
+/* Coffee Warm Tone */
+[data-theme="coffee"] body {
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+}
+
+/* ==========================================
+   THEME TRANSITION ANIMATIONS
+   ========================================== */
+
+[data-theme] {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ========================================== */
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-col: #000000;
+        --text-main: #000000;
+    }
+    
+    [data-theme="dark"],
+    [data-theme="midnight"],
+    [data-theme="cyberpunk"],
+    [data-theme="matrix"] {
+        --border-col: #ffffff;
+        --text-main: #ffffff;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    [data-theme] {
+        transition: none;
+    }
+}

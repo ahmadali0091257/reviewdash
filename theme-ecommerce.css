@@ -1,0 +1,418 @@
+/* ==========================================
+   🛍️ E-COMMERCE PROFESSIONAL THEMES
+   Flipkart, Alibaba, eBay, Walmart Inspired
+   ========================================== */
+
+/* ==========================================
+   1. FLIPKART THEME (Indian E-commerce Giant)
+   ========================================== */
+
+[data-theme="flipkart"] {
+    /* Flipkart's Signature Blue & Yellow */
+    --brand-50: #e8f4ff;
+    --brand-100: #d1e9ff;
+    --brand-200: #a3d3ff;
+    --brand-500: #2874f0;  /* Flipkart Blue */
+    --brand-600: #1c5bbf;
+    --brand-700: #1348a0;
+    --brand-800: #0d3680;
+    --brand-900: #082860;
+    
+    --bg-main: #f1f3f6;
+    --bg-card: #ffffff;
+    --border-col: #e0e0e0;
+    --text-main: #212121;
+    --text-muted: #878787;
+    
+    --flipkart-yellow: #ffe500;
+    --flipkart-green: #388e3c;
+}
+
+[data-theme="flipkart"] .bg-brand-600 {
+    background: linear-gradient(135deg, #2874f0 0%, #1c5bbf 100%) !important;
+    box-shadow: 0 2px 8px rgba(40, 116, 240, 0.3);
+}
+
+[data-theme="flipkart"] button.bg-brand-600:hover {
+    background: linear-gradient(135deg, #1c5bbf 0%, #1348a0 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40, 116, 240, 0.4);
+}
+
+[data-theme="flipkart"] .bg-emerald-500 {
+    background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%) !important;
+}
+
+[data-theme="flipkart"] aside {
+    background: #2874f0;
+}
+
+[data-theme="flipkart"] aside .text-txt {
+    color: #ffffff !important;
+}
+
+[data-theme="flipkart"] .nav-btn.bg-brand-50 {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-left: 3px solid var(--flipkart-yellow);
+}
+
+/* Flipkart's signature shadow */
+[data-theme="flipkart"] .bg-card {
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+[data-theme="flipkart"] .bg-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+   2. ALIBABA THEME (Global B2B Platform)
+   ========================================== */
+
+[data-theme="alibaba"] {
+    /* Alibaba's Orange & Professional Gray */
+    --brand-50: #fff7ed;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-500: #ff6a00;  /* Alibaba Orange */
+    --brand-600: #e65c00;
+    --brand-700: #cc5200;
+    --brand-800: #b34700;
+    --brand-900: #993d00;
+    
+    --bg-main: #f5f5f5;
+    --bg-card: #ffffff;
+    --border-col: #d9d9d9;
+    --text-main: #333333;
+    --text-muted: #666666;
+    
+    --alibaba-blue: #1890ff;
+    --alibaba-gold: #faad14;
+}
+
+[data-theme="alibaba"] .bg-brand-600 {
+    background: linear-gradient(to right, #ff6a00 0%, #ff8533 100%) !important;
+    box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);
+}
+
+[data-theme="alibaba"] aside {
+    background: linear-gradient(180deg, #ff6a00 0%, #e65c00 100%);
+}
+
+[data-theme="alibaba"] .bg-card {
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s ease;
+}
+
+[data-theme="alibaba"] .bg-card:hover {
+    border-color: #ff6a00;
+    box-shadow: 0 4px 16px rgba(255, 106, 0, 0.15);
+}
+
+/* Alibaba's professional table style */
+[data-theme="alibaba"] table thead {
+    background: linear-gradient(to bottom, #fafafa, #f0f0f0);
+}
+
+[data-theme="alibaba"] tbody tr:hover {
+    background: #fff7ed;
+}
+
+/* ==========================================
+   3. EBAY THEME (Auction & Shopping)
+   ========================================== */
+
+[data-theme="ebay"] {
+    /* eBay's Colorful Palette */
+    --brand-50: #fff5f5;
+    --brand-100: #ffe5e5;
+    --brand-200: #ffcccc;
+    --brand-500: #e53238;  /* eBay Red */
+    --brand-600: #cc2a2f;
+    --brand-700: #b32327;
+    --brand-800: #991d20;
+    --brand-900: #801619;
+    
+    --bg-main: #f7f7f7;
+    --bg-card: #ffffff;
+    --border-col: #cccccc;
+    --text-main: #191919;
+    --text-muted: #707070;
+    
+    --ebay-blue: #0064d2;
+    --ebay-yellow: #f5af02;
+    --ebay-green: #85b716;
+}
+
+[data-theme="ebay"] .bg-brand-600 {
+    background: linear-gradient(135deg, #e53238 0%, #cc2a2f 100%) !important;
+    box-shadow: 0 2px 8px rgba(229, 50, 56, 0.3);
+}
+
+[data-theme="ebay"] aside {
+    background: #ffffff;
+    border-right: 1px solid #e5e5e5;
+}
+
+[data-theme="ebay"] aside .text-brand-600 {
+    color: #e53238 !important;
+}
+
+[data-theme="ebay"] aside .text-txt {
+    color: #191919 !important;
+}
+
+[data-theme="ebay"] .nav-btn.bg-brand-50 {
+    background: #fff5f5 !important;
+    border-left: 3px solid #e53238;
+}
+
+/* eBay's colorful badges */
+[data-theme="ebay"] .bg-emerald-500 {
+    background: linear-gradient(135deg, #85b716 0%, #6fa012 100%) !important;
+}
+
+[data-theme="ebay"] .bg-orange-500 {
+    background: linear-gradient(135deg, #f5af02 0%, #dc9d02 100%) !important;
+}
+
+/* ==========================================
+   4. WALMART THEME (Retail Giant)
+   ========================================== */
+
+[data-theme="walmart"] {
+    /* Walmart's Blue & Yellow */
+    --brand-50: #e8f4ff;
+    --brand-100: #d1e9ff;
+    --brand-200: #a3d3ff;
+    --brand-500: #0071ce;  /* Walmart Blue */
+    --brand-600: #0060b0;
+    --brand-700: #004f93;
+    --brand-800: #003d75;
+    --brand-900: #002c58;
+    
+    --bg-main: #f2f8fd;
+    --bg-card: #ffffff;
+    --border-col: #d4dce5;
+    --text-main: #2e2f32;
+    --text-muted: #74767c;
+    
+    --walmart-yellow: #ffc220;
+    --walmart-spark: #0071ce;
+}
+
+[data-theme="walmart"] .bg-brand-600 {
+    background: linear-gradient(135deg, #0071ce 0%, #0060b0 100%) !important;
+    box-shadow: 0 2px 8px rgba(0, 113, 206, 0.3);
+}
+
+[data-theme="walmart"] aside {
+    background: #0071ce;
+}
+
+[data-theme="walmart"] .bg-card {
+    border: 1px solid #e6eaf0;
+    border-radius: 4px;
+}
+
+/* Walmart's spark effect */
+[data-theme="walmart"] button.bg-brand-600::before {
+    content: '✨';
+    margin-right: 4px;
+}
+
+/* ==========================================
+   5. ETSY THEME (Handmade & Vintage)
+   ========================================== */
+
+[data-theme="etsy"] {
+    /* Etsy's Warm Orange */
+    --brand-50: #fff7ed;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-500: #f1641e;  /* Etsy Orange */
+    --brand-600: #d8551a;
+    --brand-700: #bf4717;
+    --brand-800: #a63913;
+    --brand-900: #8c2c10;
+    
+    --bg-main: #ffffff;
+    --bg-card: #ffffff;
+    --border-col: #e1e3df;
+    --text-main: #222222;
+    --text-muted: #595959;
+    
+    --etsy-teal: #00838f;
+    --etsy-cream: #f9f6f1;
+}
+
+[data-theme="etsy"] .bg-main {
+    background: #f9f6f1;
+}
+
+[data-theme="etsy"] .bg-brand-600 {
+    background: linear-gradient(135deg, #f1641e 0%, #d8551a 100%) !important;
+    border-radius: 24px;
+}
+
+[data-theme="etsy"] aside {
+    background: #ffffff;
+    border-right: 1px solid #e1e3df;
+}
+
+[data-theme="etsy"] .bg-card {
+    border: 1px solid #e1e3df;
+    border-radius: 12px;
+}
+
+/* Etsy's handmade feel */
+[data-theme="etsy"] * {
+    font-family: 'Inter', 'Guardian-EgypTT', serif;
+}
+
+/* ==========================================
+   6. SHOPEE THEME (Southeast Asian E-commerce)
+   ========================================== */
+
+[data-theme="shopee"] {
+    /* Shopee's Vibrant Orange */
+    --brand-50: #fff5f0;
+    --brand-100: #ffe8db;
+    --brand-200: #ffd1b8;
+    --brand-500: #ee4d2d;  /* Shopee Orange */
+    --brand-600: #d73211;
+    --brand-700: #c02a0e;
+    --brand-800: #a9230b;
+    --brand-900: #921c09;
+    
+    --bg-main: #f5f5f5;
+    --bg-card: #ffffff;
+    --border-col: #e5e5e5;
+    --text-main: #222222;
+    --text-muted: #757575;
+    
+    --shopee-red: #ee4d2d;
+}
+
+[data-theme="shopee"] .bg-brand-600 {
+    background: linear-gradient(to right, #ee4d2d 0%, #ff6347 100%) !important;
+    box-shadow: 0 2px 8px rgba(238, 77, 45, 0.3);
+}
+
+[data-theme="shopee"] aside {
+    background: linear-gradient(135deg, #ee4d2d 0%, #ff6347 100%);
+}
+
+[data-theme="shopee"] .bg-card {
+    box-shadow: 0 1px 2px rgba(0,0,0,.09);
+}
+
+[data-theme="shopee"] .bg-card:hover {
+    box-shadow: 0 4px 16px rgba(238, 77, 45, 0.15);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   7. LAZADA THEME (Southeast Asian Platform)
+   ========================================== */
+
+[data-theme="lazada"] {
+    /* Lazada's Purple & Blue */
+    --brand-50: #f5f0ff;
+    --brand-100: #ebe0ff;
+    --brand-200: #d6c1ff;
+    --brand-500: #0f0f9f;  /* Lazada Blue */
+    --brand-600: #0d0d85;
+    --brand-700: #0b0b6b;
+    --brand-800: #090951;
+    --brand-900: #070737;
+    
+    --bg-main: #f5f5f5;
+    --bg-card: #ffffff;
+    --border-col: #e0e0e0;
+    --text-main: #212121;
+    --text-muted: #757575;
+    
+    --lazada-orange: #f36f21;
+    --lazada-purple: #6c3fb5;
+}
+
+[data-theme="lazada"] .bg-brand-600 {
+    background: linear-gradient(135deg, #0f0f9f 0%, #6c3fb5 100%) !important;
+}
+
+[data-theme="lazada"] aside {
+    background: linear-gradient(180deg, #0f0f9f 0%, #6c3fb5 100%);
+}
+
+/* ==========================================
+   COMMON E-COMMERCE ENHANCEMENTS
+   ========================================== */
+
+/* Professional product cards */
+[data-theme*="flipkart"] .bg-card,
+[data-theme*="alibaba"] .bg-card,
+[data-theme*="ebay"] .bg-card,
+[data-theme*="walmart"] .bg-card,
+[data-theme*="etsy"] .bg-card,
+[data-theme*="shopee"] .bg-card,
+[data-theme*="lazada"] .bg-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth button transitions */
+[data-theme*="flipkart"] button,
+[data-theme*="alibaba"] button,
+[data-theme*="ebay"] button,
+[data-theme*="walmart"] button,
+[data-theme*="etsy"] button,
+[data-theme*="shopee"] button,
+[data-theme*="lazada"] button {
+    transition: all 0.2s ease;
+}
+
+/* Professional focus states */
+[data-theme*="flipkart"] *:focus-visible,
+[data-theme*="alibaba"] *:focus-visible,
+[data-theme*="ebay"] *:focus-visible,
+[data-theme*="walmart"] *:focus-visible,
+[data-theme*="etsy"] *:focus-visible,
+[data-theme*="shopee"] *:focus-visible,
+[data-theme*="lazada"] *:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================== */
+
+@media (max-width: 768px) {
+    [data-theme*="flipkart"] aside,
+    [data-theme*="alibaba"] aside,
+    [data-theme*="ebay"] aside,
+    [data-theme*="walmart"] aside,
+    [data-theme*="etsy"] aside,
+    [data-theme*="shopee"] aside,
+    [data-theme*="lazada"] aside {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+
+@media print {
+    [data-theme*="flipkart"],
+    [data-theme*="alibaba"],
+    [data-theme*="ebay"],
+    [data-theme*="walmart"],
+    [data-theme*="etsy"],
+    [data-theme*="shopee"],
+    [data-theme*="lazada"] {
+        --bg-main: #ffffff;
+        --bg-card: #ffffff;
+        --text-main: #000000;
+    }
+}
