@@ -438,12 +438,44 @@
                     <input type="number" id="task-modal-qty-input" class="w-20 px-2 py-1 border border-brand-300 rounded-lg text-right text-lg font-bold bg-white text-brand-800 focus:ring-2 focus:ring-brand-500 outline-none">
                 </div>
 
-                <div class="mb-5 bg-main p-4 rounded-xl border border-theme flex justify-between items-center">
-                    <div>
+                <div class="mb-5 bg-main p-4 rounded-xl border border-theme">
+                    <div class="flex justify-between items-center mb-3">
+                        <button type="button" id="toggle-edit-info-btn" class="flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Edit Product Info
+                        </button>
+                        <button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-200 font-bold border border-red-200 shrink-0">Clear Log</button>
+                    </div>
+                    
+                    <!-- Collapsible Quick Edit Form -->
+                    <div id="quick-edit-container" class="hidden-view space-y-4 pt-4 border-t border-theme mt-3 animate-fade-in mb-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-muted uppercase tracking-wider mb-1">Product Title</label>
+                            <input type="text" id="quick-edit-title" class="w-full px-3 py-2 border border-theme bg-card text-txt rounded-lg text-sm focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-muted uppercase tracking-wider mb-1">SKU (use comma for multiple)</label>
+                            <input type="text" id="quick-edit-sku" class="w-full px-3 py-2 border border-theme bg-card text-txt rounded-lg text-sm font-mono focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                             <div>
+                                <label class="block text-[10px] font-bold text-muted uppercase tracking-wider mb-1">Daily Target</label>
+                                <input type="number" id="quick-edit-target" class="w-full px-3 py-2 border border-theme bg-card text-txt rounded-lg text-sm focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                             <div>
+                                <label class="block text-[10px] font-bold text-muted uppercase tracking-wider mb-1">Initial Stats</label>
+                                <input type="number" id="quick-edit-initial" class="w-full px-3 py-2 border border-theme bg-card text-txt rounded-lg text-sm focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                        </div>
+                        <button type="button" id="save-quick-edit-btn" class="w-full bg-brand-600 text-white py-2.5 rounded-lg text-sm font-bold hover:bg-brand-700 transition shadow-md">
+                            Save Product Changes
+                        </button>
+                    </div>
+
+                    <div id="active-task-info-display">
                         <h4 id="task-modal-title" class="font-bold text-txt text-lg">Product Title</h4>
                         <p id="task-modal-sku" class="text-sm text-muted font-mono mt-0.5">SKU: ---</p>
                     </div>
-                    <button type="button" id="reset-task-btn" class="hidden text-xs bg-red-100 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-200 font-bold border border-red-200 shrink-0">Clear Log</button>
                 </div>
                 
                 <div id="task-checkboxes-container" class="space-y-3"></div>
@@ -1085,9 +1117,18 @@
                 <div class="bg-card border ${borderStyle} rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all">
                     <div class="flex-1 cursor-pointer" onclick="window.openTaskModal('${t.p.id}', '${t.taskDate}')">
                         <div class="flex items-center gap-3 mb-1.5"><h3 class="text-xl font-bold text-txt">${t.p.title}</h3>${badgeHtml}</div>
-                        <div class="flex flex-wrap items-center gap-3 text-sm mt-2">
-                            <span class="font-mono bg-main px-2.5 py-1 rounded border border-theme text-xs text-muted">SKU: ${t.p.sku}</span>
-                            <span class="font-bold bg-brand-50 text-brand-700 px-2.5 py-1 rounded text-xs border border-brand-200">QTY: ${t.p.qty || 0}</span>
+                        <div class="flex flex-wrap items-center gap-3 text-sm mt-3">
+                            <div class="flex items-center gap-1.5" title="Click SKU to copy, icon to edit">
+                                <span class="font-mono bg-main px-2.5 py-1 rounded border border-theme text-xs text-muted cursor-pointer hover:bg-theme" onclick="event.stopPropagation(); window.copyToClipboard('${t.p.sku}', 'SKU')">SKU: ${t.p.sku}</span>
+                                <button onclick="event.stopPropagation(); window.openTaskModal('${t.p.id}', '${t.taskDate}', true)" class="p-1.5 text-brand-600 hover:bg-brand-50 rounded-lg transition-colors border border-transparent hover:border-brand-100">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 bg-brand-50 text-brand-700 px-2.5 py-1 rounded text-xs border border-brand-200" onclick="event.stopPropagation()">
+                                <span class="font-bold">QTY:</span>
+                                <input type="number" value="${t.p.qty || 0}" class="w-12 bg-transparent font-extrabold focus:outline-none focus:ring-1 focus:ring-brand-400 rounded px-1 transition-all" 
+                                    onchange="window.updateProductQty('${t.p.id}', this.value)">
+                            </div>
                             <span class="font-medium bg-main px-3 py-1 rounded-full text-muted border border-theme">Progress: <strong class="text-txt">${t.completed} / ${t.p.targetReviews}</strong></span>
                         </div>
                     </div>
@@ -1098,22 +1139,48 @@
             }).join('');
         }
 
+        window.updateProductQty = async (productId, val) => {
+            const newQty = parseInt(val) || 0;
+            try {
+                await updateDoc(doc(db, "products", productId), { qty: newQty });
+                const pT = state.todayProducts.find(x => x.id === productId); if(pT) pT.qty = newQty;
+                const pA = state.paginatedProducts.find(x => x.id === productId); if(pA) pA.qty = newQty;
+                renderTodayTasks(); renderProductsTable(); showToast('QTY Updated!');
+            } catch(err) { showToast('Error updating QTY', 'error'); }
+        };
+
         const taskModal = document.getElementById('daily-task-modal');
-        window.openTaskModal = (id, dateStr) => {
+        window.openTaskModal = (id, dateStr, autoEdit = false) => {
             const p = state.todayProducts.find(x => x.id === id); if(!p) return; activeTaskContext = p; activeTaskDate = dateStr; 
-            document.getElementById('task-modal-header').innerText = dateStr === getCurrentDateString() ? "Today's Checklist" : "Yesterday's Pending Checklist";
-            document.getElementById('task-modal-title').innerText = p.title; document.getElementById('task-modal-sku').innerText = `SKU: ${p.sku}`;
+            const isYesterday = dateStr !== getCurrentDateString();
+            document.getElementById('task-modal-header').innerText = isYesterday ? "Yesterday's Pending Checklist" : "Today's Checklist";
+            document.getElementById('task-modal-title').innerText = p.title; 
+            
+            const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+            document.getElementById('task-modal-sku').innerText = `SKU: ${skus[0] || '---'}`;
+            
+            // Populate Quick Edit fields
+            document.getElementById('quick-edit-title').value = p.title;
+            document.getElementById('quick-edit-sku').value = skus.join(', ');
+            document.getElementById('quick-edit-target').value = p.targetReviews || 1;
+            document.getElementById('quick-edit-initial').value = p.initialCount || 0;
+            
+            // Auto-expand for Yesterday tasks OR if specifically requested via autoEdit flag
+            if (autoEdit || isYesterday) {
+                document.getElementById('quick-edit-container').classList.remove('hidden-view');
+            } else {
+                document.getElementById('quick-edit-container').classList.add('hidden-view');
+            }
             
             const qtyInput = document.getElementById('task-modal-qty-input');
             qtyInput.value = p.qty || 0;
-            qtyInput.onchange = async (e) => {
-                const newQty = parseInt(e.target.value) || 0;
-                try {
-                    await updateDoc(doc(db, "products", p.id), { qty: newQty }); p.qty = newQty; 
-                    const pInAll = state.paginatedProducts.find(x => x.id === id); if(pInAll) pInAll.qty = newQty;
-                    renderTodayTasks(); renderProductsTable(); showToast('QTY Auto-Saved!');
-                } catch(err) { showToast('Error saving QTY', 'error'); }
+            qtyInput.onchange = (e) => window.updateProductQty(p.id, e.target.value);
+            
+            // Modal Header Shortcut
+            document.getElementById('active-task-info-display').onclick = () => {
+                document.getElementById('quick-edit-container').classList.toggle('hidden-view');
             };
+            document.getElementById('active-task-info-display').classList.add('cursor-pointer', 'hover:opacity-75', 'transition-all');
 
             const log = state.dailyLogs.find(l => l.productId === p.id && l.date === dateStr);
             const completed = log ? log.completedReviews : 0;
@@ -1131,7 +1198,66 @@
             taskModal.classList.remove('hidden-view'); setTimeout(() => taskModal.classList.add('modal-active'), 10);
         };
 
-        document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { taskModal.classList.remove('modal-active'); setTimeout(() => taskModal.classList.add('hidden-view'), 300); }));
+        document.querySelectorAll('.close-task-modal').forEach(b => b.addEventListener('click', () => { 
+            taskModal.classList.remove('modal-active'); 
+            setTimeout(() => {
+                taskModal.classList.add('hidden-view');
+                document.getElementById('quick-edit-container').classList.add('hidden-view');
+            }, 300); 
+        }));
+
+        // Toggle Quick Edit
+        document.getElementById('toggle-edit-info-btn').addEventListener('click', () => {
+            document.getElementById('quick-edit-container').classList.toggle('hidden-view');
+        });
+
+        // Save Quick Edit
+        document.getElementById('save-quick-edit-btn').addEventListener('click', async () => {
+            if(!activeTaskContext) return;
+            const btn = document.getElementById('save-quick-edit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Updating...';
+            btn.disabled = true;
+
+            const newTitle = document.getElementById('quick-edit-title').value.trim();
+            const newSkuRaw = document.getElementById('quick-edit-sku').value.trim();
+            const newTarget = parseInt(document.getElementById('quick-edit-target').value) || 1;
+            const newInitial = parseInt(document.getElementById('quick-edit-initial').value) || 0;
+
+            const newSkus = newSkuRaw.split(',').map(s => s.trim()).filter(s => s !== '');
+
+            const updatedData = {
+                title: newTitle,
+                sku: newSkus,
+                targetReviews: newTarget,
+                initialCount: newInitial
+            };
+
+            try {
+                await updateDoc(doc(db, "products", activeTaskContext.id), updatedData);
+                
+                // Update local instances
+                Object.assign(activeTaskContext, updatedData);
+                const pInAll = state.paginatedProducts.find(x => x.id === activeTaskContext.id);
+                if(pInAll) Object.assign(pInAll, updatedData);
+
+                // Update Display in Modal
+                document.getElementById('task-modal-title').innerText = newTitle;
+                document.getElementById('task-modal-sku').innerText = `SKU: ${newSkus[0] || '---'}`;
+                
+                // Refresh list views
+                renderTodayTasks();
+                renderProductsTable();
+                
+                document.getElementById('quick-edit-container').classList.add('hidden-view');
+                showToast('Product Information Updated!');
+            } catch(e) {
+                showToast('Error updating product', 'error');
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
 
         document.getElementById('save-task-btn').addEventListener('click', async () => {
             if(!activeTaskContext) return;
