@@ -124,6 +124,12 @@
                 <button data-target="history" class="nav-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> History
                 </button>
+                <button data-target="rewards" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-main">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Rewards
+                    </div>
+                    <span id="user-points-badge" class="bg-brand-600 text-white py-0.5 px-2.5 rounded-full text-xs font-bold shadow-sm">0 pts</span>
+                </button>
             </nav>
 
             <div class="p-4 border-t border-theme space-y-3 shrink-0">
@@ -228,33 +234,33 @@
 
             <!-- Products View -->
             <div id="view-products" class="view-section hidden-view flex-1 flex flex-col h-full">
-                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div>
-                        <h1 class="text-2xl font-bold text-txt">Product Catalog</h1>
-                        <p class="text-sm text-muted mt-1">Manage schedules, QTY, and filters</p>
+                <div class="p-8 border-b border-theme bg-card shrink-0 flex flex-col gap-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h1 class="text-2xl font-bold text-txt">Product Catalog</h1>
+                            <p class="text-sm text-muted mt-1">Manage schedules, QTY, and filters</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button id="open-advanced-search-btn" class="bg-main border border-theme text-txt px-4 py-2 rounded-lg hover:bg-theme transition shadow-sm flex items-center gap-2 font-medium text-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                Advanced Filters
+                            </button>
+                            <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap gap-3 w-full md:w-auto items-center">
-                        
-                        <!-- NEW: Day Filter Dropdown -->
-                        <select id="filter-day" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-medium shadow-sm">
-                            <option value="">🗓️ All Days</option>
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                            <option value="Sunday">Sunday</option>
-                        </select>
-
-                        <!-- Search Type Selector -->
+                    
+                    <!-- Quick Search Bar -->
+                    <div class="flex flex-wrap gap-3 w-full items-center">
                         <select id="search-type" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm font-medium shadow-sm">
                             <option value="title">🔍 Search by Title</option>
                             <option value="sku">📦 Search by SKU</option>
                             <option value="both">🔎 Search Both</option>
                         </select>
 
-                        <input type="text" id="search-product" placeholder="Search title or SKU..." class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm w-40 md:w-56 text-sm">
+                        <input type="text" id="search-product" placeholder="Quick search..." class="flex-1 px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none transition focus:ring-2 focus:ring-brand-500 shadow-sm text-sm">
+                        
                         <button id="btn-search" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition font-medium text-sm shadow-sm flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             Search
@@ -262,10 +268,15 @@
                         <button id="btn-clear-search" class="bg-theme border border-theme text-txt px-4 py-2 rounded-lg hover:bg-main transition font-medium text-sm shadow-sm hidden">
                             Clear
                         </button>
-                        
-                        <button id="open-add-modal-btn" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg transition shadow-sm flex items-center gap-2 font-medium text-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add
-                        </button>
+                    </div>
+                    
+                    <!-- Active Filters Display -->
+                    <div id="active-filters-container" class="hidden">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-xs font-bold text-muted">Active Filters:</span>
+                            <div id="active-filters-list" class="flex gap-2 flex-wrap"></div>
+                            <button id="clear-all-filters-btn" class="text-xs font-bold text-red-600 hover:text-red-700 underline">Clear All</button>
+                        </div>
                     </div>
                 </div>
                 <div class="p-8 flex-1 overflow-y-auto">
@@ -375,6 +386,132 @@
                         <ul id="history-list" class="divide-y divide-theme">
                             <li class="p-8 text-center text-muted">Select a date from the calendar to view history.</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards & Points System View -->
+            <div id="view-rewards" class="view-section hidden-view flex-1 flex flex-col h-full overflow-hidden">
+                <div class="p-8 border-b border-theme bg-card shrink-0">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h1 class="text-2xl font-bold text-txt">🎮 Rewards & Points</h1>
+                            <p class="text-sm text-muted mt-1">Earn points and redeem rewards</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-gradient-to-r from-brand-600 to-brand-700 text-white px-6 py-3 rounded-xl shadow-lg">
+                                <p class="text-xs font-medium opacity-90">Your Points</p>
+                                <p id="user-total-points" class="text-3xl font-extrabold">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex-1 overflow-y-auto p-8">
+                    <div class="max-w-6xl mx-auto space-y-8">
+                        
+                        <!-- Points Stats -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-muted">Total Earned</p>
+                                        <p id="total-earned-points" class="text-2xl font-bold text-txt">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-muted">Total Spent</p>
+                                        <p id="total-spent-points" class="text-2xl font-bold text-txt">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-muted">Items Redeemed</p>
+                                        <p id="total-items-redeemed" class="text-2xl font-bold text-txt">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Earn Points Section -->
+                        <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                            <h2 class="text-xl font-bold text-txt mb-4 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Earn Points
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-main border border-theme rounded-lg p-4 hover:border-brand-500 transition">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-bold text-txt">Complete a Review</h3>
+                                        <span class="bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold">+10 pts</span>
+                                    </div>
+                                    <p class="text-sm text-muted">Complete any product review task</p>
+                                </div>
+                                
+                                <div class="bg-main border border-theme rounded-lg p-4 hover:border-brand-500 transition">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-bold text-txt">Add New Product</h3>
+                                        <span class="bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold">+5 pts</span>
+                                    </div>
+                                    <p class="text-sm text-muted">Add a new product to catalog</p>
+                                </div>
+                                
+                                <div class="bg-main border border-theme rounded-lg p-4 hover:border-brand-500 transition">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-bold text-txt">Daily Login</h3>
+                                        <span class="bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold">+2 pts</span>
+                                    </div>
+                                    <p class="text-sm text-muted">Login every day to earn bonus</p>
+                                </div>
+                                
+                                <div class="bg-main border border-theme rounded-lg p-4 hover:border-brand-500 transition">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-bold text-txt">Complete All Today's Tasks</h3>
+                                        <span class="bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-bold">+50 pts</span>
+                                    </div>
+                                    <p class="text-sm text-muted">Finish all pending tasks for the day</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Rewards Shop -->
+                        <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                            <h2 class="text-xl font-bold text-txt mb-4 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                Rewards Shop
+                            </h2>
+                            <div id="rewards-shop-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Rewards will be injected here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Points History -->
+                        <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
+                            <h2 class="text-xl font-bold text-txt mb-4 flex items-center gap-2">
+                                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Points History
+                            </h2>
+                            <div id="points-history-list" class="space-y-3 max-h-96 overflow-y-auto">
+                                <!-- Points history will be injected here -->
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -592,6 +729,77 @@
                     <div class="w-px bg-theme"></div>
                     <div class="flex flex-col items-center"><span class="text-xs uppercase mb-1">Current QTY</span> <span id="stats-qty" class="text-brand-600 text-lg font-bold">0</span></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Search Modal -->
+    <div id="advanced-search-modal" class="fixed inset-0 z-[60] hidden-view modal-overlay bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-2xl modal-content flex flex-col border border-theme max-h-[90vh]">
+            <div class="p-5 border-b border-theme flex justify-between items-center bg-main rounded-t-2xl shrink-0">
+                <h3 class="text-lg font-bold text-txt">🔍 Advanced Search & Filters</h3>
+                <button class="close-advanced-search text-muted hover:text-red-500 transition-colors bg-card rounded-full p-1 border border-theme">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1">
+                <form id="advanced-search-form" class="space-y-5">
+                    <!-- Search Query -->
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-2">🔎 Search Keywords</label>
+                        <input type="text" id="adv-search-query" placeholder="Enter product title or SKU..." class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                    </div>
+                    
+                    <!-- Days Filter -->
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-2">📅 Scheduled Days</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="adv-days-filter"></div>
+                    </div>
+                    
+                    <!-- QTY Range -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-txt mb-2">📦 Min QTY</label>
+                            <input type="number" id="adv-min-qty" min="0" placeholder="0" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-txt mb-2">📦 Max QTY</label>
+                            <input type="number" id="adv-max-qty" min="0" placeholder="1000" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                    </div>
+                    
+                    <!-- Target Reviews Range -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-txt mb-2">🎯 Min Target</label>
+                            <input type="number" id="adv-min-target" min="0" placeholder="0" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-txt mb-2">🎯 Max Target</label>
+                            <input type="number" id="adv-max-target" min="0" placeholder="100" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                    </div>
+                    
+                    <!-- Sort By -->
+                    <div>
+                        <label class="block text-sm font-semibold text-txt mb-2">📊 Sort By</label>
+                        <select id="adv-sort-by" class="w-full px-4 py-2.5 border border-theme bg-main text-txt rounded-lg focus:ring-2 focus:ring-brand-500 outline-none cursor-pointer">
+                            <option value="createdAt-desc">Newest First</option>
+                            <option value="createdAt-asc">Oldest First</option>
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="qty-desc">Highest QTY</option>
+                            <option value="qty-asc">Lowest QTY</option>
+                            <option value="target-desc">Highest Target</option>
+                            <option value="target-asc">Lowest Target</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="p-5 border-t border-theme flex justify-end gap-3 rounded-b-2xl shrink-0 bg-main">
+                <button type="button" id="reset-advanced-search" class="px-5 py-2.5 text-sm font-bold text-muted hover:bg-theme rounded-lg transition">Reset</button>
+                <button type="button" class="close-advanced-search px-5 py-2.5 text-sm font-bold text-muted hover:bg-theme rounded-lg transition">Cancel</button>
+                <button type="button" id="apply-advanced-search" class="px-6 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-md transition">Apply Filters</button>
             </div>
         </div>
     </div>
@@ -1643,7 +1851,405 @@
                     renderTodayFeaturedProducts();
                 }
             }
+            if (target === 'rewards') {
+                loadRewardsData();
+            }
         };
+
+        // ==========================================
+        // 12. ADVANCED SEARCH & FILTERS
+        // ==========================================
+        
+        let advancedFilters = {
+            query: '',
+            days: [],
+            minQty: null,
+            maxQty: null,
+            minTarget: null,
+            maxTarget: null,
+            sortBy: 'createdAt-desc'
+        };
+        
+        // Setup advanced search modal
+        function setupAdvancedSearchModal() {
+            // Setup days checkboxes
+            document.getElementById('adv-days-filter').innerHTML = daysBilingual.map(d => `
+                <label class="flex items-center space-x-2 p-2 border border-theme bg-main rounded-lg cursor-pointer hover:bg-theme transition text-xs">
+                    <input type="checkbox" value="${d.id}" class="adv-day-checkbox rounded w-3 h-3 text-brand-600">
+                    <span class="text-txt font-medium">${d.en}</span>
+                </label>
+            `).join('');
+        }
+        
+        // Open advanced search modal
+        document.getElementById('open-advanced-search-btn').addEventListener('click', () => {
+            setupAdvancedSearchModal();
+            
+            // Pre-fill current filters
+            document.getElementById('adv-search-query').value = advancedFilters.query;
+            document.getElementById('adv-min-qty').value = advancedFilters.minQty || '';
+            document.getElementById('adv-max-qty').value = advancedFilters.maxQty || '';
+            document.getElementById('adv-min-target').value = advancedFilters.minTarget || '';
+            document.getElementById('adv-max-target').value = advancedFilters.maxTarget || '';
+            document.getElementById('adv-sort-by').value = advancedFilters.sortBy;
+            
+            document.querySelectorAll('.adv-day-checkbox').forEach(cb => {
+                cb.checked = advancedFilters.days.includes(cb.value);
+            });
+            
+            const modal = document.getElementById('advanced-search-modal');
+            modal.classList.remove('hidden-view');
+            setTimeout(() => modal.classList.add('modal-active'), 10);
+        });
+        
+        // Close advanced search modal
+        document.querySelectorAll('.close-advanced-search').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = document.getElementById('advanced-search-modal');
+                modal.classList.remove('modal-active');
+                setTimeout(() => modal.classList.add('hidden-view'), 300);
+            });
+        });
+        
+        // Reset advanced search
+        document.getElementById('reset-advanced-search').addEventListener('click', () => {
+            advancedFilters = {
+                query: '',
+                days: [],
+                minQty: null,
+                maxQty: null,
+                minTarget: null,
+                maxTarget: null,
+                sortBy: 'createdAt-desc'
+            };
+            setupAdvancedSearchModal();
+            document.getElementById('adv-search-query').value = '';
+            document.getElementById('adv-min-qty').value = '';
+            document.getElementById('adv-max-qty').value = '';
+            document.getElementById('adv-min-target').value = '';
+            document.getElementById('adv-max-target').value = '';
+            document.getElementById('adv-sort-by').value = 'createdAt-desc';
+        });
+        
+        // Apply advanced search
+        document.getElementById('apply-advanced-search').addEventListener('click', async () => {
+            advancedFilters.query = document.getElementById('adv-search-query').value.trim();
+            advancedFilters.days = Array.from(document.querySelectorAll('.adv-day-checkbox:checked')).map(cb => cb.value);
+            advancedFilters.minQty = parseInt(document.getElementById('adv-min-qty').value) || null;
+            advancedFilters.maxQty = parseInt(document.getElementById('adv-max-qty').value) || null;
+            advancedFilters.minTarget = parseInt(document.getElementById('adv-min-target').value) || null;
+            advancedFilters.maxTarget = parseInt(document.getElementById('adv-max-target').value) || null;
+            advancedFilters.sortBy = document.getElementById('adv-sort-by').value;
+            
+            document.querySelector('.close-advanced-search').click();
+            await applyAdvancedFilters();
+            updateActiveFiltersDisplay();
+        });
+        
+        // Apply advanced filters
+        async function applyAdvancedFilters() {
+            try {
+                const snap = await getDocs(collection(db, "products"));
+                let results = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                // Apply query filter
+                if (advancedFilters.query) {
+                    const query = advancedFilters.query.toLowerCase();
+                    results = results.filter(p => {
+                        const titleMatch = p.title.toLowerCase().includes(query);
+                        const skus = Array.isArray(p.sku) ? p.sku : [p.sku];
+                        const skuMatch = skus.some(sku => sku.toLowerCase().includes(query));
+                        return titleMatch || skuMatch;
+                    });
+                }
+                
+                // Apply days filter
+                if (advancedFilters.days.length > 0) {
+                    results = results.filter(p => 
+                        p.days && p.days.some(day => advancedFilters.days.includes(day))
+                    );
+                }
+                
+                // Apply QTY filters
+                if (advancedFilters.minQty !== null) {
+                    results = results.filter(p => (p.qty || 0) >= advancedFilters.minQty);
+                }
+                if (advancedFilters.maxQty !== null) {
+                    results = results.filter(p => (p.qty || 0) <= advancedFilters.maxQty);
+                }
+                
+                // Apply target filters
+                if (advancedFilters.minTarget !== null) {
+                    results = results.filter(p => p.targetReviews >= advancedFilters.minTarget);
+                }
+                if (advancedFilters.maxTarget !== null) {
+                    results = results.filter(p => p.targetReviews <= advancedFilters.maxTarget);
+                }
+                
+                // Apply sorting
+                const [sortField, sortOrder] = advancedFilters.sortBy.split('-');
+                results.sort((a, b) => {
+                    let aVal = a[sortField];
+                    let bVal = b[sortField];
+                    
+                    if (sortField === 'title') {
+                        aVal = (aVal || '').toLowerCase();
+                        bVal = (bVal || '').toLowerCase();
+                    }
+                    
+                    if (sortOrder === 'asc') {
+                        return aVal > bVal ? 1 : -1;
+                    } else {
+                        return aVal < bVal ? 1 : -1;
+                    }
+                });
+                
+                state.paginatedProducts = results;
+                renderProductsTable();
+                
+                showToast(`Found ${results.length} product(s)`);
+                document.getElementById('load-more-btn').classList.add('hidden');
+            } catch(e) {
+                console.error('Advanced search error:', e);
+                showToast('Search error', 'error');
+            }
+        }
+        
+        // Update active filters display
+        function updateActiveFiltersDisplay() {
+            const container = document.getElementById('active-filters-container');
+            const list = document.getElementById('active-filters-list');
+            
+            const activeFilters = [];
+            
+            if (advancedFilters.query) activeFilters.push({ label: `Search: "${advancedFilters.query}"`, key: 'query' });
+            if (advancedFilters.days.length > 0) activeFilters.push({ label: `Days: ${advancedFilters.days.length}`, key: 'days' });
+            if (advancedFilters.minQty !== null) activeFilters.push({ label: `Min QTY: ${advancedFilters.minQty}`, key: 'minQty' });
+            if (advancedFilters.maxQty !== null) activeFilters.push({ label: `Max QTY: ${advancedFilters.maxQty}`, key: 'maxQty' });
+            if (advancedFilters.minTarget !== null) activeFilters.push({ label: `Min Target: ${advancedFilters.minTarget}`, key: 'minTarget' });
+            if (advancedFilters.maxTarget !== null) activeFilters.push({ label: `Max Target: ${advancedFilters.maxTarget}`, key: 'maxTarget' });
+            
+            if (activeFilters.length > 0) {
+                container.classList.remove('hidden');
+                list.innerHTML = activeFilters.map(f => `
+                    <span class="inline-flex items-center gap-2 bg-brand-100 text-brand-700 px-3 py-1 rounded-full text-xs font-bold border border-brand-200">
+                        ${f.label}
+                        <button onclick="removeFilter('${f.key}')" class="hover:text-brand-900">×</button>
+                    </span>
+                `).join('');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+        
+        // Remove individual filter
+        window.removeFilter = function(key) {
+            if (key === 'query') advancedFilters.query = '';
+            else if (key === 'days') advancedFilters.days = [];
+            else advancedFilters[key] = null;
+            
+            applyAdvancedFilters();
+            updateActiveFiltersDisplay();
+        };
+        
+        // Clear all filters
+        document.getElementById('clear-all-filters-btn')?.addEventListener('click', () => {
+            advancedFilters = {
+                query: '',
+                days: [],
+                minQty: null,
+                maxQty: null,
+                minTarget: null,
+                maxTarget: null,
+                sortBy: 'createdAt-desc'
+            };
+            fetchPaginatedProducts(true);
+            updateActiveFiltersDisplay();
+        });
+
+        // ==========================================
+        // 13. POINTS & REWARDS SYSTEM
+        // ==========================================
+        
+        let userPoints = {
+            total: 0,
+            earned: 0,
+            spent: 0,
+            history: []
+        };
+        
+        const rewardsShopItems = [
+            { id: 'theme-unlock', name: '🎨 Unlock Premium Theme', cost: 100, description: 'Unlock exclusive premium theme' },
+            { id: 'auto-backup', name: '💾 Auto Backup (30 days)', cost: 200, description: 'Automatic daily backups for 30 days' },
+            { id: 'bulk-import', name: '📦 Bulk Import Feature', cost: 150, description: 'Import products via CSV' },
+            { id: 'priority-support', name: '⭐ Priority Support (7 days)', cost: 300, description: 'Get priority customer support' },
+            { id: 'custom-reports', name: '📊 Custom Reports', cost: 250, description: 'Generate custom analytics reports' },
+            { id: 'api-access', name: '🔗 API Access (30 days)', cost: 500, description: 'Access to REST API' }
+        ];
+        
+        // Load rewards data
+        async function loadRewardsData() {
+            try {
+                const userEmail = auth.currentUser?.email;
+                if (!userEmail) return;
+                
+                const pointsSnap = await getDocs(query(collection(db, "user_points"), where("userEmail", "==", userEmail)));
+                
+                if (pointsSnap.empty) {
+                    // Initialize user points
+                    await addDoc(collection(db, "user_points"), {
+                        userEmail,
+                        total: 0,
+                        earned: 0,
+                        spent: 0,
+                        history: [],
+                        createdAt: serverTimestamp()
+                    });
+                    userPoints = { total: 0, earned: 0, spent: 0, history: [] };
+                } else {
+                    const data = pointsSnap.docs[0].data();
+                    userPoints = {
+                        id: pointsSnap.docs[0].id,
+                        total: data.total || 0,
+                        earned: data.earned || 0,
+                        spent: data.spent || 0,
+                        history: data.history || []
+                    };
+                }
+                
+                renderRewardsView();
+            } catch(e) {
+                console.error('Error loading rewards:', e);
+            }
+        }
+        
+        // Render rewards view
+        function renderRewardsView() {
+            document.getElementById('user-total-points').innerText = userPoints.total;
+            document.getElementById('user-points-badge').innerText = `${userPoints.total} pts`;
+            document.getElementById('total-earned-points').innerText = userPoints.earned;
+            document.getElementById('total-spent-points').innerText = userPoints.spent;
+            document.getElementById('total-items-redeemed').innerText = userPoints.history.filter(h => h.type === 'spent').length;
+            
+            // Render shop items
+            document.getElementById('rewards-shop-grid').innerHTML = rewardsShopItems.map(item => `
+                <div class="bg-main border border-theme rounded-xl p-6 hover:border-brand-500 transition">
+                    <div class="text-4xl mb-3">${item.name.split(' ')[0]}</div>
+                    <h3 class="font-bold text-txt mb-2">${item.name.substring(2)}</h3>
+                    <p class="text-sm text-muted mb-4">${item.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-brand-600 font-bold text-lg">${item.cost} pts</span>
+                        <button onclick="redeemReward('${item.id}', ${item.cost}, '${item.name}')" 
+                                class="px-4 py-2 text-xs font-bold rounded-lg transition ${userPoints.total >= item.cost ? 'bg-brand-600 text-white hover:bg-brand-700' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}"
+                                ${userPoints.total < item.cost ? 'disabled' : ''}>
+                            Redeem
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Render points history
+            const historyHtml = userPoints.history.length > 0 
+                ? userPoints.history.slice().reverse().map(h => `
+                    <div class="flex justify-between items-center p-4 bg-main border border-theme rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center ${h.type === 'earned' ? 'bg-green-100' : 'bg-orange-100'}">
+                                ${h.type === 'earned' ? '➕' : '➖'}
+                            </div>
+                            <div>
+                                <p class="font-bold text-txt text-sm">${h.description}</p>
+                                <p class="text-xs text-muted">${new Date(h.timestamp).toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <span class="font-bold ${h.type === 'earned' ? 'text-green-600' : 'text-orange-600'}">
+                            ${h.type === 'earned' ? '+' : '-'}${h.points} pts
+                        </span>
+                    </div>
+                `).join('')
+                : '<p class="text-center text-muted py-8">No points history yet</p>';
+            
+            document.getElementById('points-history-list').innerHTML = historyHtml;
+        }
+        
+        // Add points
+        async function addPoints(points, description) {
+            try {
+                const userEmail = auth.currentUser?.email;
+                if (!userEmail || !userPoints.id) return;
+                
+                const newHistory = {
+                    type: 'earned',
+                    points,
+                    description,
+                    timestamp: new Date().toISOString()
+                };
+                
+                userPoints.total += points;
+                userPoints.earned += points;
+                userPoints.history.push(newHistory);
+                
+                await updateDoc(doc(db, "user_points", userPoints.id), {
+                    total: userPoints.total,
+                    earned: userPoints.earned,
+                    history: userPoints.history
+                });
+                
+                renderRewardsView();
+                showToast(`🎉 Earned ${points} points!`);
+            } catch(e) {
+                console.error('Error adding points:', e);
+            }
+        }
+        
+        // Redeem reward
+        window.redeemReward = async function(itemId, cost, itemName) {
+            if (userPoints.total < cost) {
+                showToast('Not enough points!', 'error');
+                return;
+            }
+            
+            if (!confirm(`Redeem ${itemName} for ${cost} points?`)) return;
+            
+            try {
+                const newHistory = {
+                    type: 'spent',
+                    points: cost,
+                    description: `Redeemed: ${itemName}`,
+                    itemId,
+                    timestamp: new Date().toISOString()
+                };
+                
+                userPoints.total -= cost;
+                userPoints.spent += cost;
+                userPoints.history.push(newHistory);
+                
+                await updateDoc(doc(db, "user_points", userPoints.id), {
+                    total: userPoints.total,
+                    spent: userPoints.spent,
+                    history: userPoints.history
+                });
+                
+                renderRewardsView();
+                showToast(`✅ Successfully redeemed ${itemName}!`);
+                
+                // Trigger confetti
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            } catch(e) {
+                console.error('Error redeeming reward:', e);
+                showToast('Error redeeming reward', 'error');
+            }
+        };
+        
+        // Award points for actions
+        const originalSaveProductBtn = document.getElementById('save-product-btn');
+        originalSaveProductBtn.addEventListener('click', async function() {
+            // Wait for product to be saved, then award points
+            setTimeout(() => {
+                if (!document.getElementById('edit-product-id').value) {
+                    addPoints(5, 'Added new product');
+                }
+            }, 1000);
+        });
 
     </script>
 </body>
