@@ -856,7 +856,21 @@
             { id: 'Sunday', en: 'Sunday', ur: 'اتوار' }
         ];
 
-        let chartInstance = null; let activeTaskContext = null; let activeTaskDate = null; 
+        let chartInstance = null; let activeTaskContext = null; let activeTaskDate = null;
+        
+        // Additional SKU management
+        let additionalSkuCount = 0;
+        
+        // Advanced filters state
+        let advancedFilters = {
+            query: '',
+            days: [],
+            minQty: null,
+            maxQty: null,
+            minTarget: null,
+            maxTarget: null,
+            sortBy: 'createdAt-desc'
+        }; 
 
         // ==========================================
         // 3. UTILITIES & THEME ENGINE
@@ -922,6 +936,57 @@
         // ==========================================
         // 5. DATA FETCHING
         // ==========================================
+        
+        // Setup all button listeners after login
+        function setupButtonListeners() {
+            console.log('🔧 Setting up button listeners...');
+            attachAddProductButtonListener();
+            attachAddFeaturedButtonListener();
+            attachAdvancedSearchButtonListener();
+            attachSearchButtonListeners();
+            console.log('✅ All button listeners attached');
+        }
+        
+        // Search button listeners
+        function attachSearchButtonListeners() {
+            const btnSearch = document.getElementById('btn-search');
+            const btnClearSearch = document.getElementById('btn-clear-search');
+            const searchInput = document.getElementById('search-product');
+            
+            if (btnSearch) {
+                btnSearch.addEventListener('click', () => { 
+                    const searchQuery = searchInput.value.trim();
+                    if (!searchQuery) {
+                        showToast('Please enter a search term', 'error');
+                        return;
+                    }
+                    state.searchQuery = searchQuery;
+                    fetchPaginatedProducts(true);
+                    btnClearSearch.classList.remove('hidden');
+                });
+                console.log('✅ Search button listener attached');
+            }
+            
+            if (btnClearSearch) {
+                btnClearSearch.addEventListener('click', () => {
+                    searchInput.value = '';
+                    state.searchQuery = '';
+                    fetchPaginatedProducts(true);
+                    btnClearSearch.classList.add('hidden');
+                });
+                console.log('✅ Clear search button listener attached');
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        btnSearch.click();
+                    }
+                });
+                console.log('✅ Search input enter key listener attached');
+            }
+        }
+        
         async function initializeData() {
             try {
                 const countSnap = await getCountFromServer(collection(db, "products"));
@@ -938,7 +1003,10 @@
                 // Load featured products on startup
                 await fetchFeaturedProducts();
 
-                setupUI(); switchView('dashboard'); await fetchPaginatedProducts(true);
+                setupUI(); 
+                setupButtonListeners(); // ✅ ATTACH BUTTON LISTENERS AFTER LOGIN
+                switchView('dashboard'); 
+                await fetchPaginatedProducts(true);
             } catch(e) { console.error(e); showToast("Error loading data", "error"); }
         }
 
@@ -1234,17 +1302,19 @@
             }
         }
         
-        // DAY FILTER
-        document.getElementById('filter-day').addEventListener('change', (e) => { 
-            state.filterDay = e.target.value; 
-            fetchPaginatedProducts(true); 
-        });
+        // DAY FILTER (element removed from UI, keeping code for future use)
+        const filterDayElement = document.getElementById('filter-day');
+        if (filterDayElement) {
+            filterDayElement.addEventListener('change', (e) => { 
+                state.filterDay = e.target.value; 
+                fetchPaginatedProducts(true); 
+            });
+        }
 
         // Add/Edit Product Modal
         const prodModal = document.getElementById('add-product-modal');
         
-        // Multiple SKU Management
-        let additionalSkuCount = 0;
+        // Multiple SKU Management (variable declared at top)
         
         function addSkuInput() {
             additionalSkuCount++;
@@ -1270,23 +1340,37 @@
             }
         };
         
-        document.getElementById('add-sku-btn').addEventListener('click', addSkuInput);
+        // Add SKU button - with null check
+        const addSkuBtn = document.getElementById('add-sku-btn');
+        if (addSkuBtn) {
+            addSkuBtn.addEventListener('click', addSkuInput);
+        } else {
+            console.warn('⚠️ add-sku-btn not found');
+        }
         
-        // Open Add Product Modal
-        document.getElementById('open-add-modal-btn').addEventListener('click', () => {
-            console.log('✅ Add Product button clicked');
-            document.getElementById('product-form').reset(); 
-            document.getElementById('edit-product-id').value = ""; 
-            document.getElementById('modal-product-title').innerText = "Add New Product"; 
-            document.getElementById('days-error').classList.add('hidden');
-            
-            // Clear additional SKUs
-            document.getElementById('additional-skus-container').innerHTML = '';
-            additionalSkuCount = 0;
-            
-            prodModal.classList.remove('hidden-view'); 
-            setTimeout(() => prodModal.classList.add('modal-active'), 10);
-        });
+        // Open Add Product Modal - MOVED TO setupButtonListeners()
+        function attachAddProductButtonListener() {
+            const openAddModalBtn = document.getElementById('open-add-modal-btn');
+            if (openAddModalBtn) {
+                openAddModalBtn.addEventListener('click', () => {
+                    console.log('✅ Add Product button clicked');
+                    document.getElementById('product-form').reset(); 
+                    document.getElementById('edit-product-id').value = ""; 
+                    document.getElementById('modal-product-title').innerText = "Add New Product"; 
+                    document.getElementById('days-error').classList.add('hidden');
+                    
+                    // Clear additional SKUs
+                    document.getElementById('additional-skus-container').innerHTML = '';
+                    additionalSkuCount = 0;
+                    
+                    prodModal.classList.remove('hidden-view'); 
+                    setTimeout(() => prodModal.classList.add('modal-active'), 10);
+                });
+                console.log('✅ Add Product button listener attached');
+            } else {
+                console.error('❌ open-add-modal-btn not found!');
+            }
+        }
 
         window.openEditModal = (id) => {
             const p = state.paginatedProducts.find(x => x.id === id) || state.todayProducts.find(x => x.id === id); if(!p) return;
@@ -1802,21 +1886,29 @@
             `).join('');
         }
 
-        // Open add featured modal
-        document.getElementById('open-add-featured-modal-btn').addEventListener('click', () => {
-            console.log('✅ Add Featured button clicked');
-            document.getElementById('featured-form').reset();
-            document.getElementById('edit-featured-id').value = '';
-            document.getElementById('modal-featured-title').innerText = '⭐ Add Featured Product';
-            document.getElementById('save-featured-text').innerText = 'Add Featured';
-            document.getElementById('featured-days-error').classList.add('hidden');
-            
-            setupFeaturedDaysCheckboxes();
-            
-            const modal = document.getElementById('add-featured-modal');
-            modal.classList.remove('hidden-view');
-            setTimeout(() => modal.classList.add('modal-active'), 10);
-        });
+        // Open add featured modal - MOVED TO setupButtonListeners()
+        function attachAddFeaturedButtonListener() {
+            const openAddFeaturedBtn = document.getElementById('open-add-featured-modal-btn');
+            if (openAddFeaturedBtn) {
+                openAddFeaturedBtn.addEventListener('click', () => {
+                    console.log('✅ Add Featured button clicked');
+                    document.getElementById('featured-form').reset();
+                    document.getElementById('edit-featured-id').value = '';
+                    document.getElementById('modal-featured-title').innerText = '⭐ Add Featured Product';
+                    document.getElementById('save-featured-text').innerText = 'Add Featured';
+                    document.getElementById('featured-days-error').classList.add('hidden');
+                    
+                    setupFeaturedDaysCheckboxes();
+                    
+                    const modal = document.getElementById('add-featured-modal');
+                    modal.classList.remove('hidden-view');
+                    setTimeout(() => modal.classList.add('modal-active'), 10);
+                });
+                console.log('✅ Add Featured button listener attached');
+            } else {
+                console.warn('⚠️ open-add-featured-modal-btn not found (Featured view not loaded yet)');
+            }
+        }
         
         // Open edit featured modal
         window.openEditFeaturedModal = (id) => {
@@ -1922,15 +2014,7 @@
         // 12. ADVANCED SEARCH & FILTERS
         // ==========================================
         
-        let advancedFilters = {
-            query: '',
-            days: [],
-            minQty: null,
-            maxQty: null,
-            minTarget: null,
-            maxTarget: null,
-            sortBy: 'createdAt-desc'
-        };
+        // Advanced filters (variable declared at top)
         
         // Setup advanced search modal
         function setupAdvancedSearchModal() {
@@ -1943,26 +2027,34 @@
             `).join('');
         }
         
-        // Open advanced search modal
-        document.getElementById('open-advanced-search-btn').addEventListener('click', () => {
-            setupAdvancedSearchModal();
+        // Open advanced search modal - MOVED TO setupButtonListeners()
+        function attachAdvancedSearchButtonListener() {
+            const advSearchBtn = document.getElementById('open-advanced-search-btn');
+            if (advSearchBtn) {
+                advSearchBtn.addEventListener('click', () => {
+                    setupAdvancedSearchModal();
             
-            // Pre-fill current filters
-            document.getElementById('adv-search-query').value = advancedFilters.query;
-            document.getElementById('adv-min-qty').value = advancedFilters.minQty || '';
-            document.getElementById('adv-max-qty').value = advancedFilters.maxQty || '';
-            document.getElementById('adv-min-target').value = advancedFilters.minTarget || '';
-            document.getElementById('adv-max-target').value = advancedFilters.maxTarget || '';
-            document.getElementById('adv-sort-by').value = advancedFilters.sortBy;
-            
-            document.querySelectorAll('.adv-day-checkbox').forEach(cb => {
-                cb.checked = advancedFilters.days.includes(cb.value);
-            });
-            
-            const modal = document.getElementById('advanced-search-modal');
-            modal.classList.remove('hidden-view');
-            setTimeout(() => modal.classList.add('modal-active'), 10);
-        });
+                    // Pre-fill current filters
+                    document.getElementById('adv-search-query').value = advancedFilters.query;
+                    document.getElementById('adv-min-qty').value = advancedFilters.minQty || '';
+                    document.getElementById('adv-max-qty').value = advancedFilters.maxQty || '';
+                    document.getElementById('adv-min-target').value = advancedFilters.minTarget || '';
+                    document.getElementById('adv-max-target').value = advancedFilters.maxTarget || '';
+                    document.getElementById('adv-sort-by').value = advancedFilters.sortBy;
+                    
+                    document.querySelectorAll('.adv-day-checkbox').forEach(cb => {
+                        cb.checked = advancedFilters.days.includes(cb.value);
+                    });
+                    
+                    const modal = document.getElementById('advanced-search-modal');
+                    modal.classList.remove('hidden-view');
+                    setTimeout(() => modal.classList.add('modal-active'), 10);
+                });
+                console.log('✅ Advanced Search button listener attached');
+            } else {
+                console.error('❌ open-advanced-search-btn not found!');
+            }
+        }
         
         // Close advanced search modal
         document.querySelectorAll('.close-advanced-search').forEach(btn => {
