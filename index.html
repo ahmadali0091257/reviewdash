@@ -970,9 +970,38 @@
                 }
             });
 
-            if (target === 'dashboard') renderDashboard();
-            if (target === 'today') renderTodayTasks();
-            if (target === 'history') document.getElementById('history-date-picker').value = getCurrentDateString();
+            // Load data based on view
+            if (target === 'dashboard') {
+                renderDashboard();
+            }
+            if (target === 'today') {
+                renderTodayTasks();
+            }
+            if (target === 'history') {
+                document.getElementById('history-date-picker').value = getCurrentDateString();
+            }
+            if (target === 'featured') {
+                if (state.featuredProducts.length === 0) {
+                    fetchFeaturedProducts();
+                } else {
+                    renderFeaturedProducts();
+                }
+            }
+            if (target === 'today-featured') {
+                if (state.featuredProducts.length === 0) {
+                    fetchFeaturedProducts().then(() => renderTodayFeaturedProducts());
+                } else {
+                    renderTodayFeaturedProducts();
+                }
+            }
+            if (target === 'rewards') {
+                loadRewardsData();
+            }
+            if (target === 'products') {
+                if (state.paginatedProducts.length === 0) {
+                    fetchPaginatedProducts(true);
+                }
+            }
         }
 
         // ==========================================
@@ -1211,7 +1240,7 @@
             fetchPaginatedProducts(true); 
         });
 
-        // Add/Edit
+        // Add/Edit Product Modal
         const prodModal = document.getElementById('add-product-modal');
         
         // Multiple SKU Management
@@ -1243,7 +1272,9 @@
         
         document.getElementById('add-sku-btn').addEventListener('click', addSkuInput);
         
+        // Open Add Product Modal
         document.getElementById('open-add-modal-btn').addEventListener('click', () => {
+            console.log('✅ Add Product button clicked');
             document.getElementById('product-form').reset(); 
             document.getElementById('edit-product-id').value = ""; 
             document.getElementById('modal-product-title').innerText = "Add New Product"; 
@@ -1289,11 +1320,21 @@
         document.querySelectorAll('.close-add-modal').forEach(btn => btn.addEventListener('click', () => { prodModal.classList.remove('modal-active'); setTimeout(() => prodModal.classList.add('hidden-view'), 300); }));
 
         document.getElementById('save-product-btn').addEventListener('click', async () => {
-            const form = document.getElementById('product-form'); if(!form.checkValidity()) { form.reportValidity(); return; }
+            const form = document.getElementById('product-form'); 
+            if(!form.checkValidity()) { 
+                form.reportValidity(); 
+                return; 
+            }
+            
             const checkedDays = Array.from(document.querySelectorAll('.day-checkbox:checked')).map(cb => cb.value);
-            if(checkedDays.length === 0) { document.getElementById('days-error').classList.remove('hidden'); return; }
+            if(checkedDays.length === 0) { 
+                document.getElementById('days-error').classList.remove('hidden'); 
+                return; 
+            }
 
-            document.getElementById('save-product-text').classList.add('hidden'); document.getElementById('save-product-spinner').classList.remove('hidden'); document.getElementById('save-product-btn').disabled = true;
+            document.getElementById('save-product-text').classList.add('hidden'); 
+            document.getElementById('save-product-spinner').classList.remove('hidden'); 
+            document.getElementById('save-product-btn').disabled = true;
 
             const editId = document.getElementById('edit-product-id').value;
             
@@ -1307,7 +1348,7 @@
             
             const prodData = { 
                 title: document.getElementById('prod-title').value, 
-                sku: allSkus, // Store as array
+                sku: allSkus,
                 qty: parseInt(document.getElementById('prod-qty').value) || 0,
                 initialCount: parseInt(document.getElementById('prod-initial').value), 
                 targetReviews: parseInt(document.getElementById('prod-target').value), 
@@ -1315,11 +1356,31 @@
             };
             
             try {
-                if(editId) { await updateDoc(doc(db, "products", editId), prodData); showToast('Product updated successfully!'); } 
-                else { prodData.createdAt = serverTimestamp(); await addDoc(collection(db, "products"), prodData); state.totalProductsCount++; showToast('Product added successfully!'); }
-                await initializeData(); document.querySelector('.close-add-modal').click();
-            } catch(e) { showToast('Error saving product', 'error'); } 
-            finally { document.getElementById('save-product-text').classList.remove('hidden'); document.getElementById('save-product-spinner').classList.add('hidden'); document.getElementById('save-product-btn').disabled = false; }
+                if(editId) { 
+                    await updateDoc(doc(db, "products", editId), prodData); 
+                    showToast('Product updated successfully!');
+                } else { 
+                    prodData.createdAt = serverTimestamp(); 
+                    await addDoc(collection(db, "products"), prodData); 
+                    state.totalProductsCount++;
+                    showToast('Product added successfully!');
+                    
+                    // Award points for adding product
+                    if (userPoints.id) {
+                        await addPoints(5, 'Added new product');
+                    }
+                }
+                
+                await initializeData(); 
+                document.querySelector('.close-add-modal').click();
+            } catch(e) { 
+                console.error('Error saving product:', e);
+                showToast('Error saving product', 'error'); 
+            } finally { 
+                document.getElementById('save-product-text').classList.remove('hidden'); 
+                document.getElementById('save-product-spinner').classList.add('hidden'); 
+                document.getElementById('save-product-btn').disabled = false; 
+            }
         });
 
         window.deleteProduct = async (id) => {
@@ -1743,6 +1804,7 @@
 
         // Open add featured modal
         document.getElementById('open-add-featured-modal-btn').addEventListener('click', () => {
+            console.log('✅ Add Featured button clicked');
             document.getElementById('featured-form').reset();
             document.getElementById('edit-featured-id').value = '';
             document.getElementById('modal-featured-title').innerText = '⭐ Add Featured Product';
@@ -1853,25 +1915,6 @@
             } catch(e) {
                 console.error('Error deleting featured product:', e);
                 showToast('Error deleting featured product', 'error');
-            }
-        };
-
-        // Load featured products on view switch
-        const originalSwitchView = switchView;
-        switchView = function(target) {
-            originalSwitchView(target);
-            if (target === 'featured') {
-                fetchFeaturedProducts();
-            }
-            if (target === 'today-featured') {
-                if (state.featuredProducts.length === 0) {
-                    fetchFeaturedProducts().then(() => renderTodayFeaturedProducts());
-                } else {
-                    renderTodayFeaturedProducts();
-                }
-            }
-            if (target === 'rewards') {
-                loadRewardsData();
             }
         };
 
@@ -2351,17 +2394,6 @@
                 showToast('Error redeeming reward', 'error');
             }
         };
-        
-        // Award points for actions
-        const originalSaveProductBtn = document.getElementById('save-product-btn');
-        originalSaveProductBtn.addEventListener('click', async function() {
-            // Wait for product to be saved, then award points
-            setTimeout(() => {
-                if (!document.getElementById('edit-product-id').value) {
-                    addPoints(5, 'Added new product');
-                }
-            }, 1000);
-        });
 
     </script>
 </body>
