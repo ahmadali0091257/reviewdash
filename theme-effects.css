@@ -1,0 +1,604 @@
+/* ==========================================
+   🎪 ADVANCED THEME EFFECTS & ANIMATIONS
+   Extra Special Effects for Premium Themes
+   ========================================== */
+
+/* ==========================================
+   GLASS MORPHISM EFFECTS
+   ========================================== */
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="crystal-white"] .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+[data-theme="ocean-blue"] .glass-effect {
+    background: rgba(19, 47, 76, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+[data-theme="royal-purple"] .glass-effect {
+    background: rgba(26, 15, 46, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+[data-theme="sunset-orange"] .glass-effect {
+    background: rgba(45, 24, 16, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+/* ==========================================
+   GRADIENT BORDER ANIMATIONS
+   ========================================== */
+
+@keyframes gradient-border {
+    0%, 100% {
+        border-image-source: linear-gradient(45deg, var(--brand-500), var(--brand-700));
+    }
+    50% {
+        border-image-source: linear-gradient(45deg, var(--brand-700), var(--brand-500));
+    }
+}
+
+.gradient-border {
+    border: 2px solid;
+    border-image-slice: 1;
+    animation: gradient-border 3s ease infinite;
+}
+
+/* ==========================================
+   HOVER LIFT & SHADOW EFFECTS
+   ========================================== */
+
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="crystal-white"] .hover-lift:hover {
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="ocean-blue"] .hover-lift:hover {
+    box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
+}
+
+[data-theme="royal-purple"] .hover-lift:hover {
+    box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5);
+}
+
+[data-theme="sunset-orange"] .hover-lift:hover {
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.5);
+}
+
+/* ==========================================
+   PARTICLE EFFECTS
+   ========================================== */
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Crystal White Particles */
+[data-theme="crystal-white"] body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(37, 99, 235, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: 0 0, 40px 40px;
+    animation: particle-drift 20s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes particle-drift {
+    0% { background-position: 0 0, 40px 40px; }
+    100% { background-position: 50px 50px, 90px 90px; }
+}
+
+/* ==========================================
+   NEON GLOW EFFECTS
+   ========================================== */
+
+@keyframes neon-glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px var(--brand-500),
+            0 0 10px var(--brand-500),
+            0 0 20px var(--brand-500);
+    }
+    50% {
+        text-shadow: 
+            0 0 10px var(--brand-600),
+            0 0 20px var(--brand-600),
+            0 0 40px var(--brand-600),
+            0 0 60px var(--brand-600);
+    }
+}
+
+.neon-text {
+    animation: neon-glow 2s ease-in-out infinite;
+}
+
+/* ==========================================
+   RIPPLE CLICK EFFECT
+   ========================================== */
+
+@keyframes ripple-effect {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+    width: 300px;
+    height: 300px;
+    animation: ripple-effect 0.6s ease-out;
+}
+
+/* ==========================================
+   LOADING SKELETON ANIMATION
+   ========================================== */
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-card) 0%,
+        var(--border-col) 50%,
+        var(--bg-card) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* ==========================================
+   TYPEWRITER EFFECT
+   ========================================== */
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--brand-500); }
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--brand-500);
+    white-space: nowrap;
+    animation: 
+        typewriter 3s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+/* ==========================================
+   FLOATING ELEMENTS
+   ========================================== */
+
+@keyframes float-up-down {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.float-animation {
+    animation: float-up-down 3s ease-in-out infinite;
+}
+
+/* ==========================================
+   ROTATE 3D EFFECT
+   ========================================== */
+
+@keyframes rotate-3d {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+.rotate-3d {
+    animation: rotate-3d 10s linear infinite;
+    transform-style: preserve-3d;
+}
+
+/* ==========================================
+   GRADIENT ANIMATION
+   ========================================== */
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient {
+    background: linear-gradient(
+        -45deg,
+        var(--brand-500),
+        var(--brand-600),
+        var(--brand-700),
+        var(--brand-800)
+    );
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+/* ==========================================
+   SCALE PULSE EFFECT
+   ========================================== */
+
+@keyframes scale-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.scale-pulse {
+    animation: scale-pulse 2s ease-in-out infinite;
+}
+
+/* ==========================================
+   SLIDE IN ANIMATIONS
+   ========================================== */
+
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-top {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-bottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-left { animation: slide-in-left 0.5s ease-out; }
+.slide-in-right { animation: slide-in-right 0.5s ease-out; }
+.slide-in-top { animation: slide-in-top 0.5s ease-out; }
+.slide-in-bottom { animation: slide-in-bottom 0.5s ease-out; }
+
+/* ==========================================
+   ZOOM ANIMATIONS
+   ========================================== */
+
+@keyframes zoom-in {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoom-out {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.zoom-in { animation: zoom-in 0.3s ease-out; }
+.zoom-out { animation: zoom-out 0.3s ease-out; }
+
+/* ==========================================
+   FLIP ANIMATIONS
+   ========================================== */
+
+@keyframes flip-horizontal {
+    from {
+        transform: perspective(400px) rotateY(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(400px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes flip-vertical {
+    from {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+.flip-horizontal { animation: flip-horizontal 0.6s ease-out; }
+.flip-vertical { animation: flip-vertical 0.6s ease-out; }
+
+/* ==========================================
+   ATTENTION SEEKERS
+   ========================================== */
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(0.9); }
+    20%, 40% { transform: scale(1.1); }
+}
+
+@keyframes wobble {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-25px) rotate(-5deg); }
+    30% { transform: translateX(20px) rotate(3deg); }
+    45% { transform: translateX(-15px) rotate(-3deg); }
+    60% { transform: translateX(10px) rotate(2deg); }
+    75% { transform: translateX(-5px) rotate(-1deg); }
+}
+
+@keyframes jello {
+    0%, 100% { transform: skewX(0deg) skewY(0deg); }
+    30% { transform: skewX(25deg) skewY(25deg); }
+    40% { transform: skewX(-15deg) skewY(-15deg); }
+    50% { transform: skewX(15deg) skewY(15deg); }
+    65% { transform: skewX(-5deg) skewY(-5deg); }
+    75% { transform: skewX(5deg) skewY(5deg); }
+}
+
+.heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
+.wobble { animation: wobble 1s ease-in-out; }
+.jello { animation: jello 0.9s ease-in-out; }
+
+/* ==========================================
+   THEME-SPECIFIC SPECIAL EFFECTS
+   ========================================== */
+
+/* Crystal White - Snow Effect */
+[data-theme="crystal-white"] .special-effect::before {
+    content: '❄';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    font-size: 20px;
+    opacity: 0;
+    animation: snow-fall 3s linear infinite;
+}
+
+@keyframes snow-fall {
+    0% {
+        top: -20px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* Ocean Blue - Wave Effect */
+[data-theme="ocean-blue"] .special-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="ocean-blue"] .special-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 200%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--brand-500), transparent);
+    animation: wave-slide 2s linear infinite;
+}
+
+@keyframes wave-slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Royal Purple - Sparkle Effect */
+[data-theme="royal-purple"] .special-effect {
+    position: relative;
+}
+
+[data-theme="royal-purple"] .special-effect::before {
+    content: '✨';
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: 16px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+}
+
+/* Sunset Orange - Fire Effect */
+[data-theme="sunset-orange"] .special-effect::before {
+    content: '🔥';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    animation: fire-flicker 1s ease-in-out infinite;
+}
+
+@keyframes fire-flicker {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(-5px) scale(1.1);
+    }
+}
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Use GPU acceleration for animations */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+.transition-smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.transition-fast { transition: all 0.15s ease; }
+.transition-slow { transition: all 0.5s ease; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-500 { animation-delay: 0.5s; }
+
+.duration-fast { animation-duration: 0.3s; }
+.duration-normal { animation-duration: 0.5s; }
+.duration-slow { animation-duration: 1s; }

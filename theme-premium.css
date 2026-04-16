@@ -1,0 +1,535 @@
+/* ==========================================
+   🎨 PREMIUM THEMES COLLECTION
+   Ultra Beautiful Themes with Animations
+   ========================================== */
+
+/* ==========================================
+   1. CRYSTAL WHITE ❄️ (Ultra Clean & Professional)
+   ========================================== */
+[data-theme="crystal-white"] {
+    --brand-50: #eff6ff;
+    --brand-100: #dbeafe;
+    --brand-200: #bfdbfe;
+    --brand-500: #3b82f6;
+    --brand-600: #2563eb;
+    --brand-700: #1d4ed8;
+    --brand-800: #1e40af;
+    --brand-900: #1e3a8a;
+    --bg-main: #ffffff;
+    --bg-card: #fafbff;
+    --border-col: #e0e7ff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+}
+
+/* Crystal White Glass Morphism Effect */
+[data-theme="crystal-white"] .bg-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="crystal-white"] aside {
+    background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+    box-shadow: 4px 0 24px rgba(59, 130, 246, 0.08);
+}
+
+[data-theme="crystal-white"] .nav-btn:hover {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="crystal-white"] .bg-brand-600 {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="crystal-white"] button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Floating Animation */
+@keyframes float-crystal {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+[data-theme="crystal-white"] .bg-brand-600 {
+    animation: float-crystal 3s ease-in-out infinite;
+}
+
+/* ==========================================
+   2. OCEAN BLUE 🌊 (Deep & Calming)
+   ========================================== */
+[data-theme="ocean-blue"] {
+    --brand-50: #ecfeff;
+    --brand-100: #cffafe;
+    --brand-200: #a5f3fc;
+    --brand-500: #06b6d4;
+    --brand-600: #0891b2;
+    --brand-700: #0e7490;
+    --brand-800: #155e75;
+    --brand-900: #164e63;
+    --bg-main: #0a1929;
+    --bg-card: #132f4c;
+    --border-col: #1e4976;
+    --text-main: #e3f2fd;
+    --text-muted: #90caf9;
+}
+
+/* Ocean Wave Background */
+[data-theme="ocean-blue"] body {
+    background: linear-gradient(180deg, #0a1929 0%, #001e3c 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+[data-theme="ocean-blue"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(8, 145, 178, 0.1) 0%, transparent 50%);
+    animation: wave-move 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes wave-move {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(-50px) translateY(-30px); }
+}
+
+[data-theme="ocean-blue"] .bg-card {
+    background: rgba(19, 47, 76, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    box-shadow: 0 8px 32px rgba(6, 182, 212, 0.15);
+}
+
+[data-theme="ocean-blue"] .bg-brand-600 {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    box-shadow: 0 8px 32px rgba(6, 182, 212, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="ocean-blue"] .bg-brand-600::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+[data-theme="ocean-blue"] .nav-btn:hover {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(8, 145, 178, 0.2) 100%);
+    border-left: 3px solid #06b6d4;
+    transform: translateX(5px);
+}
+
+/* Ripple Effect */
+@keyframes ripple {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+[data-theme="ocean-blue"] button:active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: rgba(6, 182, 212, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s ease-out;
+}
+
+/* ==========================================
+   3. ROYAL PURPLE 👑 (Luxury & Elegant)
+   ========================================== */
+[data-theme="royal-purple"] {
+    --brand-50: #faf5ff;
+    --brand-100: #f3e8ff;
+    --brand-200: #e9d5ff;
+    --brand-500: #a855f7;
+    --brand-600: #9333ea;
+    --brand-700: #7e22ce;
+    --brand-800: #6b21a8;
+    --brand-900: #581c87;
+    --bg-main: #0f0a1a;
+    --bg-card: #1a0f2e;
+    --border-col: #2d1b4e;
+    --text-main: #f3e8ff;
+    --text-muted: #c084fc;
+}
+
+/* Royal Purple Gradient Background */
+[data-theme="royal-purple"] body {
+    background: linear-gradient(135deg, #0f0a1a 0%, #1a0f2e 50%, #2d1b4e 100%);
+    position: relative;
+}
+
+[data-theme="royal-purple"] body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+    animation: rotate-gradient 30s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate-gradient {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+[data-theme="royal-purple"] .bg-card {
+    background: linear-gradient(135deg, rgba(26, 15, 46, 0.9) 0%, rgba(45, 27, 78, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="royal-purple"] .bg-brand-600 {
+    background: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #7e22ce 100%);
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.5),
+                0 0 60px rgba(168, 85, 247, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold Shimmer Effect */
+[data-theme="royal-purple"] .bg-brand-600::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 215, 0, 0.2) 50%, 
+        transparent 70%);
+    animation: gold-shimmer 4s infinite;
+}
+
+@keyframes gold-shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+[data-theme="royal-purple"] .nav-btn:hover {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%);
+    border-left: 3px solid #a855f7;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+    transform: translateX(5px) scale(1.02);
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+}
+
+[data-theme="royal-purple"] button:hover {
+    animation: pulse-glow 2s infinite;
+}
+
+/* ==========================================
+   4. SUNSET ORANGE 🌅 (Warm & Energetic)
+   ========================================== */
+[data-theme="sunset-orange"] {
+    --brand-50: #fff7ed;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-500: #f97316;
+    --brand-600: #ea580c;
+    --brand-700: #c2410c;
+    --brand-800: #9a3412;
+    --brand-900: #7c2d12;
+    --bg-main: #1a0f0a;
+    --bg-card: #2d1810;
+    --border-col: #4a2818;
+    --text-main: #fff7ed;
+    --text-muted: #fdba74;
+}
+
+/* Sunset Gradient Background */
+[data-theme="sunset-orange"] body {
+    background: linear-gradient(180deg, 
+        #1a0f0a 0%, 
+        #2d1810 30%, 
+        #4a2818 60%, 
+        #7c2d12 100%);
+    position: relative;
+}
+
+[data-theme="sunset-orange"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top, rgba(249, 115, 22, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom, rgba(234, 88, 12, 0.1) 0%, transparent 60%);
+    animation: sunset-pulse 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes sunset-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+[data-theme="sunset-orange"] .bg-card {
+    background: linear-gradient(135deg, rgba(45, 24, 16, 0.95) 0%, rgba(74, 40, 24, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    box-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
+}
+
+[data-theme="sunset-orange"] .bg-brand-600 {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
+    box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5),
+                0 0 60px rgba(234, 88, 12, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fire Glow Effect */
+[data-theme="sunset-orange"] .bg-brand-600::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: fire-glow 3s ease-in-out infinite;
+}
+
+@keyframes fire-glow {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+}
+
+[data-theme="sunset-orange"] .nav-btn:hover {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(234, 88, 12, 0.2) 100%);
+    border-left: 3px solid #f97316;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+    transform: translateX(5px);
+}
+
+/* Ember Particles Effect */
+@keyframes ember-rise {
+    0% { 
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-100px) translateX(20px) scale(0);
+        opacity: 0;
+    }
+}
+
+[data-theme="sunset-orange"] button:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #f97316;
+    border-radius: 50%;
+    animation: ember-rise 2s ease-out infinite;
+}
+
+/* ==========================================
+   GLOBAL PREMIUM ANIMATIONS
+   ========================================== */
+
+/* Smooth Page Transitions */
+.view-section {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card Hover Effects */
+[data-theme="crystal-white"] .bg-card:hover,
+[data-theme="ocean-blue"] .bg-card:hover,
+[data-theme="royal-purple"] .bg-card:hover,
+[data-theme="sunset-orange"] .bg-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button Press Animation */
+button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* Input Focus Glow */
+[data-theme="crystal-white"] input:focus,
+[data-theme="ocean-blue"] input:focus,
+[data-theme="royal-purple"] input:focus,
+[data-theme="sunset-orange"] input:focus {
+    box-shadow: 0 0 0 3px var(--brand-200);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-theme="crystal-white"] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 10px;
+}
+
+[data-theme="ocean-blue"] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+    border-radius: 10px;
+}
+
+[data-theme="royal-purple"] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #a855f7 0%, #9333ea 100%);
+    border-radius: 10px;
+}
+
+[data-theme="sunset-orange"] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+    border-radius: 10px;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin-smooth {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin-smooth 1s linear infinite;
+}
+
+/* Bounce Animation for Notifications */
+@keyframes bounce-in {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#toast {
+    animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Gradient Text Animation */
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+[data-theme="royal-purple"] h1,
+[data-theme="sunset-orange"] h1 {
+    background: linear-gradient(90deg, var(--brand-500), var(--brand-700), var(--brand-500));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* Floating Labels Animation */
+@keyframes float-label {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+label {
+    animation: float-label 2s ease-in-out infinite;
+}
+
+/* Card Entrance Animation */
+@keyframes card-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.bg-card {
+    animation: card-entrance 0.6s ease-out;
+}
+
+/* Hover Lift Effect */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   RESPONSIVE ANIMATIONS
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* Reduce animation intensity on mobile */
+    [data-theme="crystal-white"] .bg-brand-600,
+    [data-theme="ocean-blue"] body::before,
+    [data-theme="royal-purple"] body::before,
+    [data-theme="sunset-orange"] body::before {
+        animation-duration: 6s;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
