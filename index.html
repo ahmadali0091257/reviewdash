@@ -492,11 +492,23 @@
                         
                         <!-- Rewards Shop -->
                         <div class="bg-card border border-theme rounded-xl p-6 shadow-sm">
-                            <h2 class="text-xl font-bold text-txt mb-4 flex items-center gap-2">
-                                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                Rewards Shop
-                            </h2>
-                            <div id="rewards-shop-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-xl font-bold text-txt flex items-center gap-2">
+                                    <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                    Rewards Shop
+                                </h2>
+                                <select id="shop-category-filter" class="px-4 py-2 border border-theme bg-main text-txt rounded-lg outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm">
+                                    <option value="all">🛍️ All Items (40)</option>
+                                    <option value="themes">🎨 Themes (8)</option>
+                                    <option value="productivity">💼 Productivity (8)</option>
+                                    <option value="notifications">🔔 Notifications (6)</option>
+                                    <option value="backup">💾 Backup & Security (6)</option>
+                                    <option value="team">👥 Team (5)</option>
+                                    <option value="integrations">🔗 Integrations (4)</option>
+                                    <option value="support">⭐ Support (3)</option>
+                                </select>
+                            </div>
+                            <div id="rewards-shop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <!-- Rewards will be injected here -->
                             </div>
                         </div>
@@ -922,6 +934,9 @@
                 
                 const todaySnap = await getDocs(query(collection(db, "products"), where("days", "array-contains-any",[getCurrentDayName(), getYesterdayDayName()])));
                 state.todayProducts = todaySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                // Load featured products on startup
+                await fetchFeaturedProducts();
 
                 setupUI(); switchView('dashboard'); await fetchPaginatedProducts(true);
             } catch(e) { console.error(e); showToast("Error loading data", "error"); }
@@ -1626,9 +1641,13 @@
             try {
                 const snap = await getDocs(query(collection(db, "featured_products"), orderBy("position", "asc")));
                 state.featuredProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.log('✅ Featured products loaded:', state.featuredProducts.length);
                 renderFeaturedProducts();
             } catch(e) {
                 console.error('Error fetching featured products:', e);
+                // If collection doesn't exist, initialize empty
+                state.featuredProducts = [];
+                renderFeaturedProducts();
             }
         }
 
@@ -2079,12 +2098,59 @@
         };
         
         const rewardsShopItems = [
-            { id: 'theme-unlock', name: '🎨 Unlock Premium Theme', cost: 100, description: 'Unlock exclusive premium theme' },
-            { id: 'auto-backup', name: '💾 Auto Backup (30 days)', cost: 200, description: 'Automatic daily backups for 30 days' },
-            { id: 'bulk-import', name: '📦 Bulk Import Feature', cost: 150, description: 'Import products via CSV' },
-            { id: 'priority-support', name: '⭐ Priority Support (7 days)', cost: 300, description: 'Get priority customer support' },
-            { id: 'custom-reports', name: '📊 Custom Reports', cost: 250, description: 'Generate custom analytics reports' },
-            { id: 'api-access', name: '🔗 API Access (30 days)', cost: 500, description: 'Access to REST API' }
+            // 🎨 Themes & Customization (1-8)
+            { id: 'theme-premium-pack', name: '🎨 Premium Theme Pack', cost: 100, description: 'Unlock all 4 premium animated themes', category: 'themes' },
+            { id: 'theme-custom-builder', name: '🌈 Custom Theme Builder', cost: 250, description: 'Create your own custom theme with colors', category: 'themes' },
+            { id: 'custom-logo', name: '🖼️ Custom Logo Upload', cost: 150, description: 'Upload your company logo to dashboard', category: 'themes' },
+            { id: 'avatar-frames', name: '🎭 Avatar Frames Pack', cost: 50, description: 'Decorative profile picture frames', category: 'themes' },
+            { id: 'animated-bg', name: '✨ Animated Backgrounds', cost: 200, description: 'Particle effects and gradient animations', category: 'themes' },
+            { id: 'custom-dashboard', name: '🎪 Custom Dashboard Layout', cost: 800, description: 'Personalized widget arrangement', category: 'themes' },
+            { id: 'dark-mode-plus', name: '🌙 Dark Mode Plus', cost: 75, description: 'Enhanced dark mode with OLED support', category: 'themes' },
+            { id: 'font-pack', name: '✍️ Premium Font Pack', cost: 120, description: 'Access to 50+ premium fonts', category: 'themes' },
+            
+            // 💼 Productivity Features (9-16)
+            { id: 'bulk-import', name: '📦 Bulk Import (CSV)', cost: 150, description: 'Import 100+ products at once', category: 'productivity' },
+            { id: 'advanced-analytics', name: '📊 Advanced Analytics', cost: 300, description: 'Detailed performance reports & insights', category: 'productivity' },
+            { id: 'auto-scheduler', name: '🤖 AI Auto-Scheduler', cost: 400, description: 'Smart scheduling recommendations', category: 'productivity' },
+            { id: 'quick-actions', name: '⚡ Quick Actions Panel', cost: 200, description: 'Keyboard shortcuts & command palette', category: 'productivity' },
+            { id: 'calendar-view', name: '📅 Calendar View', cost: 250, description: 'Monthly calendar with drag & drop', category: 'productivity' },
+            { id: 'templates', name: '📋 Product Templates', cost: 180, description: 'Save and reuse product templates', category: 'productivity' },
+            { id: 'bulk-edit', name: '✏️ Bulk Edit Tool', cost: 220, description: 'Edit multiple products at once', category: 'productivity' },
+            { id: 'smart-search', name: '🔍 Smart Search AI', cost: 280, description: 'AI-powered search suggestions', category: 'productivity' },
+            
+            // 🔔 Notifications & Alerts (17-22)
+            { id: 'push-notifications', name: '🔔 Push Notifications', cost: 200, description: 'Browser push notifications for tasks', category: 'notifications' },
+            { id: 'email-reports', name: '📧 Email Reports', cost: 150, description: 'Daily/Weekly automated email reports', category: 'notifications' },
+            { id: 'whatsapp-integration', name: '📱 WhatsApp Alerts', cost: 300, description: 'Get notifications on WhatsApp', category: 'notifications' },
+            { id: 'smart-reminders', name: '⏰ Smart Reminders', cost: 100, description: 'Custom reminder times & recurring alerts', category: 'notifications' },
+            { id: 'sms-alerts', name: '💬 SMS Alerts', cost: 250, description: 'Text message notifications', category: 'notifications' },
+            { id: 'slack-integration', name: '💼 Slack Integration', cost: 350, description: 'Slack notifications & bot commands', category: 'notifications' },
+            
+            // 💾 Backup & Security (23-28)
+            { id: 'auto-backup', name: '💾 Auto Backup (30 days)', cost: 200, description: 'Automatic daily backups for 30 days', category: 'backup' },
+            { id: 'extended-backup', name: '🔐 Extended Backup (90 days)', cost: 400, description: '90 days backup with version history', category: 'backup' },
+            { id: 'cloud-storage', name: '☁️ Cloud Storage (5GB)', cost: 300, description: '5GB cloud storage for files', category: 'backup' },
+            { id: 'two-factor-auth', name: '🔒 Two-Factor Auth', cost: 150, description: 'Enhanced security with 2FA', category: 'backup' },
+            { id: 'data-encryption', name: '🛡️ Data Encryption', cost: 500, description: 'End-to-end data encryption', category: 'backup' },
+            { id: 'export-all', name: '📤 Export All Data', cost: 180, description: 'Export complete database to Excel/JSON', category: 'backup' },
+            
+            // 👥 Team & Collaboration (29-33)
+            { id: 'team-member', name: '👥 Add Team Member', cost: 250, description: 'Invite 1 team member to workspace', category: 'team' },
+            { id: 'task-assignment', name: '🎯 Task Assignment', cost: 300, description: 'Assign tasks to team members', category: 'team' },
+            { id: 'team-chat', name: '💬 Team Chat', cost: 400, description: 'Built-in messaging & file sharing', category: 'team' },
+            { id: 'team-analytics', name: '📊 Team Analytics', cost: 350, description: 'Team performance metrics & stats', category: 'team' },
+            { id: 'team-leaderboard', name: '🏆 Team Leaderboard', cost: 200, description: 'Competitive rankings & badges', category: 'team' },
+            
+            // 🔗 Integrations & API (34-37)
+            { id: 'api-access', name: '🔗 API Access (30 days)', cost: 500, description: 'REST API access with documentation', category: 'integrations' },
+            { id: 'google-sheets', name: '📊 Google Sheets Sync', cost: 300, description: 'Auto-sync to Google Sheets', category: 'integrations' },
+            { id: 'zapier', name: '🔄 Zapier Integration', cost: 600, description: 'Connect 1000+ apps via Zapier', category: 'integrations' },
+            { id: 'webhook', name: '🪝 Webhook Support', cost: 350, description: 'Custom webhooks for automation', category: 'integrations' },
+            
+            // ⭐ Premium Support (38-40)
+            { id: 'priority-support', name: '⭐ Priority Support (7 days)', cost: 300, description: 'Fast response priority support', category: 'support' },
+            { id: 'vip-support', name: '💎 VIP Support (30 days)', cost: 800, description: '24/7 VIP support with phone access', category: 'support' },
+            { id: 'training-session', name: '🎓 Training Session', cost: 500, description: '1-hour personalized training call', category: 'support' }
         ];
         
         // Load rewards data
@@ -2131,22 +2197,7 @@
             document.getElementById('total-spent-points').innerText = userPoints.spent;
             document.getElementById('total-items-redeemed').innerText = userPoints.history.filter(h => h.type === 'spent').length;
             
-            // Render shop items
-            document.getElementById('rewards-shop-grid').innerHTML = rewardsShopItems.map(item => `
-                <div class="bg-main border border-theme rounded-xl p-6 hover:border-brand-500 transition">
-                    <div class="text-4xl mb-3">${item.name.split(' ')[0]}</div>
-                    <h3 class="font-bold text-txt mb-2">${item.name.substring(2)}</h3>
-                    <p class="text-sm text-muted mb-4">${item.description}</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-brand-600 font-bold text-lg">${item.cost} pts</span>
-                        <button onclick="redeemReward('${item.id}', ${item.cost}, '${item.name}')" 
-                                class="px-4 py-2 text-xs font-bold rounded-lg transition ${userPoints.total >= item.cost ? 'bg-brand-600 text-white hover:bg-brand-700' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}"
-                                ${userPoints.total < item.cost ? 'disabled' : ''}>
-                            Redeem
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+            renderShopItems('all');
             
             // Render points history
             const historyHtml = userPoints.history.length > 0 
@@ -2170,6 +2221,61 @@
             
             document.getElementById('points-history-list').innerHTML = historyHtml;
         }
+        
+        // Render shop items with category filter
+        function renderShopItems(category = 'all') {
+            const filteredItems = category === 'all' 
+                ? rewardsShopItems 
+                : rewardsShopItems.filter(item => item.category === category);
+            
+            const categoryColors = {
+                themes: 'purple',
+                productivity: 'blue',
+                notifications: 'yellow',
+                backup: 'green',
+                team: 'pink',
+                integrations: 'indigo',
+                support: 'red'
+            };
+            
+            document.getElementById('rewards-shop-grid').innerHTML = filteredItems.map(item => {
+                const color = categoryColors[item.category] || 'gray';
+                const canAfford = userPoints.total >= item.cost;
+                
+                return `
+                <div class="bg-main border border-theme rounded-xl p-5 hover:border-brand-500 transition hover:shadow-lg group">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="text-3xl">${item.name.split(' ')[0]}</div>
+                        <span class="text-xs px-2 py-1 rounded-full bg-${color}-100 text-${color}-700 font-bold border border-${color}-200">
+                            ${item.category}
+                        </span>
+                    </div>
+                    <h3 class="font-bold text-txt mb-2 text-sm">${item.name.substring(2)}</h3>
+                    <p class="text-xs text-muted mb-4 line-clamp-2">${item.description}</p>
+                    <div class="flex justify-between items-center pt-3 border-t border-theme">
+                        <span class="text-brand-600 font-bold text-base">${item.cost} pts</span>
+                        <button onclick="redeemReward('${item.id}', ${item.cost}, '${item.name.replace(/'/g, "\\'")}', '${item.category}')" 
+                                class="px-4 py-2 text-xs font-bold rounded-lg transition ${canAfford ? 'bg-brand-600 text-white hover:bg-brand-700 hover:scale-105' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}"
+                                ${!canAfford ? 'disabled' : ''}>
+                            ${canAfford ? 'Redeem' : 'Locked'}
+                        </button>
+                    </div>
+                </div>
+            `}).join('');
+            
+            if (filteredItems.length === 0) {
+                document.getElementById('rewards-shop-grid').innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-muted text-lg">No items in this category</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Category filter
+        document.getElementById('shop-category-filter')?.addEventListener('change', (e) => {
+            renderShopItems(e.target.value);
+        });
         
         // Add points
         async function addPoints(points, description) {
@@ -2202,7 +2308,7 @@
         }
         
         // Redeem reward
-        window.redeemReward = async function(itemId, cost, itemName) {
+        window.redeemReward = async function(itemId, cost, itemName, category) {
             if (userPoints.total < cost) {
                 showToast('Not enough points!', 'error');
                 return;
@@ -2216,6 +2322,7 @@
                     points: cost,
                     description: `Redeemed: ${itemName}`,
                     itemId,
+                    category,
                     timestamp: new Date().toISOString()
                 };
                 
@@ -2233,7 +2340,12 @@
                 showToast(`✅ Successfully redeemed ${itemName}!`);
                 
                 // Trigger confetti
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                confetti({ 
+                    particleCount: 150, 
+                    spread: 100, 
+                    origin: { y: 0.6 },
+                    colors: ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b']
+                });
             } catch(e) {
                 console.error('Error redeeming reward:', e);
                 showToast('Error redeeming reward', 'error');
